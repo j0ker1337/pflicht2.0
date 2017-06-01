@@ -22,7 +22,6 @@ public class FilmDTO extends DTO {
     private int filmID;
     private String name;
     private int jahr;
-    private String regi;
     private GenreDTO genre;
     private ArrayList<UserDTO> users;
     private ArrayList<Schauspieler> schauspieler;
@@ -85,13 +84,12 @@ public class FilmDTO extends DTO {
 
     public void setRegisseurDTO(RegisseurDTO regisseurDTO) {
         this.regisseurDTO = regisseurDTO;
-    }
+    }    
 
     @Override
     public String toString() {
-        return "FilmDTO{" + "filmID=" + filmID + ", name=" + name + ", jahr=" + jahr + ", regi=" + regi + ", genre=" + genre + ", users=" + users + ", schauspieler=" + schauspieler + ", regisseurDTO=" + regisseurDTO + '}';
+        return "FilmDTO{" + "filmID=" + filmID + ", name=" + name + ", jahr=" + jahr + ", genre=" + genre + ", users=" + users + ", schauspieler=" + schauspieler + ", regisseurDTO=" + regisseurDTO + '}';
     }
-    
     
 
 
@@ -102,7 +100,6 @@ public class FilmDTO extends DTO {
         hash = 97 * hash + this.filmID;
         hash = 97 * hash + Objects.hashCode(this.name);
         hash = 97 * hash + this.jahr;
-        hash = 97 * hash + Objects.hashCode(this.regi);
         hash = 97 * hash + Objects.hashCode(this.genre);
         return hash;
     }
@@ -126,9 +123,6 @@ public class FilmDTO extends DTO {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.regi, other.regi)) {
             return false;
         }
         return true;
