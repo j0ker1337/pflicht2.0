@@ -1,0 +1,129 @@
+#zuerst eine datenbank mit dem namen wt123 anlegen und dort das sql script ausführen
+#danach kann die datenbank genutzt werden
+#in den html seite können nun die controller genutzt werden wie bspw #{userController.findAllUsers()}
+#um die validierung zu nutzen bitte RegisterDTO und den userservice den ich beispielsweise angelegt habe
+
+
+
+
+
+
+
+
+
+
+create table genre(
+genreID integer,
+name varchar(100)
+);
+
+create table filme(
+filmID integer,
+name varchar(100),
+genre integer,
+jahr integer,
+regisseur varchar(100)
+);
+create table rights(
+id integer,
+name varchar(40)
+);
+create table person(
+userID integer,
+name varchar(100),
+vorname varchar(100),
+geburtsdatum Date,
+benutzerName varchar(100),
+password varchar(100),
+rightsID integer
+);
+
+create table usertofilm(
+film integer,
+user integer
+);
+
+alter table rights add constraint pk_rights primary key (id);
+alter table genre add constraint pk_genre primary key (genreID);
+alter table filme add constraint pk_filme primary key (filmID);
+alter table person add constraint pk_person primary key (userID);
+
+
+alter table rights MODIFY id integer AUTO_INCREMENT;
+alter table rights MODIFY name varchar(100) NOT NULL;
+
+alter table genre MODIFY genreID integer AUTO_INCREMENT;
+alter table genre MODIFY name varchar(100) NOT NULL;
+
+alter table person add constraint fk_genre foreign key (rightsID) references rights(id);
+alter table person MODIFY userID integer AUTO_INCREMENT;
+alter table person MODIFY name varchar(100) NULL DEFAULT NULL;
+alter table person MODIFY vorname varchar(100) NULL DEFAULT NULL;
+alter table person MODIFY benutzerName varchar(100) NOT NULL;
+alter table person MODIFY password varchar(100) NOT NULL;
+alter table person MODIFY rightsID integer NOT NULL;
+
+alter table filme MODIFY filmID integer AUTO_INCREMENT;
+alter table filme MODIFY name varchar(100) NOT NULL;
+alter table filme MODIFY jahr integer NULL DEFAULT 0;
+alter table filme MODIFY regisseur varchar(100) NOT NULL;
+
+
+alter table usertofilm add constraint pk_filmepersons primary key (film,user);
+alter table usertofilm add constraint fk_filme foreign key (film) references filme(filmID);
+alter table usertofilm add constraint fk_persons foreign key (user) references person(UserID);
+
+
+
+alter table genre add constraint genre_unique_name unique (name);
+alter table rights add constraint rights_unique_name unique (name);
+alter table person add constraint benutzer_unique_name unique (benutzerName);
+
+insert into rights (name) values ('Admin');
+insert into rights (name)values ('User');
+insert into rights (name)values ('Gast');
+insert into genre (name) values ('Action');
+insert into genre (name) values ('Drama');
+insert into genre (name) values ('Thriller');
+insert into genre (name) values ('Horror');
+insert into genre (name) values ('SyFy');
+
+
+insert into filme (name,genre,jahr ,regisseur) values ('from dusk till dawn',4,0,'hans günter');
+insert into filme (name,genre,jahr ,regisseur) values ('from dusk till dawn2',4,2000,'hans günter');
+insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 1',5,1999,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 2',5,2002,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 3',5,2005,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 4',5,1978,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 5',5,1982,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 6',5,1985,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 7',5,2016,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('Herr der Ringe 1',2,1999,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('Herr der Ringe 2',2,2002,'horst meyer');
+insert into filme (name,genre,jahr ,regisseur) values ('Herr der Ringe 3',2,2004,'horst meyer');
+
+insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('','Rieger','1984-06-05','don12345','1234',2);
+insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don1','Rieger1','1984-06-05','don1111','1234',2);
+insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don2','Rieger1','1984-06-05','don123','1234',2);
+insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don3','Rieger22','1984-06-05','don123456','1234',2);
+insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don14','Rieger112','1984-06-05','don113411','1234',2);
+insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don15','Rieger1222','1984-06-05','don1223223','1234',2);
+
+
+
+insert  into usertofilm values(1,2);
+insert  into usertofilm values(2,4);
+insert  into usertofilm values(3,4);
+insert  into usertofilm values(1,4);
+insert  into usertofilm values(5,5);
+insert  into usertofilm values(7,2);
+insert  into usertofilm values(8,2);
+insert  into usertofilm values(11,2);
+insert  into usertofilm values(10,2);
+insert  into usertofilm values(2,2);
+insert  into usertofilm values(3,2);
+insert  into usertofilm values(6,2);
+insert  into usertofilm values(5,2);
+insert  into usertofilm values(4,2);
+insert  into usertofilm values(9,2);
+
