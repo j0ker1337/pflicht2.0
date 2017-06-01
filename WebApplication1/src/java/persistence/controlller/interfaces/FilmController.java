@@ -12,6 +12,7 @@ import persistence.dto.UserDTO;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
+import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
@@ -22,9 +23,9 @@ import persistence.exceptions.usersnotfound;
  */
 public interface FilmController {
 
-    public FilmDTO findById(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound;
+    public FilmDTO findById(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound;
 
-    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound;
+    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound;
 
     public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem;
 

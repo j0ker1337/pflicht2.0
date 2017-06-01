@@ -1,12 +1,10 @@
 package persistence.DAO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import persistence.connection.DBverbindung;
 import persistence.entities.Film;
 import persistence.entities.User;
 import persistence.exceptions.CombinationNotFound;
@@ -18,10 +16,9 @@ import persistence.exceptions.usersnotfound;
 
 public class likefilmDao extends Dao {
     
-    private Connection conn;
-    
+ 
     public likefilmDao() {
-        this.conn = DBverbindung.getConnection();
+     
     }
     
     public ArrayList<Film> findFilmsLikedByUser(int id) throws filmnotfound {

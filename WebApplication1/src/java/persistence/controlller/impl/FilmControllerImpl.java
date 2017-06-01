@@ -16,6 +16,7 @@ import persistence.dto.UserDTO;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
+import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
@@ -30,12 +31,12 @@ import persistence.exceptions.usersnotfound;
 public class FilmControllerImpl extends ControllerImpl implements FilmController {
 
     @Override
-    public FilmDTO findById(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound {
+    public FilmDTO findById(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound {
         return super.findFilmByID(id);
     }
 
     @Override
-    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound {
+    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound {
         return super.findFilmByName(name);
     }
 
