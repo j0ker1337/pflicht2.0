@@ -5,11 +5,11 @@
  */
 package persistence.mapper;
 
-import persistence.entities.Film;
+import java.util.ArrayList;
 import persistence.dto.FilmDTO;
+import persistence.entities.Film;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.genreNotFound;
-import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +21,6 @@ public class FilmMapper {
         FilmDTO filmDTO = new FilmDTO();
         filmDTO.setFilmID(film.getFilmID());
         filmDTO.setJahr(film.getJahr());
-        filmDTO.setRegi(film.getRegi());
         filmDTO.setName(film.getName());
         return filmDTO;
     }
@@ -48,7 +47,7 @@ public class FilmMapper {
         film.setGenre(filmDTO.getGenre().getId());
         film.setJahr(filmDTO.getJahr());
         film.setName(filmDTO.getName());
-        film.setRegi(filmDTO.getRegi());
+        film.setRegi(filmDTO.getRegisseurDTO().getId());
         return film;
     }
 }

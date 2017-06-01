@@ -17,6 +17,10 @@ public class DaoManager {
     private likefilmDao lDao;
     private genreDao gDao;
     private rightsDao rDao;
+    private regiDao regieDao;
+    private schauspielerDao schauspielerdao;
+    private schauspielerfilmDao schauspielerfilmDao;
+    
     
     public DaoManager() {
         this.fDao=new filmDao();
@@ -24,6 +28,21 @@ public class DaoManager {
         this.usDao=new userDao();
         this.lDao = new likefilmDao();
         this.rDao = new rightsDao();
+        this.schauspielerdao = new schauspielerDao(); 
+        this.regieDao = new regiDao();
+        this.schauspielerfilmDao = new schauspielerfilmDao();
+    }
+
+    public regiDao getRegieDao() {
+        return regieDao;
+    }
+
+    public schauspielerDao getSchauspielerdao() {
+        return schauspielerdao;
+    }
+
+    public schauspielerfilmDao getSchauspielerfilmDao() {
+        return schauspielerfilmDao;
     }
 
     public filmDao getfDao() {
@@ -45,6 +64,7 @@ public class DaoManager {
     public rightsDao getrDao() {
         return rDao;
     }
+     
     
     
     

@@ -15,6 +15,7 @@ import persistence.DAO.DaoManager;
 import persistence.controlller.interfaces.Controller;
 import persistence.dto.FilmDTO;
 import persistence.dto.GenreDTO;
+import persistence.dto.RegisseurDTO;
 import persistence.dto.RightDTO;
 import persistence.dto.UserDTO;
 import persistence.entities.Film;
@@ -28,11 +29,13 @@ import persistence.exceptions.UserIdEmpty;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
+import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 import persistence.mapper.FilmMapper;
 import persistence.mapper.GenreMapper;
+import persistence.mapper.RegiMapper;
 import persistence.mapper.RightsMapper;
 import persistence.mapper.UserMapper;
 import util.checker.userCheck;
@@ -50,16 +53,22 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound {
+    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
         FilmDTO dTO = FilmMapper.entityToDTO(daoManager.getfDao().findFilmByName(name));
         dTO.setUsers(findUsersWhoLikesFilm(dTO.getFilmID()));
+        dTO.setRegisseurDTO(findRegisseurwhoCreatedFilm(dTO.getFilmID()));
         return dTO;
     }
 
+    public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
+        return RegiMapper.entityToDTO(daoManager.getRegieDao().findRegisseurwhoCreatedFilm(id));
+    }
+
     @Override
-    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound {
+    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound{
         FilmDTO dTO = FilmMapper.entityToDTO(daoManager.getfDao().findFilmByID(id));
         dTO.setUsers(findUsersWhoLikesFilm(dTO.getFilmID()));
+        dTO.setRegisseurDTO(findRegisseurwhoCreatedFilm(dTO.getFilmID()));
         return dTO;
     }
 
@@ -182,7 +191,7 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-     public UserDTO update(UserDTO udto) throws UserEmpty, UserIdEmpty, rightsnotfound, RightIdEmpty, UserBNameEmpty, connectionProblem {
+    public UserDTO update(UserDTO udto) throws UserEmpty, UserIdEmpty, rightsnotfound, RightIdEmpty, UserBNameEmpty, connectionProblem {
         User x = UserMapper.dtoToentity(udto);
         try {
             userCheck.checkforUpdateUser(x, daoManager);
@@ -301,4 +310,5 @@ public class ControllerImpl implements Controller {
         userCheck.checkforSaveUser(UserMapper.dtoToentity(udto), daoManager);
         return UserMapper.entityToDto(daoManager.getUsDao().insert(x));
     }
+
 }

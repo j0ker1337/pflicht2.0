@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
+import persistence.entities.Schauspieler;
 
 /**
  *
@@ -23,7 +24,19 @@ public class FilmDTO extends DTO {
     private int jahr;
     private String regi;
     private GenreDTO genre;
-    ArrayList<UserDTO> users;
+    private ArrayList<UserDTO> users;
+    private ArrayList<Schauspieler> schauspieler;
+    private RegisseurDTO regisseurDTO;
+
+    public ArrayList<Schauspieler> getSchauspieler() {
+        return schauspieler;
+    }
+
+    public void setSchauspieler(ArrayList<Schauspieler> schauspieler) {
+        this.schauspieler = schauspieler;
+    }
+    
+    
 
     public int getFilmID() {
         return filmID;
@@ -57,13 +70,6 @@ public class FilmDTO extends DTO {
         this.jahr = jahr;
     }
 
-    public String getRegi() {
-        return regi;
-    }
-
-    public void setRegi(String regi) {
-        this.regi = regi;
-    }
 
     public ArrayList<UserDTO> getUsers() {
         return users;
@@ -73,10 +79,22 @@ public class FilmDTO extends DTO {
         this.users = users;
     }
 
+    public RegisseurDTO getRegisseurDTO() {
+        return regisseurDTO;
+    }
+
+    public void setRegisseurDTO(RegisseurDTO regisseurDTO) {
+        this.regisseurDTO = regisseurDTO;
+    }
+
     @Override
     public String toString() {
-        return "FilmDTO{" + "filmID=" + filmID + ", name=" + name + ", jahr=" + jahr + ", regi=" + regi + ", genre=" + genre + ", users=" + users + '}';
+        return "FilmDTO{" + "filmID=" + filmID + ", name=" + name + ", jahr=" + jahr + ", regi=" + regi + ", genre=" + genre + ", users=" + users + ", schauspieler=" + schauspieler + ", regisseurDTO=" + regisseurDTO + '}';
     }
+    
+    
+
+
 
     @Override
     public int hashCode() {

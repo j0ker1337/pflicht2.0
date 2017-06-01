@@ -8,6 +8,7 @@ package persistence.controlller.interfaces;
 import java.util.ArrayList;
 import persistence.dto.FilmDTO;
 import persistence.dto.GenreDTO;
+import persistence.dto.RegisseurDTO;
 import persistence.dto.RightDTO;
 import persistence.dto.UserDTO;
 import persistence.exceptions.RightIdEmpty;
@@ -18,6 +19,7 @@ import persistence.exceptions.UserIdEmpty;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
+import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
@@ -28,9 +30,11 @@ import persistence.exceptions.usersnotfound;
  */
 public interface Controller {
 
-    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound;
+    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound;
 
-    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound;
+    public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound;
+
+    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound;
 
     public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem;
 

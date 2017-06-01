@@ -10,7 +10,7 @@ public class Film {
     private String name;
     private int genre;
     private int jahr;
-    private String regi;
+    private int regi;
 
     
     public int getFilmID() {
@@ -53,11 +53,12 @@ public class Film {
         return "film{" + "filmID=" + filmID + ", name=" + name + ", genre=" + genre + ", jahr=" + jahr + ", regi=" + regi + '}';
     }
 
-    public String getRegi() {
+    public int getRegi() {
         return regi;
     }
 
-    public void setRegi(String regi) {
+    public void setRegi(int regi) {
         this.regi = regi;
     }
+
 }

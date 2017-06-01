@@ -75,7 +75,7 @@ public class filmDao extends Dao {
                 fi.setName(rs.getString("name"));
                 fi.setGenre(rs.getInt("genre"));
                 fi.setJahr(rs.getInt("jahr"));
-                fi.setRegi(rs.getString("regisseur"));
+                fi.setRegi(rs.getInt("regie"));
             } else {
                 throw new filmnotfound();
             }
@@ -99,7 +99,7 @@ public class filmDao extends Dao {
                 fi.setName(rs.getString("name"));
                 fi.setGenre(rs.getInt("genre"));
                 fi.setJahr(rs.getInt("jahr"));
-                fi.setRegi(rs.getString("regisseur"));
+                fi.setRegi(rs.getInt("regie"));
                 al.add(fi);
 
             }
