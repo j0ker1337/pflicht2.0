@@ -3,15 +3,6 @@
 #in den html seite können nun die controller genutzt werden wie bspw #{userController.findAllUsers()}
 #um die validierung zu nutzen bitte RegisterDTO und den userservice den ich beispielsweise angelegt habe
 
-
-
-
-
-
-
-
-
-
 create table genre(
 genreID integer,
 name varchar(100)
@@ -22,11 +13,25 @@ filmID integer,
 name varchar(100),
 genre integer,
 jahr integer,
-regisseur varchar(100)
+regie integer
 );
 create table rights(
 id integer,
-name varchar(40)
+name varchar(100)
+);
+create table schauspieler_To_Film(
+s_id integer,
+f_id integer
+);
+create table schauspieler(
+id integer,
+nachname varchar(100),
+vorname varchar(100)
+);
+create table regie(
+id integer,
+nachname varchar(100),
+vorname varchar(100)
 );
 create table person(
 userID integer,
@@ -48,32 +53,42 @@ alter table genre add constraint pk_genre primary key (genreID);
 alter table filme add constraint pk_filme primary key (filmID);
 alter table person add constraint pk_person primary key (userID);
 
+alter table schauspieler add constraint pk_schauspieler primary key (id);
+alter table regie add constraint pk_regie primary key (id);
 
+alter table schauspieler modify id integer auto_increment;
+alter table regie modify id integer auto_increment;
 alter table rights MODIFY id integer AUTO_INCREMENT;
 alter table rights MODIFY name varchar(100) NOT NULL;
 
 alter table genre MODIFY genreID integer AUTO_INCREMENT;
 alter table genre MODIFY name varchar(100) NOT NULL;
 
-alter table person add constraint fk_genre foreign key (rightsID) references rights(id);
+
 alter table person MODIFY userID integer AUTO_INCREMENT;
 alter table person MODIFY name varchar(100) NULL DEFAULT NULL;
 alter table person MODIFY vorname varchar(100) NULL DEFAULT NULL;
 alter table person MODIFY benutzerName varchar(100) NOT NULL;
 alter table person MODIFY password varchar(100) NOT NULL;
 alter table person MODIFY rightsID integer NOT NULL;
+alter table schauspieler MODIFY vorname varchar(100) NOT NULL;
+alter table schauspieler MODIFY nachname varchar(100) NOT NULL;
+alter table regie MODIFY vorname varchar(100) NOT NULL;
+alter table regie MODIFY nachname varchar(100) NOT NULL;
 
 alter table filme MODIFY filmID integer AUTO_INCREMENT;
 alter table filme MODIFY name varchar(100) NOT NULL;
 alter table filme MODIFY jahr integer NULL DEFAULT 0;
-alter table filme MODIFY regisseur varchar(100) NOT NULL;
+alter table filme MODIFY regie integer default 0;
 
-
+alter table schauspieler_To_Film add constraint pk_schauspieler_To_Film primary key(s_id,f_id);
 alter table usertofilm add constraint pk_filmepersons primary key (film,user);
 alter table usertofilm add constraint fk_filme foreign key (film) references filme(filmID);
 alter table usertofilm add constraint fk_persons foreign key (user) references person(UserID);
-
-
+alter table filme add constraint fk_filme_regie_id foreign key (regie) references regie(id);
+alter table schauspieler_To_Film add constraint fk_schauspieler_To_Film_f foreign key (f_id) references filme(filmID);
+alter table schauspieler_To_Film add constraint fk_schauspieler_To_Film_s foreign key (s_id) references schauspieler(id);
+alter table person add constraint fk_genre foreign key (rightsID) references rights(id);
 
 alter table genre add constraint genre_unique_name unique (name);
 alter table rights add constraint rights_unique_name unique (name);
@@ -88,19 +103,34 @@ insert into genre (name) values ('Thriller');
 insert into genre (name) values ('Horror');
 insert into genre (name) values ('SyFy');
 
+insert into regie (vorname, nachname) values ('steaven', 'spielberg');
+insert into regie (vorname, nachname) values ('peter','jackson');
+insert into regie (vorname, nachname) values ('roland','emmerich');
+insert into regie (vorname, nachname) values ('deine','mutter');
 
-insert into filme (name,genre,jahr ,regisseur) values ('from dusk till dawn',4,0,'hans günter');
-insert into filme (name,genre,jahr ,regisseur) values ('from dusk till dawn2',4,2000,'hans günter');
-insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 1',5,1999,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 2',5,2002,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 3',5,2005,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 4',5,1978,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 5',5,1982,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 6',5,1985,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('star wars episode 7',5,2016,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('Herr der Ringe 1',2,1999,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('Herr der Ringe 2',2,2002,'horst meyer');
-insert into filme (name,genre,jahr ,regisseur) values ('Herr der Ringe 3',2,2004,'horst meyer');
+insert into schauspieler (vorname, nachname) values ('dvane','johnson');
+insert into schauspieler (vorname, nachname) values ('klaudia','schiffer');
+insert into schauspieler (vorname, nachname) values ('johny','depp');
+insert into schauspieler (vorname, nachname) values ('leonardo','dicaprio');
+insert into schauspieler (vorname, nachname) values ('scarlett','johanson');
+insert into schauspieler (vorname, nachname) values ('sean','penn');
+insert into schauspieler (vorname, nachname) values ('klint','eastwood');
+insert into schauspieler (vorname, nachname) values ('schiaha','laboof');
+insert into schauspieler (vorname, nachname) values ('nataly','portman');
+insert into schauspieler (vorname, nachname) values ('emma','watson');
+
+insert into filme (name,genre,jahr ,regie) values ('from dusk till dawn',4,0,1);
+insert into filme (name,genre,jahr ,regie) values ('from dusk till dawn2',4,2000,1);
+insert into filme (name,genre,jahr ,regie) values ('star wars episode 1',5,1999,2);
+insert into filme (name,genre,jahr ,regie) values ('star wars episode 2',5,2002,2);
+insert into filme (name,genre,jahr ,regie) values ('star wars episode 3',5,2005,2);
+insert into filme (name,genre,jahr ,regie) values ('star wars episode 4',5,1978,2);
+insert into filme (name,genre,jahr ,regie) values ('star wars episode 5',5,1982,3);
+insert into filme (name,genre,jahr ,regie) values ('star wars episode 6',5,1985,3);
+insert into filme (name,genre,jahr ,regie) values ('star wars episode 7',5,2016,3);
+insert into filme (name,genre,jahr ,regie) values ('Herr der Ringe 1',2,1999,4);
+insert into filme (name,genre,jahr ,regie) values ('Herr der Ringe 2',2,2002,4);
+insert into filme (name,genre,jahr ,regie) values ('Herr der Ringe 3',2,2004,4);
 
 insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('','Rieger','1984-06-05','don12345','1234',2);
 insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don1','Rieger1','1984-06-05','don1111','1234',2);
@@ -108,8 +138,6 @@ insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) v
 insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don3','Rieger22','1984-06-05','don123456','1234',2);
 insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don14','Rieger112','1984-06-05','don113411','1234',2);
 insert into person (name,vorname,geburtsdatum,benutzerName ,password,rightsID) values ('Don15','Rieger1222','1984-06-05','don1223223','1234',2);
-
-
 
 insert  into usertofilm values(1,2);
 insert  into usertofilm values(2,4);
@@ -127,3 +155,13 @@ insert  into usertofilm values(5,2);
 insert  into usertofilm values(4,2);
 insert  into usertofilm values(9,2);
 
+insert into schauspieler_To_Film values (1,1);
+insert into schauspieler_To_Film values (1,2);
+insert into schauspieler_To_Film values (2,1);
+insert into schauspieler_To_Film values (2,1);
+insert into schauspieler_To_Film values (3,2);
+insert into schauspieler_To_Film values (2,4);
+insert into schauspieler_To_Film values (4,7);
+insert into schauspieler_To_Film values (5,8);
+insert into schauspieler_To_Film values (6,9);
+insert into schauspieler_To_Film values (7,10);
