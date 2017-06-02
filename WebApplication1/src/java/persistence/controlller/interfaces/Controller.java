@@ -10,12 +10,15 @@ import persistence.dto.FilmDTO;
 import persistence.dto.GenreDTO;
 import persistence.dto.RegisseurDTO;
 import persistence.dto.RightDTO;
+import persistence.dto.SchauspielerDTO;
 import persistence.dto.UserDTO;
+import persistence.exceptions.CombinationNotFound;
 import persistence.exceptions.RightIdEmpty;
 import persistence.exceptions.UserBNameEmpty;
 import persistence.exceptions.UserEmpty;
 import persistence.exceptions.UserFoundException;
 import persistence.exceptions.UserIdEmpty;
+import persistence.exceptions.absteigendoneminusoneorzero;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
@@ -32,45 +35,61 @@ public interface Controller {
 
     public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound;
 
+    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound;
+    
+    public ArrayList<FilmDTO> findSubFilm(String x) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound;
+    
+    
+    public GenreDTO findGenreOfFilm(int id) throws genreNotFound, connectionProblem;
+
     public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound;
 
-    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound;
 
-    public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem;
+    public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound;
 
     public GenreDTO findGenreByFilmID(int id) throws genreNotFound, connectionProblem;
 
-    public ArrayList<FilmDTO> findSubFilm(String x) throws filmnotfound, genreNotFound, connectionProblem;
+    
+      public ArrayList<FilmDTO> findFilmsLikedByUser(int id) throws filmnotfound, genreNotFound, connectionProblem, reginotfound;
+
+    public ArrayList<FilmDTO> findFilmLikedByPerson(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound, genreNotFound, reginotfound;
+
+    ArrayList<SchauspielerDTO> findSchauspielerOfFilm(int id) throws connectionProblem;
+
+    public ArrayList<UserDTO> findUsersWhoLikesFilm(int id) throws connectionProblem, usersnotfound, rightsnotfound;
+
+    public ArrayList<UserDTO> findpersonsLikesFilm(String name) throws filmnotfound, connectionProblem, usersnotfound, rightsnotfound;
+    
+        public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend, int anz) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound;
+
+    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero,rightsnotfound, reginotfound;
+    
 
     public GenreDTO findGenreById(int id) throws genreNotFound, connectionProblem;
 
     public GenreDTO findGenreByName(String name) throws genreNotFound, connectionProblem;
 
-    public ArrayList<FilmDTO> findFilmsLikedByUser(int id) throws filmnotfound, genreNotFound, connectionProblem;
-
-    public ArrayList<FilmDTO> findFilmLikedByPerson(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound, genreNotFound;
-
-    public ArrayList<UserDTO> findUsersWhoLikesFilm(int id) throws connectionProblem, usersnotfound, rightsnotfound;
-
-    public ArrayList<UserDTO> findpersonsLikesFilm(String name) throws filmnotfound, connectionProblem, usersnotfound, rightsnotfound;
+  
 
     public RightDTO findRightsById(int id) throws rightsnotfound;
 
-    public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound;
+    public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
 
-    public UserDTO findUserByID(int id) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound;
+    public UserDTO findUserByID(int id) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
 
-    public UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound;
+    public UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
 
-    public ArrayList<UserDTO> findAllUser() throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound;
+    public ArrayList<UserDTO> findAllUser() throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
 
     public RightDTO findRightOfUser(int id) throws rightsnotfound;
 
     public UserDTO update(UserDTO udto) throws UserEmpty, UserIdEmpty, rightsnotfound, RightIdEmpty, UserBNameEmpty, connectionProblem;
 
-    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend) throws filmnotfound, genreNotFound, connectionProblem;
+    public UserDTO likes(UserDTO userdto) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, CombinationNotFound, usersnotfound, reginotfound;
 
-    public ArrayList<FilmDTO> getSortedFilmsByLike(int i, int anz) throws filmnotfound, genreNotFound, connectionProblem;
+    public void checker1(ArrayList<FilmDTO> oldl, ArrayList<FilmDTO> newl, int userid) throws filmnotfound, connectionProblem, CombinationNotFound;
+
+
 
     public UserDTO save(UserDTO udto) throws connectionProblem, rightsnotfound, usernotfound, usernotfound, UserBNameEmpty, UserEmpty, UserFoundException, RightIdEmpty;
 

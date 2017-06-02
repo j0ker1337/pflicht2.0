@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
-import persistence.entities.Schauspieler;
 
 /**
  *
@@ -24,14 +23,14 @@ public class FilmDTO extends DTO {
     private int jahr;
     private GenreDTO genre;
     private ArrayList<UserDTO> users;
-    private ArrayList<Schauspieler> schauspieler;
+    private ArrayList<SchauspielerDTO> schauspieler;
     private RegisseurDTO regisseurDTO;
 
-    public ArrayList<Schauspieler> getSchauspieler() {
+    public ArrayList<SchauspielerDTO> getSchauspieler() {
         return schauspieler;
     }
 
-    public void setSchauspieler(ArrayList<Schauspieler> schauspieler) {
+    public void setSchauspieler(ArrayList<SchauspielerDTO> schauspieler) {
         this.schauspieler = schauspieler;
     }
     

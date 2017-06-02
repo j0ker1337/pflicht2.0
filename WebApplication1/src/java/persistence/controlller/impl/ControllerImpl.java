@@ -17,6 +17,7 @@ import persistence.dto.FilmDTO;
 import persistence.dto.GenreDTO;
 import persistence.dto.RegisseurDTO;
 import persistence.dto.RightDTO;
+import persistence.dto.SchauspielerDTO;
 import persistence.dto.UserDTO;
 import persistence.entities.Film;
 import persistence.entities.User;
@@ -26,6 +27,7 @@ import persistence.exceptions.UserBNameEmpty;
 import persistence.exceptions.UserEmpty;
 import persistence.exceptions.UserFoundException;
 import persistence.exceptions.UserIdEmpty;
+import persistence.exceptions.absteigendoneminusoneorzero;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
@@ -37,6 +39,7 @@ import persistence.mapper.FilmMapper;
 import persistence.mapper.GenreMapper;
 import persistence.mapper.RegiMapper;
 import persistence.mapper.RightsMapper;
+import persistence.mapper.SchauspielerMapper;
 import persistence.mapper.UserMapper;
 import util.checker.userCheck;
 
@@ -55,34 +58,32 @@ public class ControllerImpl implements Controller {
     @Override
     public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
         FilmDTO dTO = FilmMapper.entityToDTO(daoManager.getfDao().findFilmByName(name));
-        dTO.setUsers(findUsersWhoLikesFilm(dTO.getFilmID()));
-        dTO.setRegisseurDTO(findRegisseurwhoCreatedFilm(dTO.getFilmID()));
-        return dTO;
+        return buildFilmObject(dTO.getFilmID());
+    }
+
+    public GenreDTO findGenreOfFilm(int id) throws genreNotFound, connectionProblem {
+        return GenreMapper.entityToDTO(daoManager.getgDao().findGenreByFilmID(id));
     }
 
     public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
+        
         return RegiMapper.entityToDTO(daoManager.getRegieDao().findRegisseurwhoCreatedFilm(id));
     }
 
     @Override
-    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound{
+    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
         FilmDTO dTO = FilmMapper.entityToDTO(daoManager.getfDao().findFilmByID(id));
-        dTO.setUsers(findUsersWhoLikesFilm(dTO.getFilmID()));
-        dTO.setRegisseurDTO(findRegisseurwhoCreatedFilm(dTO.getFilmID()));
-        return dTO;
+        return buildFilmObject(dTO.getFilmID());
     }
 
     @Override
-    public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem {
-        ArrayList<FilmDTO> films = FilmMapper.entityArrayToDTO(
-                daoManager.getfDao().findAllFilm());
-        for (FilmDTO x : films) {
-            x.setGenre(findGenreByFilmID(x.getFilmID()));
+    public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound {
+         ArrayList<Film> filmsDTO = daoManager.getfDao().findAllFilm();
+        ArrayList<FilmDTO> films = new ArrayList<>();
+        for (Film x : filmsDTO) {
             try {
-                x.setUsers(findUsersWhoLikesFilm(x.getFilmID()));
+                films.add(buildFilmObject(x.getFilmID()));
             } catch (usersnotfound ex) {
-                Logger.getLogger(ControllerImpl.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (rightsnotfound ex) {
                 Logger.getLogger(ControllerImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -95,12 +96,13 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public ArrayList<FilmDTO> findSubFilm(String x) throws filmnotfound, genreNotFound, connectionProblem {
-        ArrayList<FilmDTO> films = FilmMapper.entityArrayToDTO(daoManager.getfDao().findSubFilm(x));
-        for (FilmDTO y : films) {
-            y.setGenre(findGenreByFilmID(y.getFilmID()));
+    public ArrayList<FilmDTO> findSubFilm(String x) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
+        ArrayList<Film> films = daoManager.getfDao().findSubFilm(x);
+         ArrayList<FilmDTO> filmsDTO = new ArrayList<>();
+        for (Film y : films) {
+            filmsDTO.add(buildFilmObject(y.getFilmID()));
         }
-        return films;
+        return filmsDTO;
     }
 
     @Override
@@ -114,22 +116,31 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public ArrayList<FilmDTO> findFilmsLikedByUser(int id) throws filmnotfound, genreNotFound, connectionProblem {
+    public ArrayList<FilmDTO> findFilmsLikedByUser(int id) throws filmnotfound, genreNotFound, connectionProblem, reginotfound {
         ArrayList<Film> likesArrayList = daoManager.getlDao().findFilmsLikedByUser(id);
         ArrayList<FilmDTO> films = FilmMapper.entityArrayToDTO(likesArrayList);
         for (FilmDTO x : films) {
             x.setGenre(findGenreByFilmID(x.getFilmID()));
+            x.setRegisseurDTO(findRegisseurwhoCreatedFilm(x.getFilmID()));
+            x.setSchauspieler(findSchauspielerOfFilm(x.getFilmID()));
         }
         return films;
     }
 
     @Override
-    public ArrayList<FilmDTO> findFilmLikedByPerson(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound, genreNotFound {
+    public ArrayList<FilmDTO> findFilmLikedByPerson(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound, genreNotFound, reginotfound {
         ArrayList<FilmDTO> films = FilmMapper.entityArrayToDTO(daoManager.getlDao().findFilmsLikedByUser(name, vorname));
         for (FilmDTO x : films) {
             x.setGenre(findGenreByFilmID(x.getFilmID()));
+            x.setRegisseurDTO(findRegisseurwhoCreatedFilm(x.getFilmID()));
+
         }
         return films;
+    }
+
+    @Override
+    public ArrayList<SchauspielerDTO> findSchauspielerOfFilm(int id) throws connectionProblem {
+        return SchauspielerMapper.entityArrayToDTO(daoManager.getSchauspielerfilmDao().findSchaupielerWhoPlayedInFilm(id));
     }
 
     @Override
@@ -152,14 +163,14 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound {
+    public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
         UserDTO udto = UserMapper.entityToDto(daoManager.getUsDao().findUserByName(name, vorname));
         udto.setLikes(findFilmsLikedByUser(udto.getId()));
         return udto;
     }
 
     @Override
-    public UserDTO findUserByID(int id) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound {
+    public UserDTO findUserByID(int id) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
         UserDTO udto = UserMapper.entityToDto(daoManager.getUsDao().findUserByID(id));
         ArrayList<FilmDTO> likes;
         likes = findFilmsLikedByUser(udto.getId());
@@ -169,14 +180,14 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound {
+    public UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
         UserDTO udto = UserMapper.entityToDto(daoManager.getUsDao().findUserByUserName(name));
         udto.setLikes(findFilmsLikedByUser(udto.getId()));
         return udto;
     }
 
     @Override
-    public ArrayList<UserDTO> findAllUser() throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound {
+    public ArrayList<UserDTO> findAllUser() throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
         ArrayList<UserDTO> udto = UserMapper.entityArrayToDTO(daoManager.getUsDao().findAllUser());
         for (UserDTO x : udto) {
             x.setRight(findRightOfUser(x.getId()));
@@ -203,7 +214,7 @@ public class ControllerImpl implements Controller {
         return null;
     }
 
-    public UserDTO likes(UserDTO userdto) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, CombinationNotFound, usersnotfound {
+    public UserDTO likes(UserDTO userdto) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, CombinationNotFound, usersnotfound, reginotfound {
         UserDTO old = findUserByID(userdto.getId());
         Film x = null;
         checker1(old.getLikes(), userdto.getLikes(), userdto.getId());
@@ -251,9 +262,9 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend, int anz) throws filmnotfound, genreNotFound, connectionProblem {
+    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend, int anz) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
         if (absteigend > 1 || absteigend < -1) {
-            return null;
+            throw new absteigendoneminusoneorzero();
         }
         ArrayList<FilmDTO> films = findAllFilm();
         Collections.sort(films, new Comparator<FilmDTO>() {
@@ -282,11 +293,12 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend) throws filmnotfound, genreNotFound, connectionProblem {
+    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
         if (absteigend > 1 || absteigend < -1) {
-            return null;
+            throw new absteigendoneminusoneorzero();
         }
-        ArrayList<FilmDTO> films = findAllFilm();
+        ArrayList<FilmDTO> films;
+        films = findAllFilm();
         Collections.sort(films, new Comparator<FilmDTO>() {
             @Override
             public int compare(FilmDTO first, FilmDTO o) {
@@ -309,6 +321,15 @@ public class ControllerImpl implements Controller {
         User x = UserMapper.dtoToentity(udto);
         userCheck.checkforSaveUser(UserMapper.dtoToentity(udto), daoManager);
         return UserMapper.entityToDto(daoManager.getUsDao().insert(x));
+    }
+
+    private FilmDTO buildFilmObject(int filmid) throws genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound, filmnotfound {
+        FilmDTO dTO = FilmMapper.entityToDTO(daoManager.getfDao().findFilmByID(filmid));
+        dTO.setUsers(findUsersWhoLikesFilm(dTO.getFilmID()));
+        dTO.setRegisseurDTO(findRegisseurwhoCreatedFilm(dTO.getFilmID()));
+        dTO.setGenre(findGenreOfFilm(dTO.getFilmID()));
+        dTO.setSchauspieler(findSchauspielerOfFilm(dTO.getFilmID()));
+        return dTO;
     }
 
 }

@@ -12,7 +12,10 @@ import javax.inject.Named;
 import persistence.controlller.interfaces.FilmController;
 import persistence.dto.FilmDTO;
 import persistence.dto.GenreDTO;
+import persistence.dto.RegisseurDTO;
+import persistence.dto.SchauspielerDTO;
 import persistence.dto.UserDTO;
+import persistence.exceptions.absteigendoneminusoneorzero;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
@@ -31,33 +34,54 @@ import persistence.exceptions.usersnotfound;
 public class FilmControllerImpl extends ControllerImpl implements FilmController {
 
     @Override
-    public FilmDTO findById(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound {
-        return super.findFilmByID(id);
-    }
-
-    @Override
-    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound,reginotfound {
+    public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
         return super.findFilmByName(name);
     }
 
     @Override
-    public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem {
-        return super.findAllFilm();
+    public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
+        return super.findFilmByID(id);
     }
 
     @Override
-    public ArrayList<FilmDTO> findSubFilm(String x) throws filmnotfound, genreNotFound, connectionProblem {
+    public ArrayList<FilmDTO> findSubFilm(String x) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
         return super.findSubFilm(x);
     }
 
     @Override
-    public ArrayList<FilmDTO> findFilmsLikedByUser(int id) throws filmnotfound, genreNotFound, connectionProblem {
-        return super.findFilmsLikedByUser(id);
+    public GenreDTO findGenreOfFilm(int id) throws genreNotFound, connectionProblem {
+        return super.findGenreOfFilm(id);
     }
 
     @Override
-    public ArrayList<FilmDTO> findFilmLikedByPerson(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound, genreNotFound {
+    public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
+        return super.findRegisseurwhoCreatedFilm(id);
+    }
+
+    @Override
+    public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound {
+       return super.findAllFilm();
+    }
+
+    @Override
+    public GenreDTO findGenreByFilmID(int id) throws genreNotFound, connectionProblem {
+       return super.findGenreByFilmID(id);
+    }
+
+    @Override
+    public ArrayList<FilmDTO> findFilmsLikedByUser(int id) throws filmnotfound, genreNotFound, connectionProblem, reginotfound {
+        return super.findFilmsLikedByUser(id);
+                
+    }
+
+    @Override
+    public ArrayList<FilmDTO> findFilmLikedByPerson(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound, genreNotFound, reginotfound {
         return super.findFilmLikedByPerson(name, vorname);
+    }
+
+    @Override
+    public ArrayList<SchauspielerDTO> findSchauspielerOfFilm(int id) throws connectionProblem {
+        return super.findSchauspielerOfFilm(id);
     }
 
     @Override
@@ -71,18 +95,15 @@ public class FilmControllerImpl extends ControllerImpl implements FilmController
     }
 
     @Override
-    public GenreDTO findGenreByFilmID(int id) throws genreNotFound, connectionProblem {
-        return super.findGenreByFilmID(id);
+    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend, int anz) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
+        return super.getSortedFilmsByLike(absteigend,anz);
     }
 
     @Override
-    public ArrayList<FilmDTO> getSortedFilmsByLike(int i,int anz) throws filmnotfound, genreNotFound, connectionProblem {
-        return super.getSortedFilmsByLike(i,anz);
+    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
+       return super.getSortedFilmsByLike(absteigend);
     }
 
-    @Override
-    public ArrayList<FilmDTO> getSortedFilmsByLike() throws filmnotfound, genreNotFound, connectionProblem {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
 }

@@ -5,6 +5,8 @@
  */
 package view.validator;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.validator.FacesValidator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,6 +15,7 @@ import persistence.dto.UserDTO;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
+import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
 
@@ -46,6 +49,8 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 
         } catch (genreNotFound ex) {
 
+        } catch (reginotfound ex) {
+            Logger.getLogger(UniqueValidator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }

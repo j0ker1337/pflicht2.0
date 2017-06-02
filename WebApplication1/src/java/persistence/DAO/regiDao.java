@@ -29,7 +29,8 @@ public class regiDao {
     }
     //"select * from schauspieler_to_film sf join schauspieler f on sf.s_id=f.id where sf.f_id=1 and sf.s_id=" + id;
         public Regisseur findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
-        String query = "select * from regie r join filme f on r.id=f.filmID where f.filmID="+id;
+        String query = "select * from regie r join filme f on f.regie=r.id where f.filmID="+id;
+            System.err.println(query);
         return findByQuery(query);
     }
 

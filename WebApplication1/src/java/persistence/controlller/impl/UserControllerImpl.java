@@ -10,7 +10,9 @@ import javax.enterprise.context.Dependent;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import persistence.controlller.interfaces.UserController;
+import persistence.dto.RightDTO;
 import persistence.dto.UserDTO;
+import persistence.exceptions.CombinationNotFound;
 import persistence.exceptions.RightIdEmpty;
 import persistence.exceptions.UserBNameEmpty;
 import persistence.exceptions.UserEmpty;
@@ -19,9 +21,11 @@ import persistence.exceptions.UserIdEmpty;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
+import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
+
 /**
  *
  * @author Nikolay und Don
@@ -29,47 +33,46 @@ import persistence.exceptions.usersnotfound;
 @Named(value = "userController")
 @Dependent
 @RequestScoped
-public class UserControllerImpl extends ControllerImpl implements UserController { 
+public class UserControllerImpl extends ControllerImpl implements UserController {
 
     @Override
-    public ArrayList<UserDTO> findAllUsers() throws connectionProblem, usersnotfound, usersnotfound, rightsnotfound, filmnotfound, genreNotFound {
-        return super.findAllUser();
+    public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
+        return super.findUserByName(name, vorname);
     }
 
     @Override
-    public UserDTO findUserById(int id) throws connectionProblem, rightsnotfound, filmnotfound, usernotfound, genreNotFound {
+    public UserDTO findUserByID(int id) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
         return super.findUserByID(id);
     }
 
     @Override
-    public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound {
-        return super.findUserByName(name, vorname);
+    public UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
+        return super.findUserByUserName(name);
     }
 
-    /**
-     *
-     * @param udto
-     * @return
-     * @throws UserIdEmpty
-     * @throws UserBNameEmpty
-     * @throws UserFoundException
-     * @throws connectionProblem
-     * @throws UserEmpty
-     * @throws rightsnotfound
-     * @throws usernotfound
-     * @throws filmnotfound
-     * @throws genreNotFound
-     * @throws RightIdEmpty
-     * @throws persistence.exceptions.CombinationNotFound
-     */
     @Override
-     public UserDTO update(UserDTO udto) throws UserEmpty, UserIdEmpty, rightsnotfound, RightIdEmpty, UserBNameEmpty, connectionProblem {
+    public ArrayList<UserDTO> findAllUser() throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
+        return super.findAllUser();
+    }
+
+    @Override
+    public RightDTO findRightOfUser(int id) throws rightsnotfound {
+        return super.findRightOfUser(id);
+    }
+
+    @Override
+    public UserDTO update(UserDTO udto) throws UserEmpty, UserIdEmpty, rightsnotfound, RightIdEmpty, UserBNameEmpty, connectionProblem {
         return super.update(udto);
-    } 
-    
-       public UserDTO save(UserDTO udto) throws connectionProblem, rightsnotfound, usernotfound, usernotfound,UserBNameEmpty,UserEmpty,UserFoundException,RightIdEmpty  {
+    }
+
+    @Override
+    public UserDTO likes(UserDTO userdto) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, CombinationNotFound, usersnotfound, reginotfound {
+        return super.likes(userdto);
+    }
+
+    @Override
+    public UserDTO save(UserDTO udto) throws connectionProblem, rightsnotfound, usernotfound, usernotfound, UserBNameEmpty, UserEmpty, UserFoundException, RightIdEmpty {
         return super.save(udto);
     }
-    
 
 }

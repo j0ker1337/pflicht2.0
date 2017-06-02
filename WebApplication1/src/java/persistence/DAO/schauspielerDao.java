@@ -74,7 +74,8 @@ public class schauspielerDao {
         }
         return r;
     }
-        public ArrayList<Schauspieler> getSchauspieler(String query) throws connectionProblem {
+
+    public ArrayList<Schauspieler> getSchauspieler(String query) throws connectionProblem {
         ArrayList<Schauspieler> al = null;
         try {
             Statement st = getConnection().createStatement();
@@ -82,9 +83,9 @@ public class schauspielerDao {
             al = new ArrayList<Schauspieler>();
             while (rs.next()) {
                 Schauspieler us = new Schauspieler();
-                 us.setId(rs.getInt("id"));
+                us.setId(rs.getInt("id"));
                 us.setVorname(rs.getString("vorname"));
-                us.setName(rs.getString("name"));
+                us.setName(rs.getString("nachname"));
                 al.add(us);
             }
         } catch (Exception e) {
@@ -94,5 +95,5 @@ public class schauspielerDao {
         }
         return al;
     }
-    
+
 }

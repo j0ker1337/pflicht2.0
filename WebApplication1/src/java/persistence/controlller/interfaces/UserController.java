@@ -8,6 +8,7 @@ package persistence.controlller.interfaces;
 import java.util.ArrayList;
 import persistence.dto.RightDTO;
 import persistence.dto.UserDTO;
+import persistence.exceptions.CombinationNotFound;
 import persistence.exceptions.RightIdEmpty;
 import persistence.exceptions.UserBNameEmpty;
 import persistence.exceptions.UserEmpty;
@@ -16,6 +17,7 @@ import persistence.exceptions.UserIdEmpty;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
+import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
@@ -26,15 +28,21 @@ import persistence.exceptions.usersnotfound;
  */
 public interface UserController {
 
-    ArrayList<UserDTO> findAllUsers() throws connectionProblem, usersnotfound, usersnotfound, rightsnotfound, filmnotfound, genreNotFound;
 
-    UserDTO findUserById(int id) throws connectionProblem, rightsnotfound, filmnotfound, usernotfound, genreNotFound;
+    public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
 
-    UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound;
+    public UserDTO findUserByID(int id) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
 
-    RightDTO findRightOfUser(int id) throws rightsnotfound;
+    public UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
+
+    public ArrayList<UserDTO> findAllUser() throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
+
+    public RightDTO findRightOfUser(int id) throws rightsnotfound;
 
     public UserDTO update(UserDTO udto) throws UserEmpty, UserIdEmpty, rightsnotfound, RightIdEmpty, UserBNameEmpty, connectionProblem;
+
+    public UserDTO likes(UserDTO userdto) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, CombinationNotFound, usersnotfound, reginotfound;
+
 
     public UserDTO save(UserDTO udto) throws connectionProblem, rightsnotfound, usernotfound, usernotfound, UserBNameEmpty, UserEmpty, UserFoundException, RightIdEmpty;
 

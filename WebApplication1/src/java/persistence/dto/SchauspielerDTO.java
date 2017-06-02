@@ -48,6 +48,13 @@ public class SchauspielerDTO {
     public void setFilme(ArrayList<FilmDTO> filme) {
         this.filme = filme;
     }
+
+    @Override
+    public String toString() {
+        return "SchauspielerDTO{" + "id=" + id + ", name=" + name + ", vorname=" + vorname + ", filme=" + filme + '}';
+    }
+    
+    
     
     
 }
