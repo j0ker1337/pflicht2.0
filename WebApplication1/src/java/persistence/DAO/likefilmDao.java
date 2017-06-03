@@ -29,6 +29,14 @@ public class likefilmDao extends Dao {
         return fd.getFilms(query);
     }
     
+        public ArrayList<Film> findFilmsLikedByUser(int id,boolean active) throws filmnotfound {
+        String query = ("select * from filme f join usertofilm x "
+                + "on f.filmID = x.film JOIN person p on x.user=p.UserID"
+                + "where p.UserID = '" + id + "' AND p.active="+active);
+        filmDao fd = new filmDao();
+        return fd.getFilms(query);
+    }
+    
     public ArrayList<Film> findFilmsLikedByUser(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound {
         userDao ud = new userDao();
         int userID = ud.findUserByName(name, vorname).getUserID();
@@ -42,10 +50,23 @@ public class likefilmDao extends Dao {
         return ud.getUsers(query);
     }
     
+        public ArrayList<User> findUsersWhoLikesFilm(int id,boolean active) throws connectionProblem, usersnotfound {
+        ArrayList<User> al = new ArrayList();
+        String query = ("select * from person f join usertofilm x on f.userID = x.user where x.film =" + id+"and x.active="+active);
+        userDao ud = new userDao();
+        return ud.getUsers(query);
+    }
+    
     public ArrayList<User> findUsersWhoLikesFilm(String name) throws filmnotfound, connectionProblem, usersnotfound {
         filmDao fd = new filmDao();
         int filmID = fd.findFilmByName(name).getFilmID();
         return findUsersWhoLikesFilm(filmID);
+    }
+    
+        public ArrayList<User> findUsersWhoLikesFilm(String name,boolean active) throws filmnotfound, connectionProblem, usersnotfound {
+        filmDao fd = new filmDao();
+        int filmID = fd.findFilmByName(name).getFilmID();
+        return findUsersWhoLikesFilm(filmID,active);
     }
     
     public Film findCombination(int userid, int filmid) throws CombinationNotFound {

@@ -81,7 +81,8 @@ alter table filme MODIFY name varchar(100) NOT NULL;
 alter table filme MODIFY jahr integer NULL DEFAULT 0;
 alter table filme MODIFY regie integer default 0;
 alter table filme MODIFY genre integer NOT NULL;
-
+alter table schauspieler_To_Film modify s_id integer default 0;
+alter table schauspieler_To_Film modify f_id integer default 0;
 
 alter table schauspieler_To_Film add constraint pk_schauspieler_To_Film primary key(s_id,f_id);
 alter table usertofilm add constraint pk_filmepersons primary key (film,user);
@@ -93,8 +94,8 @@ alter table filme add constraint fk_filme_regie_id foreign key (regie) reference
 alter table filme add constraint fk_filme_genre_id foreign key (genre) references genre(genreID);
 
 
-alter table schauspieler_To_Film add constraint fk_schauspieler_To_Film_f foreign key (f_id) references filme(filmID);
-alter table schauspieler_To_Film add constraint fk_schauspieler_To_Film_s foreign key (s_id) references schauspieler(id);
+alter table schauspieler_To_Film add constraint fk_schauspieler_To_Film_f foreign key (f_id) references filme(filmID) ON DELETE CASCADE set default;
+alter table schauspieler_To_Film add constraint fk_schauspieler_To_Film_s foreign key (s_id) references schauspieler(id) ON DELETE CASCADE set default;
 alter table person add constraint fk_genre foreign key (rightsID) references rights(id);
 
 alter table genre add constraint genre_unique_name unique (name);

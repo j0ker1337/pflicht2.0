@@ -24,6 +24,7 @@ public class UserDTO extends DTO{
     private String Bname;
     private String pass;
     private RightDTO right;
+    private boolean active;
     private ArrayList<FilmDTO> likes;
 
     public int getId() {
@@ -90,13 +91,21 @@ public class UserDTO extends DTO{
         this.likes = likes;
     }
 
-    @Override
-    public String toString() {
-        return "UserDTO{" + "id=" + id + ", vorname=" + vorname + ", name=" + name + ", geburt=" + geburt + ", Bname=" + Bname + ", pass=" + pass + ", right=" + right + ", likes=" + likes + '}';
+    public boolean isActive() {
+        return active;
     }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" + "id=" + id + ", vorname=" + vorname + ", name=" + name + ", geburt=" + geburt + ", Bname=" + Bname + ", pass=" + pass + ", right=" + right + ", active=" + active + ", likes=" + likes + '}';
+    }
 
     
+   
     
     
     

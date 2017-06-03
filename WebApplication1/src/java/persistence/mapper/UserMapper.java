@@ -5,10 +5,10 @@
  */
 package persistence.mapper;
 
-import persistence.entities.User;
-import persistence.dto.UserDTO;
-import persistence.exceptions.rightsnotfound;
 import java.util.ArrayList;
+import persistence.dto.UserDTO;
+import persistence.entities.User;
+import persistence.exceptions.rightsnotfound;
 
 /**
  *
@@ -24,6 +24,7 @@ public class UserMapper {
         udto.setPass(user.getPass());
         udto.setId(user.getUserID());
         udto.setVorname(user.getVorname());
+        udto.setActive(user.isActive());
         return udto;
     }
 
@@ -36,6 +37,7 @@ public class UserMapper {
         user.setUserID(userDto.getId());
         user.setVorname(userDto.getVorname());
         user.setName(userDto.getName());
+        user.setActive(userDto.isActive());
         return user;
     }
 

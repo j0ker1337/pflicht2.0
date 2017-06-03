@@ -11,7 +11,17 @@ public class User {
     private String Bname;
     private String pass;
     private int rightsID;
+    private boolean active;
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    
     public int getRightsID() {
         return rightsID;
     }

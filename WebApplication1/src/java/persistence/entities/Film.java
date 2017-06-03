@@ -11,7 +11,18 @@ public class Film {
     private int genre;
     private int jahr;
     private int regi;
+    private boolean active;
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    
+    
     
     public int getFilmID() {
         return filmID;

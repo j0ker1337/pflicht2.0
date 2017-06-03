@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import persistence.entities.Film;
 import persistence.exceptions.filmnotfound;
 
-
 public class filmDao extends Dao {
 
     public filmDao() {
@@ -15,6 +14,11 @@ public class filmDao extends Dao {
 
     public Film findFilmByName(String name) throws filmnotfound {
         String query = ("select * from filme where name like \'" + name + "\'");
+        return getFilm(query);
+    }
+
+    public Film findFilmByName(String name, boolean active) throws filmnotfound {
+        String query = ("select * from filme where name like \'" + name + "\' and active=" + active);
         return getFilm(query);
     }
 
@@ -28,8 +32,18 @@ public class filmDao extends Dao {
         return getFilms(query);
     }
 
+    public ArrayList<Film> findAllFilm(boolean active) throws filmnotfound {
+        String query = ("select * from filme where active=" + active);
+        return getFilms(query);
+    }
+
     public ArrayList<Film> findSubFilm(String x) throws filmnotfound {
         String query = ("select * from filme where name like \'" + x + "%\'");
+        return getFilms(query);
+    }
+
+    public ArrayList<Film> findSubFilm(String x, boolean active) throws filmnotfound {
+        String query = ("select * from filme where name like \'" + x + "%\' and active=" + active);
         return getFilms(query);
     }
 
@@ -76,6 +90,8 @@ public class filmDao extends Dao {
                 fi.setGenre(rs.getInt("genre"));
                 fi.setJahr(rs.getInt("jahr"));
                 fi.setRegi(rs.getInt("regie"));
+                fi.setActive(rs.getBoolean("active"));
+
             } else {
                 throw new filmnotfound();
             }
@@ -100,6 +116,7 @@ public class filmDao extends Dao {
                 fi.setGenre(rs.getInt("genre"));
                 fi.setJahr(rs.getInt("jahr"));
                 fi.setRegi(rs.getInt("regie"));
+                fi.setActive(rs.getBoolean("active"));
                 al.add(fi);
 
             }

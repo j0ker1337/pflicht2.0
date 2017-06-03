@@ -28,6 +28,22 @@ public class schauspielerDao {
         String query = "select * from schauspieler where id=" + id;
         return findByQuery(query);
     }
+    
+    public Schauspieler delte(int id) throws connectionProblem{
+        String query = "delete from schauspieler where id="+id;
+         try {
+            getConnection().setAutoCommit(false);
+            PreparedStatement pre = getConnection().prepareStatement(query);
+            pre.executeUpdate();
+        } catch (SQLException ex) {
+            try {
+                getConnection().rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(schauspielerDao.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+         return null;
+    }
 
     public Schauspieler insert(Schauspieler schauspieler) throws connectionProblem, schauspielernotfound {
         String query = ("insert into schauspieler (vorname ,nachname) values(?,?)");

@@ -22,6 +22,7 @@ public class FilmMapper {
         filmDTO.setFilmID(film.getFilmID());
         filmDTO.setJahr(film.getJahr());
         filmDTO.setName(film.getName());
+        filmDTO.setActive(film.isActive());
         return filmDTO;
     }
 
@@ -48,6 +49,7 @@ public class FilmMapper {
         film.setJahr(filmDTO.getJahr());
         film.setName(filmDTO.getName());
         film.setRegi(filmDTO.getRegisseurDTO().getId());
+        film.setActive(filmDTO.isActive());
         return film;
     }
 }

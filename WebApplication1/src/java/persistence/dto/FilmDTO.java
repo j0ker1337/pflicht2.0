@@ -23,9 +23,20 @@ public class FilmDTO extends DTO {
     private int jahr;
     private GenreDTO genre;
     private ArrayList<UserDTO> users;
+    private boolean active;
     private ArrayList<SchauspielerDTO> schauspieler;
     private RegisseurDTO regisseurDTO;
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    
+    
     public ArrayList<SchauspielerDTO> getSchauspieler() {
         return schauspieler;
     }

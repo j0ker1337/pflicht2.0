@@ -9,7 +9,6 @@ import persistence.exceptions.connectionProblem;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 
-
 public class userDao extends Dao {
 
     public userDao() {
@@ -28,6 +27,23 @@ public class userDao extends Dao {
     public User findUserByUserName(String name) throws connectionProblem, usernotfound {
         String query = ("select * from person where benutzerName Like '" + name + "'");
         return getUser(query);
+    }
+
+    public boolean delete(int id) throws connectionProblem, usernotfound {
+        String query = ("update person set active=" + false + " where UserID=" + id);
+        try {
+            getConnection().setAutoCommit(false);
+            PreparedStatement pre = getConnection().prepareStatement(query);
+            pre.executeUpdate();
+            getConnection().commit();
+        } catch (SQLException ex) {
+            try {
+                getConnection().rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(userDao.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        return true;
     }
 
     public User insert(User user) throws connectionProblem, usernotfound {
@@ -58,8 +74,9 @@ public class userDao extends Dao {
     }
 
     public User update(User user) throws connectionProblem {
-        String query = "update person set name=?,vorname=?,geburtsdatum=?,benutzerName=?,password=?,rightsID=? where UserID=?";
+        String query = "update person set name=?,vorname=?,geburtsdatum=?,benutzerName=?,password=?,rightsID=?,active=? where UserID=?";
         try {
+            getConnection().setAutoCommit(false);
             PreparedStatement pre = getConnection().prepareStatement(query);
             pre.setString(1, user.getName());
             pre.setString(2, user.getVorname());
@@ -67,18 +84,25 @@ public class userDao extends Dao {
             pre.setString(4, user.getBname());
             pre.setString(5, user.getPass());
             pre.setInt(6, user.getRightsID());
-            pre.setInt(7, user.getUserID());
+            pre.setBoolean(7, user.isActive());
+            pre.setInt(8, user.getUserID());
+            System.err.println(pre);
             pre.executeUpdate();
-
+            getConnection().commit();
         } catch (SQLException ex) {
+            try {
+                getConnection().rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(userDao.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             ex.printStackTrace();
             System.out.print("sadasd");
         }
         return user;
     }
-    
-        public User updateWIthOutUserName(User user) throws connectionProblem {
-        String query = "update person set name=?,vorname=?,geburtsdatum=?,password=?,rightsID=? where UserID=?";
+
+    public User updateWIthOutUserName(User user) throws connectionProblem {
+        String query = "update person set name=?,vorname=?,geburtsdatum=?,password=?,rightsID=?,active=? where UserID=?";
         try {
             PreparedStatement pre = getConnection().prepareStatement(query);
             pre.setString(1, user.getName());
@@ -86,7 +110,9 @@ public class userDao extends Dao {
             pre.setDate(3, user.getGeburt());
             pre.setString(4, user.getPass());
             pre.setInt(5, user.getRightsID());
-            pre.setInt(6, user.getUserID());
+                        pre.setBoolean(6, user.isActive());
+            pre.setInt(7, user.getUserID());
+
             pre.executeUpdate();
 
         } catch (SQLException ex) {
@@ -98,6 +124,11 @@ public class userDao extends Dao {
 
     public ArrayList<User> findAllUser() throws connectionProblem, usersnotfound {
         String query = ("select * from person");
+        return getUsers(query);
+    }
+
+    public ArrayList<User> findAllUser(boolean active) throws connectionProblem, usersnotfound {
+        String query = ("select * from person where active=" + active);
         return getUsers(query);
     }
 
@@ -117,6 +148,8 @@ public class userDao extends Dao {
                 us.setBname(rs.getString("benutzerName"));
                 us.setPass(rs.getString("password"));
                 us.setRightsID(rs.getInt("rightsID"));
+                us.setActive(rs.getBoolean("active"));
+                us.setActive(true);
             }
         } catch (SQLException e) {
             System.out.println("fehler");
@@ -140,6 +173,7 @@ public class userDao extends Dao {
                 us.setBname(rs.getString("benutzerName"));
                 us.setPass(rs.getString("password"));
                 us.setRightsID(rs.getInt("rightsID"));
+                us.setActive(rs.getBoolean("active"));
                 al.add(us);
             }
         } catch (Exception e) {
@@ -148,6 +182,5 @@ public class userDao extends Dao {
         }
         return al;
     }
-
 
 }

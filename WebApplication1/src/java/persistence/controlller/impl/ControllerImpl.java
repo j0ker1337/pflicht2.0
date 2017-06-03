@@ -47,7 +47,7 @@ import util.checker.userCheck;
  *
  * @author Nikolay und Don
  */
-public class ControllerImpl implements Controller {
+public abstract class ControllerImpl implements Controller {
 
     private final DaoManager daoManager;
 
@@ -66,7 +66,7 @@ public class ControllerImpl implements Controller {
     }
 
     public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
-        
+
         return RegiMapper.entityToDTO(daoManager.getRegieDao().findRegisseurwhoCreatedFilm(id));
     }
 
@@ -78,7 +78,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound {
-         ArrayList<Film> filmsDTO = daoManager.getfDao().findAllFilm();
+        ArrayList<Film> filmsDTO = daoManager.getfDao().findAllFilm();
         ArrayList<FilmDTO> films = new ArrayList<>();
         for (Film x : filmsDTO) {
             try {
@@ -98,7 +98,7 @@ public class ControllerImpl implements Controller {
     @Override
     public ArrayList<FilmDTO> findSubFilm(String x) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
         ArrayList<Film> films = daoManager.getfDao().findSubFilm(x);
-         ArrayList<FilmDTO> filmsDTO = new ArrayList<>();
+        ArrayList<FilmDTO> filmsDTO = new ArrayList<>();
         for (Film y : films) {
             filmsDTO.add(buildFilmObject(y.getFilmID()));
         }
@@ -330,6 +330,132 @@ public class ControllerImpl implements Controller {
         dTO.setGenre(findGenreOfFilm(dTO.getFilmID()));
         dTO.setSchauspieler(findSchauspielerOfFilm(dTO.getFilmID()));
         return dTO;
+    }
+
+    @Override
+    public FilmDTO findFilmByName(String name, boolean active) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
+        FilmDTO dTO = FilmMapper.entityToDTO(daoManager.getfDao().findFilmByName(name, active));
+        return buildFilmObject(dTO.getFilmID());
+    }
+
+    @Override
+    public ArrayList<FilmDTO> findSubFilm(String x, boolean active) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
+                ArrayList<Film> films = daoManager.getfDao().findSubFilm(x,active);
+        ArrayList<FilmDTO> filmsDTO = new ArrayList<>();
+        for (Film y : films) {
+            filmsDTO.add(buildFilmObject(y.getFilmID()));
+        }
+        return filmsDTO;
+    }
+
+    @Override
+    public ArrayList<UserDTO> findAllUser(boolean active) throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
+        ArrayList<UserDTO> udto = UserMapper.entityArrayToDTO(daoManager.getUsDao().findAllUser(active));
+        for (UserDTO x : udto) {
+            x.setRight(findRightOfUser(x.getId()));
+            x.setLikes(findFilmsLikedByUser(x.getId()));
+        }
+        return udto;
+    }
+
+    @Override
+    public ArrayList<FilmDTO> findFilmsLikedByUser(int id, boolean active) throws filmnotfound, genreNotFound, connectionProblem, reginotfound {
+         ArrayList<Film> likesArrayList = daoManager.getlDao().findFilmsLikedByUser(id,active);
+        ArrayList<FilmDTO> films = FilmMapper.entityArrayToDTO(likesArrayList);
+        for (FilmDTO x : films) {
+            x.setGenre(findGenreByFilmID(x.getFilmID()));
+            x.setRegisseurDTO(findRegisseurwhoCreatedFilm(x.getFilmID()));
+            x.setSchauspieler(findSchauspielerOfFilm(x.getFilmID()));
+        }
+        return films;
+    }
+
+    @Override
+    public ArrayList<UserDTO> findUsersWhoLikesFilm(int id, boolean active) throws connectionProblem, usersnotfound, rightsnotfound {
+        return UserMapper.entityArrayToDTO(daoManager.getlDao().findUsersWhoLikesFilm(id,active));
+    }
+
+    @Override
+    public ArrayList<UserDTO> findpersonsLikesFilm(String name, boolean active) throws filmnotfound, connectionProblem, usersnotfound, rightsnotfound {
+                ArrayList<UserDTO> users = UserMapper.entityArrayToDTO(daoManager.getlDao().findUsersWhoLikesFilm(name,active));
+        for (UserDTO x : users) {
+            x.setRight(findRightOfUser(x.getId()));
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend, int anz, boolean active) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
+             if (absteigend > 1 || absteigend < -1) {
+            throw new absteigendoneminusoneorzero();
+        }
+        ArrayList<FilmDTO> films = findAllFilm(active);
+        Collections.sort(films, new Comparator<FilmDTO>() {
+            @Override
+            public int compare(FilmDTO first, FilmDTO o) {
+                if (first.getUsers().size() == ((FilmDTO) o).getUsers().size()) {
+                    return 0;
+                }
+                if (first.getUsers().size() < ((FilmDTO) o).getUsers().size()) {
+                    return absteigend;
+                } else {
+                    return (-1) * (absteigend);
+                }
+            }
+
+        });
+        ArrayList<FilmDTO> newfilms = new ArrayList<>();
+        int i = 0;
+        for (FilmDTO fi : films) {
+            if (i < anz) {
+                newfilms.add(fi);
+                i++;
+            }
+        }
+        return newfilms;
+    }
+
+    @Override
+    public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend, boolean active) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
+        if (absteigend > 1 || absteigend < -1) {
+            throw new absteigendoneminusoneorzero();
+        }
+        ArrayList<FilmDTO> films;
+        films = findAllFilm(active);
+        Collections.sort(films, new Comparator<FilmDTO>() {
+            @Override
+            public int compare(FilmDTO first, FilmDTO o) {
+                if (first.getUsers().size() == ((FilmDTO) o).getUsers().size()) {
+                    return 0;
+                }
+                if (first.getUsers().size() < ((FilmDTO) o).getUsers().size()) {
+                    return absteigend;
+                } else {
+                    return (-1) * (absteigend);
+                }
+            }
+
+        });
+        return films;
+    }
+
+    @Override
+    public ArrayList<FilmDTO> findAllFilm(boolean active) throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound {
+        ArrayList<Film> filmsDTO = daoManager.getfDao().findAllFilm(active);
+        ArrayList<FilmDTO> films = new ArrayList<>();
+        for (Film x : filmsDTO) {
+            try {
+                films.add(buildFilmObject(x.getFilmID()));
+            } catch (usersnotfound ex) {
+                Logger.getLogger(ControllerImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return films;
+    }
+    
+    
+    public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound{
+        return daoManager.getUsDao().delete(userdto.getId());
     }
 
 }
