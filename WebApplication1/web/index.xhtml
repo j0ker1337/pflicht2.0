@@ -10,9 +10,14 @@
     </h:head>
     <h:body>
         <h:form id="form"> 
-            <h:commandLink actionListener="#{mrBean.setPage('edituser.xhtml')}"
-                           value="contact" style="font-size: large">
-                <f:ajax render="ContentLoader" />
+            <h:commandLink actionListener="#{mrBean.setPage('alluser.xhtml')}"
+                           value="All User" style="font-size: large">
+                <f:ajax execute= "@this" render="ContentLoader" />
+            </h:commandLink>
+
+            <h:commandLink actionListener="#{mrBean.setPage('allfilms.xhtml')}"
+                           value="All Filme" style="font-size: large">
+                <f:ajax execute= "@this" render="ContentLoader" />
             </h:commandLink>
 
             <h:panelGroup id="ContentLoader" >

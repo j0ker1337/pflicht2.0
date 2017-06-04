@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static persistence.DAO.Dao.getConnection;
+import persistence.DAO.interfaces.filmDao;
+import persistence.DAO.interfaces.schauspielerfilmDao;
 import persistence.entities.Film;
 import persistence.entities.Schauspieler;
 import persistence.exceptions.CombinationNotFound;
@@ -21,19 +23,19 @@ import persistence.exceptions.filmnotfound;
  *
  * @author joker
  */
-public class schauspielerfilmDao {
+ class schauspielerfilmDaoImpl implements schauspielerfilmDao{
 
     public ArrayList<Film> findFilmsplayedBySchauspieler(int id) throws filmnotfound {
         String query = ("select * from filme f join schauspieler_to_film x "
                 + "on f.filmID = x.f_id "
                 + "where x.s_id = '" + id + "'");
-        filmDao fd = new filmDao();
+        filmDao fd = new filmDaoImpl();
         return fd.getFilms(query);
     }
 
     public ArrayList<Schauspieler> findSchaupielerWhoPlayedInFilm(int id) throws connectionProblem {
         String query = ("select * from schauspieler f join schauspieler_to_film x on f.id = x.s_id where x.f_id =" + id);
-        schauspielerDao s = new schauspielerDao();
+        schauspielerDaoImpl s = new schauspielerDaoImpl();
         return s.getSchauspieler(query);
     }
 
@@ -61,7 +63,7 @@ public class schauspielerfilmDao {
                 System.out.println("fehler");
                 e.printStackTrace();
             } catch (SQLException ex) {
-                Logger.getLogger(likefilmDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(likefilmDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return findCombination(s_id, f_id);
@@ -69,7 +71,7 @@ public class schauspielerfilmDao {
 
     public Schauspieler findCombination(int s_id, int f_id) throws CombinationNotFound {
         Schauspieler fi = null;
-        schauspielerDao fd = new schauspielerDao();
+        schauspielerDaoImpl fd = new schauspielerDaoImpl();
         String query = ("select * from schauspieler_to_film sf join schauspieler f on sf.s_id=f.id where sf.f_id=" + f_id + " and sf.s_id=" + s_id);
         try {
             fi = fd.findByQuery(query);
@@ -78,5 +80,4 @@ public class schauspielerfilmDao {
         }
         return fi;
     }
-
 }

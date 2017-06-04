@@ -5,15 +5,15 @@
  */
 package persistence.DAO;
 
+import java.sql.Connection;
 import persistence.connection.DBverbindung;
 import persistence.exceptions.connectionProblem;
-import java.sql.Connection;
 
 /**
  *
  * @author Nikolay und Don
  */
-public class Dao {
+class Dao {
 
     protected static Connection getConnection() throws connectionProblem {
         Connection conn = null;

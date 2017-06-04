@@ -5,16 +5,17 @@
  */
 package persistence.DAO;
 
-import persistence.entities.Rights;
-import persistence.exceptions.rightsnotfound;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import persistence.DAO.interfaces.rightsDao;
+import persistence.entities.Rights;
+import persistence.exceptions.rightsnotfound;
 
 /**
  *
  * @author Nikolay und Don
  */
-public class rightsDao extends Dao {
+ class rightsDaoImpl extends Dao implements rightsDao{
 
     public Rights findById(int id) throws rightsnotfound {
         String query = "select * from rights where id='" + id + "'";

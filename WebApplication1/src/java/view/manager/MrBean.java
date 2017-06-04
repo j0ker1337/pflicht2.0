@@ -17,7 +17,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class MrBean {
    private String page;
-
+   private int id;
     public String getPage() {
         return page;
     }
@@ -25,6 +25,22 @@ public class MrBean {
     public void setPage(String page) {
         this.page = page;
     }
+    public void setPage(String page,int id) {
+        System.err.println(page+"/ "+id);
+        this.page = page;
+        this.id=id;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+    
+    
    
    
 }

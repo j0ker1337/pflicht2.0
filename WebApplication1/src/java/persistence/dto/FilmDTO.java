@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
+import view.validator.interfaces.IdFilme;
 
 /**
  *
@@ -17,7 +18,7 @@ import javax.inject.Named;
 @Named("Film")
 @RequestScoped
 public class FilmDTO extends DTO {
-
+    @IdFilme
     private int filmID;
     private String name;
     private int jahr;

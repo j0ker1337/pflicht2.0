@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import persistence.DAO.interfaces.filmDao;
+import persistence.DAO.interfaces.likefilmDao;
 import persistence.entities.Film;
 import persistence.entities.User;
 import persistence.exceptions.CombinationNotFound;
@@ -14,10 +16,10 @@ import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 
 
-public class likefilmDao extends Dao {
+ class likefilmDaoImpl extends Dao implements likefilmDao{
     
  
-    public likefilmDao() {
+    public likefilmDaoImpl() {
      
     }
     
@@ -25,7 +27,7 @@ public class likefilmDao extends Dao {
         String query = ("select * from filme f join usertofilm x "
                 + "on f.filmID = x.film "
                 + "where x.user = '" + id + "'");
-        filmDao fd = new filmDao();
+        filmDao fd = new filmDaoImpl();
         return fd.getFilms(query);
     }
     
@@ -33,12 +35,12 @@ public class likefilmDao extends Dao {
         String query = ("select * from filme f join usertofilm x "
                 + "on f.filmID = x.film JOIN person p on x.user=p.UserID"
                 + "where p.UserID = '" + id + "' AND p.active="+active);
-        filmDao fd = new filmDao();
+        filmDao fd = new filmDaoImpl();
         return fd.getFilms(query);
     }
     
     public ArrayList<Film> findFilmsLikedByUser(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound {
-        userDao ud = new userDao();
+        userDaoImpl ud = new userDaoImpl();
         int userID = ud.findUserByName(name, vorname).getUserID();
         return findFilmsLikedByUser(userID);
     }
@@ -46,32 +48,32 @@ public class likefilmDao extends Dao {
     public ArrayList<User> findUsersWhoLikesFilm(int id) throws connectionProblem, usersnotfound {
         ArrayList<User> al = new ArrayList();
         String query = ("select * from person f join usertofilm x on f.userID = x.user where x.film =" + id);
-        userDao ud = new userDao();
+        userDaoImpl ud = new userDaoImpl();
         return ud.getUsers(query);
     }
     
         public ArrayList<User> findUsersWhoLikesFilm(int id,boolean active) throws connectionProblem, usersnotfound {
         ArrayList<User> al = new ArrayList();
         String query = ("select * from person f join usertofilm x on f.userID = x.user where x.film =" + id+"and x.active="+active);
-        userDao ud = new userDao();
+        userDaoImpl ud = new userDaoImpl();
         return ud.getUsers(query);
     }
     
     public ArrayList<User> findUsersWhoLikesFilm(String name) throws filmnotfound, connectionProblem, usersnotfound {
-        filmDao fd = new filmDao();
+        filmDao fd = new filmDaoImpl();
         int filmID = fd.findFilmByName(name).getFilmID();
         return findUsersWhoLikesFilm(filmID);
     }
     
         public ArrayList<User> findUsersWhoLikesFilm(String name,boolean active) throws filmnotfound, connectionProblem, usersnotfound {
-        filmDao fd = new filmDao();
+        filmDao fd = new filmDaoImpl();
         int filmID = fd.findFilmByName(name).getFilmID();
         return findUsersWhoLikesFilm(filmID,active);
     }
     
     public Film findCombination(int userid, int filmid) throws CombinationNotFound {
         Film fi = null;
-        filmDao fd = new filmDao();
+        filmDao fd = new filmDaoImpl();
         String query = ("select * from usertofilm uf join filme f on uf.film=f.filmID where uf.user=" + userid + " and uf.film=" + filmid);
         try {
             fi = fd.getFilm(query);
@@ -82,7 +84,7 @@ public class likefilmDao extends Dao {
     }
     
     public Film delete(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
-        filmDao fd = new filmDao();
+        filmDao fd = new filmDaoImpl();
         String query = ("delete from usertofilm where film=? and user=?");
         return updateQuery(query, userid, filmid);
     }
@@ -106,7 +108,7 @@ public class likefilmDao extends Dao {
                 System.out.println("fehler");
                 e.printStackTrace();
             } catch (SQLException ex) {
-                Logger.getLogger(likefilmDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(likefilmDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return findCombination(userid, filmid);

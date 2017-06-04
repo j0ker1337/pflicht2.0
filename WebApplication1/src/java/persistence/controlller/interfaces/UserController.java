@@ -26,7 +26,7 @@ import persistence.exceptions.usersnotfound;
  *
  * @author Nikolay und Don
  */
-public interface UserController {
+public  interface UserController {
 
     public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
 

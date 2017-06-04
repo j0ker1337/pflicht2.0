@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistence.dto;
+package view.POJO;
 
 import javax.faces.bean.ViewScoped;
-import javax.validation.constraints.Size;
+import view.validator.interfaces.StringLenght;
 
 /**
  *
@@ -14,16 +14,16 @@ import javax.validation.constraints.Size;
  */
 @javax.faces.bean.ManagedBean
 @ViewScoped
-public class LoginDTO {
+public class LoginPOJO {
         
-    @Size(min=4,max=100)
+    @StringLenght
     private String username;
 
-    @Size(min=4,max=100)
+    @StringLenght
     private String password;
 
 
-    public LoginDTO() {
+    public LoginPOJO() {
     }
 
     public String getUsername() {

@@ -1,17 +1,21 @@
 package persistence.DAO;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import persistence.DAO.interfaces.userDao;
 import persistence.entities.User;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 
-public class userDao extends Dao {
+ class userDaoImpl extends Dao  implements userDao   {
 
-    public userDao() {
+    public userDaoImpl() {
     }
 
     public User findUserByName(String name, String vorname) throws connectionProblem, usernotfound {
@@ -40,7 +44,7 @@ public class userDao extends Dao {
             try {
                 getConnection().rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(userDao.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
         return true;
@@ -65,7 +69,7 @@ public class userDao extends Dao {
             try {
                 getConnection().rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(userDao.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
             ex.printStackTrace();
             System.out.print("sadasd");
@@ -93,7 +97,7 @@ public class userDao extends Dao {
             try {
                 getConnection().rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(userDao.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
             ex.printStackTrace();
             System.out.print("sadasd");

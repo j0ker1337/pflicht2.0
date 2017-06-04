@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static persistence.DAO.Dao.getConnection;
+import persistence.DAO.interfaces.schauspielerDao;
 import persistence.connection.DBverbindung;
 import persistence.entities.Schauspieler;
 import persistence.exceptions.connectionProblem;
@@ -22,7 +23,7 @@ import persistence.exceptions.schauspielernotfound;
  *
  * @author joker
  */
-public class schauspielerDao {
+ class schauspielerDaoImpl implements schauspielerDao{
 
     public Schauspieler findSchauspielerById(int id) throws connectionProblem, schauspielernotfound {
         String query = "select * from schauspieler where id=" + id;
@@ -39,7 +40,7 @@ public class schauspielerDao {
             try {
                 getConnection().rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(schauspielerDao.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(schauspielerDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
          return null;
@@ -62,7 +63,7 @@ public class schauspielerDao {
             try {
                 getConnection().rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(userDao.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
             ex.printStackTrace();
             System.out.print("sadasd");

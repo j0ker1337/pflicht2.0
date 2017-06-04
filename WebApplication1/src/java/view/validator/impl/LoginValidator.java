@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.validator;
+package view.validator.impl;
 
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -16,7 +16,7 @@ import javax.faces.validator.ValidatorException;
  *
  * @author Nikolay und Don
  */
-@FacesValidator(value="fooValidator")
+@FacesValidator("NameFilmeValidator")
 public class LoginValidator implements Validator {
 
     @Override

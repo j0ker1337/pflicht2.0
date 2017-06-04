@@ -5,6 +5,15 @@
  */
 package persistence.DAO;
 
+import persistence.DAO.interfaces.filmDao;
+import persistence.DAO.interfaces.genreDao;
+import persistence.DAO.interfaces.likefilmDao;
+import persistence.DAO.interfaces.regiDao;
+import persistence.DAO.interfaces.rightsDao;
+import persistence.DAO.interfaces.schauspielerDao;
+import persistence.DAO.interfaces.schauspielerfilmDao;
+import persistence.DAO.interfaces.userDao;
+
 
 /**
  *
@@ -15,7 +24,7 @@ public class DaoManager {
     private filmDao fDao;
     private userDao usDao;
     private likefilmDao lDao;
-    private genreDao gDao;
+    private genreDaoImpl gDao;
     private rightsDao rDao;
     private regiDao regieDao;
     private schauspielerDao schauspielerdao;
@@ -23,14 +32,14 @@ public class DaoManager {
     
     
     public DaoManager() {
-        this.fDao=new filmDao();
-        this.gDao=new genreDao();
-        this.usDao=new userDao();
-        this.lDao = new likefilmDao();
-        this.rDao = new rightsDao();
-        this.schauspielerdao = new schauspielerDao(); 
-        this.regieDao = new regiDao();
-        this.schauspielerfilmDao = new schauspielerfilmDao();
+        this.fDao=new filmDaoImpl();
+        this.gDao=new genreDaoImpl();
+        this.usDao=new userDaoImpl();
+        this.lDao = new likefilmDaoImpl();
+        this.rDao = new rightsDaoImpl();
+        this.schauspielerdao = new schauspielerDaoImpl(); 
+        this.regieDao = new regiDaoImpl();
+        this.schauspielerfilmDao = new schauspielerfilmDaoImpl();
     }
 
     public regiDao getRegieDao() {

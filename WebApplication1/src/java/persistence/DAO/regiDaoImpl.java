@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static persistence.DAO.Dao.getConnection;
+import persistence.DAO.interfaces.regiDao;
 import persistence.connection.DBverbindung;
 import persistence.entities.Regisseur;
 import persistence.exceptions.connectionProblem;
@@ -21,7 +22,7 @@ import persistence.exceptions.reginotfound;
  *
  * @author joker
  */
-public class regiDao {
+ class regiDaoImpl implements regiDao{
 
     public Regisseur findRegisseurById(int id) throws connectionProblem, reginotfound {
         String query = "select * from regi where id=" + id;
@@ -51,7 +52,7 @@ public class regiDao {
             try {
                 getConnection().rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(userDao.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
             ex.printStackTrace();
             System.out.print("sadasd");

@@ -1,5 +1,5 @@
 
-import persistence.controlller.impl.FilmControllerImpl;
+import persistence.controlller.controllerManager;
 import persistence.dto.FilmDTO;
 import persistence.exceptions.RightIdEmpty;
 import persistence.exceptions.UserBNameEmpty;
@@ -26,8 +26,8 @@ import persistence.exceptions.usersnotfound;
 public class Main {
 
     public static void main(String[] args) throws rightsnotfound, usernotfound, connectionProblem, filmnotfound, genreNotFound, reginotfound, usersnotfound, absteigendoneminusoneorzero, UserEmpty, UserIdEmpty, RightIdEmpty, UserBNameEmpty {
-         FilmControllerImpl filmControllerImpl = new FilmControllerImpl();
-         for(FilmDTO filmDTO : filmControllerImpl.findAllFilm(true)){
+         controllerManager x = new controllerManager();
+         for(FilmDTO filmDTO : x.getFilmController().findAllFilm(true)){
              System.err.println(filmDTO);
          }
 

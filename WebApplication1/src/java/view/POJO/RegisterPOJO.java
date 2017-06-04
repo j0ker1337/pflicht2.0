@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistence.dto;
+package view.POJO;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import view.validator.Unique;
+import view.validator.interfaces.StringLenght;
+import view.validator.interfaces.UniqueUserName;
 
 /**
  *
@@ -17,15 +17,15 @@ import view.validator.Unique;
  */
 @ManagedBean
 @RequestScoped
-public class RegisterDTO {
+public class RegisterPOJO {
     
     
     @NotNull
-    @Size(min=4,max=100)
-    @Unique
+    @StringLenght
+    @UniqueUserName
     private String benutzername;
     @NotNull
-    @Size(min=4,max=100)
+    @StringLenght
     private String password;
 
     public String getBenutzername() {
@@ -44,7 +44,7 @@ public class RegisterDTO {
         this.password = password;
     }
 
-    public RegisterDTO() {
+    public RegisterPOJO() {
     }
     
     

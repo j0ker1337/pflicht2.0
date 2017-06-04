@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistence.controlller.impl;
+package persistence.controlller;
 
 import java.util.ArrayList;
-import javax.enterprise.context.Dependent;
-import javax.faces.bean.RequestScoped;
-import javax.inject.Named;
+import persistence.controlller.interfaces.Controller;
 import persistence.controlller.interfaces.UserController;
 import persistence.dto.RightDTO;
 import persistence.dto.UserDTO;
@@ -30,64 +28,61 @@ import persistence.exceptions.usersnotfound;
  *
  * @author Nikolay und Don
  */
-@Named(value = "userController")
-@Dependent
-@RequestScoped
-public class UserControllerImpl extends ControllerImpl implements UserController {
 
-    
-    public UserControllerImpl() {
-    super(); 
+public class UserControllerImpl implements UserController {
+
+    private Controller controller;
+
+    public UserControllerImpl(Controller controller) {
+        this.controller = controller;
     }
 
-    
     @Override
     public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
-        return super.findUserByName(name, vorname);
+        return controller.findUserByName(name, vorname);
     }
 
     @Override
     public UserDTO findUserByID(int id) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
-        return super.findUserByID(id);
+        return controller.findUserByID(id);
     }
 
     @Override
     public UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
-        return super.findUserByUserName(name);
+        return controller.findUserByUserName(name);
     }
 
     @Override
     public ArrayList<UserDTO> findAllUser() throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
-        return super.findAllUser();
+        return controller.findAllUser();
     }
 
     @Override
     public RightDTO findRightOfUser(int id) throws rightsnotfound {
-        return super.findRightOfUser(id);
+        return controller.findRightOfUser(id);
     }
 
     @Override
     public UserDTO update(UserDTO udto) throws UserEmpty, UserIdEmpty, rightsnotfound, RightIdEmpty, UserBNameEmpty, connectionProblem {
-        return super.update(udto);
+        return controller.update(udto);
     }
 
     @Override
     public UserDTO likes(UserDTO userdto) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, CombinationNotFound, usersnotfound, reginotfound {
-        return super.likes(userdto);
+        return controller.likes(userdto);
     }
 
     @Override
     public UserDTO save(UserDTO udto) throws connectionProblem, rightsnotfound, usernotfound, usernotfound, UserBNameEmpty, UserEmpty, UserFoundException, RightIdEmpty {
-        return super.save(udto);
+        return controller.save(udto);
     }
-    
-        public ArrayList<UserDTO> findAllUser(boolean active) throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound{
-            return super.findAllUser(active);
-        }
-         
-            
-    public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound{
-       return super.delete(userdto);
+
+    public ArrayList<UserDTO> findAllUser(boolean active) throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
+        return controller.findAllUser(active);
+    }
+
+    public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound {
+        return controller.delete(userdto);
     }
 
 }

@@ -1,12 +1,31 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        #{filmController.findAllFilm(true)}
+        <h:form>
+            <h:dataTable var="user" value="#{controllerManager.controller.findAllUser()}">
+                <h:column>
+                    <f:facet name = "header">id</f:facet>
+                    #{user.name}</h:column>
+                <h:column>
+                    <f:facet name = "header">name</f:facet>
+                    #{user.id}</h:column>
+                <h:column>
+                    <c:set var = "id" scope = "session" value = "#{user.id}"/>
+                    <h:commandLink actionListener="#{mrBean.setPage('alluserfalse.xhtml',id)}" action="edit"
+                                   value="edit" style="font-size: large">
+                        <f:ajax  render="bla" />            
+                    </h:commandLink>
+                </h:column>           
+            </h:dataTable>  
+        </h:form>
     </h:body>
 </html>
 

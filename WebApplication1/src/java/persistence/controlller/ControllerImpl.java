@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistence.controlller.impl;
+package persistence.controlller;
 
+import persistence.controlller.interfaces.Controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,7 +48,7 @@ import util.checker.userCheck;
  *
  * @author Nikolay und Don
  */
-public abstract class ControllerImpl implements Controller {
+public class ControllerImpl implements Controller {
 
     private final DaoManager daoManager;
 

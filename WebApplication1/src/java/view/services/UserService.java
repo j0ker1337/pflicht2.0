@@ -8,8 +8,7 @@ package view.services;
 import javax.enterprise.context.Dependent;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
-import persistence.controlller.impl.UserControllerImpl;
-import persistence.controlller.interfaces.UserController;
+import persistence.controlller.controllerManager;
 import persistence.dto.UserDTO;
 
 /**
@@ -30,10 +29,12 @@ public class UserService {
     public void setCurrentUser(UserDTO currentUser) {
         this.currentUser = currentUser;
     }
-    private UserController userController;
+    private controllerManager coManager;
+
 
     public UserService() {
-        this.userController = new UserControllerImpl();
+        this.coManager = new controllerManager();
+        coManager.getUserController();
     }
 /*
     public void register(RegisterDTO reg) throws rightsnotfound {

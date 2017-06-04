@@ -4,12 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import persistence.DAO.interfaces.filmDao;
 import persistence.entities.Film;
 import persistence.exceptions.filmnotfound;
 
-public class filmDao extends Dao {
+class filmDaoImpl extends Dao implements filmDao{
 
-    public filmDao() {
+    public filmDaoImpl() {
     }
 
     public Film findFilmByName(String name) throws filmnotfound {
