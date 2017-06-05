@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:s="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title> MyMovieDB </title>
+        <link rel="stylesheet" type="text/css" href="resources/css/Main.css"></link>
+    </h:head>
+    <h:body>
+        <div class="Page">
+
+            <div class="Bannerol">
+                <p></p>
+            </div>
+            <div class="Persontext">
+                <p>Willkommen namen holen
+                    . Schön das sie heute am: aktuelles datum vorbeischauen.</p>
+            </div>
+
+            <h:form class="knopp">
+                <h:commandButton  value="Click für 1" action="#{hauptseitenBean.choosestate1()}">
+                    <f:ajax render=":Hauptcontainer" />
+                </h:commandButton>
+
+                <h:commandButton  value="Click für 2" action="#{hauptseitenBean.choosestate2()}">
+                    <f:ajax render=":Hauptcontainer" />
+                </h:commandButton>
+
+                <h:commandButton  value="Click für 3" action="#{hauptseitenBean.choosestate3()}">
+                    <f:ajax  render=":Hauptcontainer" />
+                </h:commandButton>
+            </h:form>
+
+            <h:panelGroup id="Hauptcontainer"  >
+
+                <h:panelGroup id="nimm1" rendered="#{hauptseitenBean.state1}" >
+                    <h:outputText id="s1" value="state1" />
+                    <p>jojojojo<br/> und och ganz viel mehr un so</p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                </h:panelGroup>
+
+                <h:panelGroup id="nimm2" rendered="#{hauptseitenBean.state2}" >
+                    <h:outputText id="s2"  value="state2" />
+                </h:panelGroup>
+
+                <h:panelGroup id="nimm3" rendered="#{hauptseitenBean.state3}" >
+                    <h:outputText id="s3"  value="state3" />
+                </h:panelGroup>
+              
+            </h:panelGroup> 
+
+        </div>
+    </h:body>
+</html>

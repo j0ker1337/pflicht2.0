@@ -1,0 +1,92 @@
+
+.Page{
+    font-size: 100%;
+    font-family: Verdana, 'Lucidia Sans Unicode', sans-serif;
+    position:fixed;
+    text-align:center;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    background: url(../Pics/loginHintergrund.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+   /* background-attachment: fixed; */
+    overflow: scroll;
+    z-index: 0;
+  }
+.Bannerol{
+    position:fixed;
+    top:0;
+    left:0;
+    background: url(../Pics/MyMovieDb_Logo_final.png);
+    background-repeat: no-repeat;
+    background-size: 75% 100%;
+    background-position: center;
+    height: 30vh;
+    width: 40%;
+    z-index: 1;
+}
+column{
+    font-size: 30%;
+    color: red;
+    width:40%;
+    
+}
+.knopp{
+    position:fixed;
+    width:100%;
+    z-index: 3;
+    top:30vh;
+    left:0;
+    text-align: center;
+}
+.Persontext{
+    position: fixed;
+    top: 0;
+    right:20px;
+    height: 30vh;
+    width: 40%;
+    z-index: 2;
+}
+#Hauptcontainer{
+    position:absolute;
+    left:0;
+    top: 35vh;
+    width:100%;
+    background-color: red;
+    
+    z-index: -999;
+}
+
+#regForm{
+    position: relative;
+    
+    max-height: 100%;
+    min-height: 100%;
+    float:left;
+    border-color: red;
+    border-width: 1000px;
+    border-left:solid;
+    border-right:solid;
+    border-top: solid;
+    border-bottom: solid;
+    
+    
+}
+
+#registerTrivia {
+   position: relative;
+   float:right;
+   left:30%;
+   max-width: 50%;
+   min-width: 20%;
+   top:0;   
+   border-left:solid;
+   border-left-color: black;
+}
+
+.smallp{
+    font-size: 85%;
+}
+
