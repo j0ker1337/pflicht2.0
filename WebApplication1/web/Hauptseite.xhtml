@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:s="http://xmlns.jcp.org/jsf/html">
+      xmlns:s="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title> MyMovieDB </title>
         <link rel="stylesheet" type="text/css" href="resources/css/Main.css"></link>
@@ -15,7 +16,7 @@
                 <p></p>
             </div>
             <div class="Persontext">
-                <p>Willkommen namen holen
+                <p>Willkommen #{userService.currentUser.bname}
                     . Schön das sie heute am: aktuelles datum vorbeischauen.</p>
             </div>
 
@@ -36,20 +37,23 @@
             <h:panelGroup id="Hauptcontainer"  >
 
                 <h:panelGroup id="nimm1" rendered="#{hauptseitenBean.state1}" >
-                    <h:outputText id="s1" value="state1" />
-                    <p>jojojojo<br/> und och ganz viel mehr un so</p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
-                    <p>ganzviel<br/></p><p>ganzviel<br/></p><p>ganzviel<br/></p>
+                    <h:form >
+                    <h:dataTable var="film" value="#{controllerManager.filmController.findAllFilm()}">
+                        <h:column>
+                            <f:facet name = "header">id</f:facet>
+                            #{film.name}</h:column>
+                        <h:column>
+                            <f:facet name = "header">name</f:facet>
+                            #{film.filmID}</h:column>
+                        <h:column>
+                            <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
+                            <h:commandLink actionListener="#{mrBean.setPage('filmedit.xhtml',id)}" action="edit Film"
+                                           value="edit" style="font-size: large">
+                                <f:ajax  render="ContenLoader" />            
+                            </h:commandLink>
+                        </h:column>
+                    </h:dataTable>
+                        </h:form>
                 </h:panelGroup>
 
                 <h:panelGroup id="nimm2" rendered="#{hauptseitenBean.state2}" >
@@ -59,7 +63,7 @@
                 <h:panelGroup id="nimm3" rendered="#{hauptseitenBean.state3}" >
                     <h:outputText id="s3"  value="state3" />
                 </h:panelGroup>
-              
+
             </h:panelGroup> 
 
         </div>

@@ -21,10 +21,10 @@
             <div class="LoginForm">
                 <h:form>
                     <label for="user-name">Benutzername:</label>
-                    <h:inputText id="user-name" value="bn"  />
+                    <h:inputText id="user-name" value="#{userService.currentUser.bname}"  />
 
                     <label for="user-pw">Passwort:</label>
-                    <h:inputSecret id="user-pw" value="Passwort"  />
+                    <h:inputSecret id="user-pw" value="#{userService.currentUser.pass}"  />
 
                     <h:commandButton value="Einloggen" action="Hauptseite" ></h:commandButton>
                 </h:form>
