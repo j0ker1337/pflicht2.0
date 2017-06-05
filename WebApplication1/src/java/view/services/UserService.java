@@ -5,11 +5,24 @@
  */
 package view.services;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import persistence.controlller.controllerManager;
+import persistence.dto.FilmDTO;
 import persistence.dto.UserDTO;
+import persistence.exceptions.RightIdEmpty;
+import persistence.exceptions.UserBNameEmpty;
+import persistence.exceptions.UserEmpty;
+import persistence.exceptions.UserIdEmpty;
+import persistence.exceptions.connectionProblem;
+import persistence.exceptions.filmnotfound;
+import persistence.exceptions.genreNotFound;
+import persistence.exceptions.reginotfound;
+import persistence.exceptions.rightsnotfound;
+import persistence.exceptions.usernotfound;
 
 /**
  *
@@ -21,6 +34,7 @@ import persistence.dto.UserDTO;
 public class UserService {
 
     private UserDTO currentUser;
+    private controllerManager coManager;
 
     public UserDTO getCurrentUser() {
         return currentUser;
@@ -29,14 +43,52 @@ public class UserService {
     public void setCurrentUser(UserDTO currentUser) {
         this.currentUser = currentUser;
     }
-    private controllerManager coManager;
-
 
     public UserService() {
         this.coManager = new controllerManager();
-        coManager.getUserController();
+        try {
+            this.currentUser=coManager.getUserController().findUserByID(2);
+        } catch (connectionProblem ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usernotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (filmnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-/*
+    
+    
+    public void add(FilmDTO dto){
+        System.err.println("\n"+currentUser.getLikes());
+        currentUser.getLikes().add(dto);
+        System.err.println("\n"+currentUser.getLikes());
+        
+    }
+    
+    public void update(){
+        try {
+            coManager.getUserController().update(currentUser);
+        } catch (UserEmpty ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UserIdEmpty ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RightIdEmpty ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UserBNameEmpty ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (connectionProblem ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /*
     public void register(RegisterDTO reg) throws rightsnotfound {
         System.err.println(reg);
         UserDTO dto = new UserDTO();
@@ -142,5 +194,5 @@ public class UserService {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-*/
+     */
 }

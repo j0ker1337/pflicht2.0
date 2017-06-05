@@ -7,16 +7,16 @@ package persistence.dto;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import view.validator.interfaces.IdFilme;
 
+ 
 /**
  *
  * @author Nikolay und Don
  */
 @Named("Film")
-@RequestScoped
+
 public class FilmDTO extends DTO {
     @IdFilme
     private int filmID;
@@ -133,10 +133,7 @@ public class FilmDTO extends DTO {
         if (this.jahr != other.jahr) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.name, other.name);
     }
  
 }
