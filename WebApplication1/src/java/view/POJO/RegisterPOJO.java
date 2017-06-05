@@ -8,7 +8,6 @@ package view.POJO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.NotNull;
-import view.validator.interfaces.StringLenght;
 import view.validator.interfaces.UniqueUserName;
 
 /**
@@ -21,12 +20,15 @@ public class RegisterPOJO {
     
     
     @NotNull
-    @StringLenght
+
     @UniqueUserName
     private String benutzername;
     @NotNull
-    @StringLenght
+
     private String password;
+    
+    private String vorname;
+    private String nachname;
 
     public String getBenutzername() {
         return benutzername;
@@ -45,6 +47,22 @@ public class RegisterPOJO {
     }
 
     public RegisterPOJO() {
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
     
     

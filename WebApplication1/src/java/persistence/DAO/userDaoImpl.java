@@ -18,21 +18,25 @@ import persistence.exceptions.usersnotfound;
     public userDaoImpl() {
     }
 
+    @Override
     public User findUserByName(String name, String vorname) throws connectionProblem, usernotfound {
         String query = ("select * from person where name like \'" + name + "\' and vorname like \'" + vorname + "\'");
         return getUser(query);
     }
 
+    @Override
     public User findUserByID(int id) throws connectionProblem, usernotfound {
         String query = ("select * from person where userID = " + id);
         return getUser(query);
     }
 
+    @Override
     public User findUserByUserName(String name) throws connectionProblem, usernotfound {
         String query = ("select * from person where benutzerName Like '" + name + "'");
         return getUser(query);
     }
 
+    @Override
     public boolean delete(int id) throws connectionProblem, usernotfound {
         String query = ("update person set active=" + false + " where UserID=" + id);
         try {
@@ -50,9 +54,9 @@ import persistence.exceptions.usersnotfound;
         return true;
     }
 
+    @Override
     public User insert(User user) throws connectionProblem, usernotfound {
-
-        String query = ("insert into person (benutzerName ,password,rightsID) values(?,?,?)");
+        String query = ("insert into person (benutzerName ,password,rightsID,vorname,name) values(?,?,?,?,?)");
         int id = 0;
         try {
             getConnection().setAutoCommit(false);
@@ -60,6 +64,8 @@ import persistence.exceptions.usersnotfound;
             pre.setString(1, user.getBname());
             pre.setString(2, user.getPass());
             pre.setInt(3, user.getRightsID());
+            pre.setString(4, user.getVorname());
+            pre.setString(5, user.getName());
             pre.executeUpdate();
             getConnection().commit();
             ResultSet rs = pre.getGeneratedKeys();
@@ -67,6 +73,7 @@ import persistence.exceptions.usersnotfound;
             id = rs.getInt(1);
         } catch (SQLException ex) {
             try {
+                System.err.println("ROLLBACK!");
                 getConnection().rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
@@ -77,6 +84,7 @@ import persistence.exceptions.usersnotfound;
         return findUserByUserName(user.getBname());
     }
 
+    @Override
     public User update(User user) throws connectionProblem {
         String query = "update person set name=?,vorname=?,geburtsdatum=?,benutzerName=?,password=?,rightsID=?,active=? where UserID=?";
         try {
@@ -99,12 +107,12 @@ import persistence.exceptions.usersnotfound;
             } catch (SQLException ex1) {
                 Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
-            ex.printStackTrace();
             System.out.print("sadasd");
         }
         return user;
     }
 
+    @Override
     public User updateWIthOutUserName(User user) throws connectionProblem {
         String query = "update person set name=?,vorname=?,geburtsdatum=?,password=?,rightsID=?,active=? where UserID=?";
         try {
@@ -120,17 +128,18 @@ import persistence.exceptions.usersnotfound;
             pre.executeUpdate();
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
             System.out.print("sadasd");
         }
         return user;
     }
 
+    @Override
     public ArrayList<User> findAllUser() throws connectionProblem, usersnotfound {
         String query = ("select * from person");
         return getUsers(query);
     }
 
+    @Override
     public ArrayList<User> findAllUser(boolean active) throws connectionProblem, usersnotfound {
         String query = ("select * from person where active=" + active);
         return getUsers(query);
@@ -157,11 +166,10 @@ import persistence.exceptions.usersnotfound;
             }
         } catch (SQLException e) {
             System.out.println("fehler");
-            e.printStackTrace();
         }
         return us;
     }
-
+    @Override
     public ArrayList<User> getUsers(String query) throws connectionProblem, usersnotfound {
         ArrayList<User> al = null;
         try {
@@ -180,9 +188,8 @@ import persistence.exceptions.usersnotfound;
                 us.setActive(rs.getBoolean("active"));
                 al.add(us);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("fehler");
-            e.printStackTrace();
         }
         return al;
     }

@@ -7,7 +7,7 @@
     <h:head>
         <title>Facelet Title</title>
         <link rel="stylesheet" type="text/css" href="resources/css/Main.css"></link>
-        
+
     </h:head>
 
 
@@ -15,52 +15,43 @@
 
         <div class="Page">
 
-            <h:form onsubmit="#{Person.machwasmitdenDaten()}">
+            <h:form>
                 <h:panelGroup id="regForm" layout="block">
-                <h:panelGrid cellpadding="5" cellspacing="0" columns="1" border="1" bgcolor="gray" width="220">
+                    <h:panelGrid cellpadding="5" cellspacing="0" columns="1" border="1" bgcolor="gray" width="220">
                         <h:column >
                             <p class="smallp">Benutzername</p>
-                            <h:inputText class="inpText"  value="#{Person.BenName}" label="Benutzername"/>
+                            <h:inputText class="inpText"  value="#{registerPOJO.benutzername}" label="Benutzername"/>
                         </h:column>
                         <h:column>
                             <p class="smallp">Passwort</p>
-                            <h:inputSecret class="inpText" value="#{Person.Pw}" label="Passwort"/>
+                            <h:inputSecret class="inpText" value="#{registerPOJO.password}" label="Passwort"/>
                         </h:column>
                         <h:column>
                             <p class="smallp">Vorname</p>
-                            <h:inputText class="inpText" value="#{Person.VorName}" label="Vorname"/>
+                            <h:inputText class="inpText" value="#{registerPOJO.vorname}" label="Vorname"/>
                         </h:column>
                         <h:column>
                             <p class="smallp">Nachname</p>
-                            <h:inputText class="inpText" value="#{Person.NachName}" label="Nachname"/>
+                            <h:inputText class="inpText" value="#{registerPOJO.nachname}" label="Nachname"/>
                         </h:column>
                         <h:column>
                             <p>Optionale Angaben</p> 
                         </h:column>
-
-                        <h:column>
-                            <p class="smallp">Lieblings-Film</p>
-                            <h:inputText class="inpText" value="#{Person.favFilm}"/>
-                        </h:column>
-                        <h:column>
-                            <p class="smallp">Lieblings-Regie</p>
-                            <h:inputText class="inpText" value="#{Person.favRegie}"/>
-                        </h:column>                    
-                        <h:column>
-                            <p class="smallp">Lieblings-Schauspieler</p>
-                            <h:inputText class="inpText" value="#{Person.favSchauspieler}"/>
-                        </h:column>                    
+              
 
                     </h:panelGrid>
-            </h:panelGroup>
+                </h:panelGroup>
+                <h:commandButton 
+                    value="Speichern" 
+                    action="#{userService.register(registerPOJO)}"/>
             </h:form>
             <h:panelGroup layout="block" id="registerTrivia">
                 <p>Wilkommen auf MyMovieDb die Nr.1 Seite für selbstangelegte Film-Datenbanken.
-                Es fehlt nurnoch ein kleiner Schritt bevor sie losolegen können.
-                Füllen sie as Formular auf der linken Seite aus um alle Features von
-                MyMovieDb zu nutzen. Z.B; Anlegen einer Datenbank mit ihren Lieblingsfilmen,
-                 Durchsuchen der Datenbanken anderer MyMovieDb-User,
-                und so....voll geil alter
+                    Es fehlt nurnoch ein kleiner Schritt bevor sie losolegen können.
+                    Füllen sie as Formular auf der linken Seite aus um alle Features von
+                    MyMovieDb zu nutzen. Z.B; Anlegen einer Datenbank mit ihren Lieblingsfilmen,
+                    Durchsuchen der Datenbanken anderer MyMovieDb-User,
+                    und so....voll geil alter
                 </p>
             </h:panelGroup>
 

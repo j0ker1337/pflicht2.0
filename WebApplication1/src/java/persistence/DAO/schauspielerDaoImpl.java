@@ -25,11 +25,13 @@ import persistence.exceptions.schauspielernotfound;
  */
  class schauspielerDaoImpl implements schauspielerDao{
 
+    @Override
     public Schauspieler findSchauspielerById(int id) throws connectionProblem, schauspielernotfound {
         String query = "select * from schauspieler where id=" + id;
         return findByQuery(query);
     }
     
+    @Override
     public Schauspieler delte(int id) throws connectionProblem{
         String query = "delete from schauspieler where id="+id;
          try {
@@ -46,6 +48,7 @@ import persistence.exceptions.schauspielernotfound;
          return null;
     }
 
+    @Override
     public Schauspieler insert(Schauspieler schauspieler) throws connectionProblem, schauspielernotfound {
         String query = ("insert into schauspieler (vorname ,nachname) values(?,?)");
         int id = 0;
@@ -65,12 +68,12 @@ import persistence.exceptions.schauspielernotfound;
             } catch (SQLException ex1) {
                 Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
-            ex.printStackTrace();
             System.out.print("sadasd");
         }
         return findSchauspielerById(id);
     }
 
+    @Override
     public Schauspieler findByQuery(String query) throws connectionProblem, schauspielernotfound {
         Schauspieler r = null;
         try {
@@ -92,6 +95,7 @@ import persistence.exceptions.schauspielernotfound;
         return r;
     }
 
+    @Override
     public ArrayList<Schauspieler> getSchauspieler(String query) throws connectionProblem {
         ArrayList<Schauspieler> al = null;
         try {
@@ -105,9 +109,8 @@ import persistence.exceptions.schauspielernotfound;
                 us.setName(rs.getString("nachname"));
                 al.add(us);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("fehler");
-            e.printStackTrace();
             throw new connectionProblem();
         }
         return al;

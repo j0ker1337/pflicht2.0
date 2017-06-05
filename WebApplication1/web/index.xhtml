@@ -12,26 +12,24 @@
             <link rel="stylesheet" type="text/css" href="resources/css/Main.css"></link>
     </h:head>
     <h:body>
-       
-        <div class="Page">
+     <h:form id="form"> 
+            <h:commandLink actionListener="#{mrBean.setPage('alluser.xhtml')}"
+                           value="All User" style="font-size: large">
+                <f:ajax execute= "@this" render="ContentLoader" />
+            </h:commandLink>
 
-            <h:graphicImage value ="resources/Pics/MyMovieDb_Logo_final.png"/>
+            <h:commandLink actionListener="#{mrBean.setPage('allfilms.xhtml')}"
+                           value="All Filme" style="font-size: large">
+                <f:ajax execute= "@this" render="ContentLoader" />
+            </h:commandLink>
 
-            <h:panelGrid columns="2" ></h:panelGrid>
-            <div class="LoginForm">
-                <h:form>
-                    <label for="user-name">Benutzername:</label>
-                    <h:inputText id="user-name" value="bn"  />
+            <h:panelGroup id="ContentLoader" >
+                <div id="CONTENT_CONTAINER">
+                    <ui:include src="#{mrBean.page}" />
+                </div>
+            </h:panelGroup> 
 
-                    <label for="user-pw">Passwort:</label>
-                    <h:inputSecret id="user-pw" value="Passwort"  />
-
-                    <h:commandButton value="Einloggen" action="Hauptseite" ></h:commandButton>
-                </h:form>
-            </div>
-            <p>Falls sie noch kein Konto haben folgen sie diesem <h:link value="Link" outcome="Registrierseite" /></p>
-
-        </div>
+        </h:form>
     </h:body>
 </html>
 

@@ -41,7 +41,7 @@ public class UniqueValidator implements ConstraintValidator<UniqueUserName, Obje
             context.buildConstraintViolationWithTemplate("Verbindungsprobleme").addConstraintViolation();
             return false;
         } catch (usernotfound ex) {
-            context.buildConstraintViolationWithTemplate("Dieser Benutzername ist noch frei").addConstraintViolation();
+
             return true;
 
         } catch (rightsnotfound ex) {

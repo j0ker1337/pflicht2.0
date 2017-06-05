@@ -29,17 +29,16 @@ public class userCheck {
         if (user.getUserID() == 0) {
             throw new UserIdEmpty();
         }
-        if(user.getRightsID()==0){
+        if (user.getRightsID() == 0) {
             throw new RightIdEmpty();
         }
-             daoManger.getrDao().findById(user.getRightsID());
-        if(user.getBname()==null){
+        daoManger.getrDao().findById(user.getRightsID());
+        if (user.getBname() == null) {
             throw new UserBNameEmpty();
         }
-        if(daoManger.getUsDao().findUserByUserName(user.getBname())!=null && user.getUserID()!=daoManger.getUsDao().findUserByUserName(user.getBname()).getUserID()){
-             throw new UserFoundException();
-        }
-        else{
+        if (daoManger.getUsDao().findUserByUserName(user.getBname()) != null && user.getUserID() != daoManger.getUsDao().findUserByUserName(user.getBname()).getUserID()) {
+            throw new UserFoundException();
+        } else {
             throw new usernotfound();
         }
 
@@ -56,8 +55,10 @@ public class userCheck {
         if (user.getBname() == null) {
             throw new UserBNameEmpty();
         }
-        if (daoManger.getUsDao().findUserByUserName(user.getBname()) != null) {
-            throw new UserFoundException();
+        try {
+            daoManger.getUsDao().findUserByUserName(user.getBname());
+        } catch (usernotfound e) {
+
         }
 
     }

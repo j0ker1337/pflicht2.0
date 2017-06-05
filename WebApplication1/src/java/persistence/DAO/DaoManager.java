@@ -21,14 +21,14 @@ import persistence.DAO.interfaces.userDao;
  */
 public class DaoManager {
     
-    private filmDao fDao;
-    private userDao usDao;
-    private likefilmDao lDao;
+    private filmDaoImpl fDao;
+    private userDaoImpl usDao;
+    private likefilmDaoImpl lDao;
     private genreDaoImpl gDao;
-    private rightsDao rDao;
-    private regiDao regieDao;
-    private schauspielerDao schauspielerdao;
-    private schauspielerfilmDao schauspielerfilmDao;
+    private rightsDaoImpl rDao;
+    private regiDaoImpl regieDao;
+    private schauspielerDaoImpl schauspielerdao;
+    private schauspielerfilmDaoImpl schauspielerfilmDao;
     
     
     public DaoManager() {
