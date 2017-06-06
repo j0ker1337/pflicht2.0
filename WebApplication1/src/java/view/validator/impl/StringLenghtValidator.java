@@ -19,7 +19,7 @@ public class StringLenghtValidator implements ConstraintValidator<StringLenght, 
 
     @Override
     public void initialize(StringLenght constraintAnnotation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         
     }
 
     @Override
