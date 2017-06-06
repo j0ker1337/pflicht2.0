@@ -5,14 +5,12 @@
  */
 package persistence.entities;
 
-import javax.annotation.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
 /**
  *
  * @author Nikolay und Don
  */
 public class Genre {
+
     private String name;
     private int id;
 
@@ -32,7 +30,4 @@ public class Genre {
         this.id = id;
     }
 
-
-    
-    
 }

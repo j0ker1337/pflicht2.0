@@ -28,7 +28,6 @@ import persistence.exceptions.usersnotfound;
  *
  * @author Nikolay und Don
  */
-
 public class UserControllerImpl implements UserController {
 
     private Controller controller;

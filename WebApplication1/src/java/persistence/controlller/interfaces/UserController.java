@@ -26,7 +26,7 @@ import persistence.exceptions.usersnotfound;
  *
  * @author Nikolay und Don
  */
-public  interface UserController {
+public interface UserController {
 
     public UserDTO findUserByName(String name, String vorname) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
 
@@ -45,7 +45,6 @@ public  interface UserController {
     public UserDTO save(UserDTO udto) throws connectionProblem, rightsnotfound, usernotfound, usernotfound, UserBNameEmpty, UserEmpty, UserFoundException, RightIdEmpty;
 
     public ArrayList<UserDTO> findAllUser(boolean active) throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound;
-    
-        
+
     public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound;
 }

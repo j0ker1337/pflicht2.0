@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
         <title>MyMovieDb</title>
 
-            <link rel="stylesheet" type="text/css" href="resources/css/Main.css"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/Main.css"></link>
     </h:head>
     <h:body>
 
@@ -21,10 +21,10 @@
             <div class="LoginForm">
                 <h:form>
                     <label for="user-name">Benutzername:</label>
-                    <h:inputText id="user-name" value="#{userService.currentUser.bname}"  />
+                    <h:inputText id="user-name" value="#{USERSE.currentUser.bname}"  />
 
                     <label for="user-pw">Passwort:</label>
-                    <h:inputSecret id="user-pw" value="#{userService.currentUser.pass}"  />
+                    <h:inputSecret id="user-pw" value="#{USERSE.currentUser.pass}"  />
 
                     <h:commandButton value="Einloggen" action="Hauptseite" ></h:commandButton>
                 </h:form>
@@ -32,7 +32,7 @@
             <p>Falls sie noch kein Konto haben folgen sie diesem <h:link value="Link" outcome="Registrierseite" /></p>
 
         </div>
-     
+
     </h:body>
 </html>
 

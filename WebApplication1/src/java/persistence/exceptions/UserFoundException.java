@@ -9,6 +9,6 @@ package persistence.exceptions;
  *
  * @author Nikolay und Don
  */
-public class UserFoundException extends Exception{
-    
+public class UserFoundException extends Exception {
+
 }

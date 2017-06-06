@@ -1,11 +1,12 @@
-
 package persistence.entities;
 
 import javax.annotation.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
 @ManagedBean
 @RequestScoped
 public class Film {
+
     private int filmID;
     private String name;
     private int genre;
@@ -21,9 +22,6 @@ public class Film {
         this.active = active;
     }
 
-    
-    
-    
     public int getFilmID() {
         return filmID;
     }
@@ -40,7 +38,6 @@ public class Film {
         this.name = name;
     }
 
-
     public int getJahr() {
         return jahr;
     }
@@ -56,8 +53,6 @@ public class Film {
     public void setGenre(int genre) {
         this.genre = genre;
     }
-    
-    
 
     @Override
     public String toString() {

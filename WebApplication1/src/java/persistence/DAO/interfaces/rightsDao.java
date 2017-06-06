@@ -13,9 +13,9 @@ import persistence.exceptions.rightsnotfound;
  * @author joker
  */
 public interface rightsDao {
-    
-    public Rights findById(int id) throws rightsnotfound; 
-    
+
+    public Rights findById(int id) throws rightsnotfound;
+
     public Rights findRightOfUser(int id) throws rightsnotfound;
 
     public Rights getRights(String query) throws rightsnotfound;

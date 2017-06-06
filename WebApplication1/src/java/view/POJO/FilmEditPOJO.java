@@ -16,13 +16,14 @@ import view.validator.interfaces.StringLenght;
  * @author joker
  */
 public class FilmEditPOJO {
+
     @Id
     @IdFilme
     private int id;
     @StringLenght
     @NameFilme
     private String name;
-    
+
     private int jahr;
     @IdGenre
     @Id
@@ -77,8 +78,5 @@ public class FilmEditPOJO {
     public void setRegisseurDTO(int regisseurDTO) {
         this.regisseurDTO = regisseurDTO;
     }
-    
-    
-    
-    
+
 }

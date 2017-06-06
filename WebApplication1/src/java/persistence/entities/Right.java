@@ -10,8 +10,9 @@ package persistence.entities;
  * @author Nikolay und Don
  */
 public class Right {
-   private int id;
-   private String name;
+
+    private int id;
+    private String name;
 
     public int getId() {
         return id;
@@ -28,7 +29,5 @@ public class Right {
     public void setName(String name) {
         this.name = name;
     }
-   
-   
-   
+
 }

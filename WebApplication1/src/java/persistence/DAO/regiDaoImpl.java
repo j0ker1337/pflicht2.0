@@ -22,16 +22,17 @@ import persistence.exceptions.reginotfound;
  *
  * @author joker
  */
- class regiDaoImpl implements regiDao{
+class regiDaoImpl implements regiDao {
 
     public Regisseur findRegisseurById(int id) throws connectionProblem, reginotfound {
         String query = "select * from regi where id=" + id;
         return findByQuery(query);
     }
+
     //"select * from schauspieler_to_film sf join schauspieler f on sf.s_id=f.id where sf.f_id=1 and sf.s_id=" + id;
-        public Regisseur findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
-        String query = "select * from regie r join filme f on f.regie=r.id where f.filmID="+id;
-            System.err.println(query);
+    public Regisseur findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
+        String query = "select * from regie r join filme f on f.regie=r.id where f.filmID=" + id;
+        System.err.println(query);
         return findByQuery(query);
     }
 

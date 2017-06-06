@@ -26,8 +26,6 @@ import persistence.exceptions.usersnotfound;
  */
 public interface FilmController {
 
-
-
     public FilmDTO findFilmByName(String name) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound;
 
     public FilmDTO findFilmByID(int id) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound;

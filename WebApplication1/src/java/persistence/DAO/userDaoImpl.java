@@ -13,7 +13,7 @@ import persistence.exceptions.connectionProblem;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 
- class userDaoImpl extends Dao  implements userDao   {
+class userDaoImpl extends Dao implements userDao {
 
     public userDaoImpl() {
     }
@@ -122,7 +122,7 @@ import persistence.exceptions.usersnotfound;
             pre.setDate(3, user.getGeburt());
             pre.setString(4, user.getPass());
             pre.setInt(5, user.getRightsID());
-                        pre.setBoolean(6, user.isActive());
+            pre.setBoolean(6, user.isActive());
             pre.setInt(7, user.getUserID());
 
             pre.executeUpdate();
@@ -169,6 +169,7 @@ import persistence.exceptions.usersnotfound;
         }
         return us;
     }
+
     @Override
     public ArrayList<User> getUsers(String query) throws connectionProblem, usersnotfound {
         ArrayList<User> al = null;

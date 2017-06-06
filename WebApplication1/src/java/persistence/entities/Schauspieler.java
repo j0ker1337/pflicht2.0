@@ -10,9 +10,10 @@ package persistence.entities;
  * @author joker
  */
 public class Schauspieler {
-      private int id;
-      private String name;
-      private String vorname;
+
+    private int id;
+    private String name;
+    private String vorname;
 
     public int getId() {
         return id;
@@ -37,7 +38,5 @@ public class Schauspieler {
     public void setVorname(String vorname) {
         this.vorname = vorname;
     }
-      
-      
-      
+
 }

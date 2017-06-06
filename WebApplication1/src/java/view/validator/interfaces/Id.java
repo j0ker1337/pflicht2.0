@@ -5,25 +5,26 @@
  */
 package view.validator.interfaces;
 
-import view.validator.impl.IdValidator;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import view.validator.impl.IdValidator;
 
 /**
  *
  * @author joker
  */
-
 @Constraint(validatedBy = IdValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface Id {
+
     String message() default "Wrong Username";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
-

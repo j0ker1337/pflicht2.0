@@ -9,6 +9,6 @@ package persistence.exceptions;
  *
  * @author joker
  */
-public class absteigendoneminusoneorzero extends Exception{
-    
+public class absteigendoneminusoneorzero extends Exception {
+
 }

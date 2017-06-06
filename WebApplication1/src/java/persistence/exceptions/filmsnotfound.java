@@ -11,6 +11,6 @@ import java.sql.SQLException;
  *
  * @author Nikolay und Don
  */
-public class filmsnotfound extends SQLException{
-    
+public class filmsnotfound extends SQLException {
+
 }

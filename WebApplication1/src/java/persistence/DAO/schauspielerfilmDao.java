@@ -23,7 +23,7 @@ import persistence.exceptions.filmnotfound;
  *
  * @author joker
  */
- class schauspielerfilmDaoImpl implements schauspielerfilmDao{
+class schauspielerfilmDaoImpl implements schauspielerfilmDao {
 
     public ArrayList<Film> findFilmsplayedBySchauspieler(int id) throws filmnotfound {
         String query = ("select * from filme f join schauspieler_to_film x "

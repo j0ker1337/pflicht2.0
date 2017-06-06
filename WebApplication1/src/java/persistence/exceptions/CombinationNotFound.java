@@ -9,6 +9,6 @@ package persistence.exceptions;
  *
  * @author Nikolay und Don
  */
-public class CombinationNotFound extends Exception{
-    
+public class CombinationNotFound extends Exception {
+
 }

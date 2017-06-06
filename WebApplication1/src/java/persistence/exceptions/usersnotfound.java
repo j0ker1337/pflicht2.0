@@ -11,6 +11,6 @@ import java.sql.SQLException;
  *
  * @author Nikolay und Don
  */
-public class usersnotfound extends SQLException{
-    
+public class usersnotfound extends SQLException {
+
 }

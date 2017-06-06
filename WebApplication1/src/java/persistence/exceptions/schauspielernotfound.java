@@ -11,6 +11,6 @@ import java.sql.SQLException;
  *
  * @author joker
  */
-public class schauspielernotfound extends SQLException{
-    
+public class schauspielernotfound extends SQLException {
+
 }

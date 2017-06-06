@@ -16,27 +16,25 @@ import persistence.exceptions.usersnotfound;
  * @author joker
  */
 public interface userDao {
-    
-    
-    
+
     public User findUserByName(String name, String vorname) throws connectionProblem, usernotfound;
 
     public User findUserByID(int id) throws connectionProblem, usernotfound;
 
-    public User findUserByUserName(String name) throws connectionProblem, usernotfound; 
+    public User findUserByUserName(String name) throws connectionProblem, usernotfound;
 
     public boolean delete(int id) throws connectionProblem, usernotfound;
 
     public User insert(User user) throws connectionProblem, usernotfound;
-    public User update(User user) throws connectionProblem; 
+
+    public User update(User user) throws connectionProblem;
 
     public User updateWIthOutUserName(User user) throws connectionProblem;
 
     public ArrayList<User> findAllUser() throws connectionProblem, usersnotfound;
 
-    public ArrayList<User> findAllUser(boolean active) throws connectionProblem, usersnotfound; 
+    public ArrayList<User> findAllUser(boolean active) throws connectionProblem, usersnotfound;
 
     public ArrayList<User> getUsers(String query) throws connectionProblem, usersnotfound;
 
 }
-

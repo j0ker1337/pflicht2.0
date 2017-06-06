@@ -23,18 +23,18 @@ import persistence.exceptions.schauspielernotfound;
  *
  * @author joker
  */
- class schauspielerDaoImpl implements schauspielerDao{
+class schauspielerDaoImpl implements schauspielerDao {
 
     @Override
     public Schauspieler findSchauspielerById(int id) throws connectionProblem, schauspielernotfound {
         String query = "select * from schauspieler where id=" + id;
         return findByQuery(query);
     }
-    
+
     @Override
-    public Schauspieler delte(int id) throws connectionProblem{
-        String query = "delete from schauspieler where id="+id;
-         try {
+    public Schauspieler delte(int id) throws connectionProblem {
+        String query = "delete from schauspieler where id=" + id;
+        try {
             getConnection().setAutoCommit(false);
             PreparedStatement pre = getConnection().prepareStatement(query);
             pre.executeUpdate();
@@ -45,7 +45,7 @@ import persistence.exceptions.schauspielernotfound;
                 Logger.getLogger(schauspielerDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
-         return null;
+        return null;
     }
 
     @Override

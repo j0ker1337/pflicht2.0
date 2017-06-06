@@ -25,15 +25,15 @@ public class StringLenghtValidator implements ConstraintValidator<StringLenght, 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
-        if(((String)value).length()<4){
+        if (((String) value).length() < 4) {
             context.buildConstraintViolationWithTemplate("Bitte gib mehr als 4 Zeichen ein").addConstraintViolation();
             return false;
         }
-        if(((String)value).length()>100){
-             context.buildConstraintViolationWithTemplate("Deine Eingabe ist zu lang maximal 100").addConstraintViolation();
-             return false;
+        if (((String) value).length() > 100) {
+            context.buildConstraintViolationWithTemplate("Deine Eingabe ist zu lang maximal 100").addConstraintViolation();
+            return false;
         }
         return true;
     }
-    
+
 }

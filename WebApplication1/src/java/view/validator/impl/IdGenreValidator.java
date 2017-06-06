@@ -8,7 +8,6 @@ import persistence.exceptions.connectionProblem;
 import persistence.exceptions.genreNotFound;
 import view.validator.interfaces.IdGenre;
 
-
 @FacesValidator("IdGenreValidator")
 public class IdGenreValidator implements ConstraintValidator<IdGenre, Object> {
 
@@ -20,7 +19,7 @@ public class IdGenreValidator implements ConstraintValidator<IdGenre, Object> {
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         try {
-             controllerManager controller = new controllerManager();
+            controllerManager controller = new controllerManager();
             if (controller.getGenreController().findGenreById((Integer) value) != null) {
 
             }

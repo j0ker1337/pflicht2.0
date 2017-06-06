@@ -10,6 +10,7 @@ package persistence.entities;
  * @author Nikolay und Don
  */
 public class Rights {
+
     private int id;
     private String name;
 
@@ -28,7 +29,5 @@ public class Rights {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
+
 }

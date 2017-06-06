@@ -9,6 +9,6 @@ package persistence.exceptions;
  *
  * @author Nikolay und Don
  */
-public class filmnotfound extends Exception{
-    
+public class filmnotfound extends Exception {
+
 }

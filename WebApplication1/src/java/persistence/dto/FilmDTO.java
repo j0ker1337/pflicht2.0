@@ -10,7 +10,6 @@ import java.util.Objects;
 import javax.inject.Named;
 import view.validator.interfaces.IdFilme;
 
- 
 /**
  *
  * @author Nikolay und Don
@@ -18,6 +17,7 @@ import view.validator.interfaces.IdFilme;
 @Named("Film")
 
 public class FilmDTO extends DTO {
+
     @IdFilme
     private int filmID;
     private String name;
@@ -36,8 +36,6 @@ public class FilmDTO extends DTO {
         this.active = active;
     }
 
-    
-    
     public ArrayList<SchauspielerDTO> getSchauspieler() {
         return schauspieler;
     }
@@ -45,8 +43,6 @@ public class FilmDTO extends DTO {
     public void setSchauspieler(ArrayList<SchauspielerDTO> schauspieler) {
         this.schauspieler = schauspieler;
     }
-    
-    
 
     public int getFilmID() {
         return filmID;
@@ -80,7 +76,6 @@ public class FilmDTO extends DTO {
         this.jahr = jahr;
     }
 
-
     public ArrayList<UserDTO> getUsers() {
         return users;
     }
@@ -95,15 +90,12 @@ public class FilmDTO extends DTO {
 
     public void setRegisseurDTO(RegisseurDTO regisseurDTO) {
         this.regisseurDTO = regisseurDTO;
-    }    
+    }
 
     @Override
     public String toString() {
         return "FilmDTO{" + "filmID=" + filmID + ", name=" + name + ", jahr=" + jahr + ", genre=" + genre + ", users=" + users + ", schauspieler=" + schauspieler + ", regisseurDTO=" + regisseurDTO + '}';
     }
-    
-
-
 
     @Override
     public int hashCode() {
@@ -135,5 +127,5 @@ public class FilmDTO extends DTO {
         }
         return Objects.equals(this.name, other.name);
     }
- 
+
 }

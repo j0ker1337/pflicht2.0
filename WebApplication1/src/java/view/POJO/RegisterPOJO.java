@@ -17,8 +17,7 @@ import view.validator.interfaces.UniqueUserName;
 @ManagedBean
 @RequestScoped
 public class RegisterPOJO {
-    
-    
+
     @NotNull
 
     @UniqueUserName
@@ -26,7 +25,7 @@ public class RegisterPOJO {
     @NotNull
 
     private String password;
-    
+
     private String vorname;
     private String nachname;
 
@@ -64,10 +63,5 @@ public class RegisterPOJO {
     public void setNachname(String nachname) {
         this.nachname = nachname;
     }
-    
-    
-    
-    
-    
-    
+
 }

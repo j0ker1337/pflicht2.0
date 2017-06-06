@@ -5,7 +5,6 @@
  */
 package persistence.controlller;
 
-import persistence.controlller.interfaces.Controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -341,7 +340,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public ArrayList<FilmDTO> findSubFilm(String x, boolean active) throws filmnotfound, genreNotFound, connectionProblem, usersnotfound, rightsnotfound, reginotfound {
-                ArrayList<Film> films = daoManager.getfDao().findSubFilm(x,active);
+        ArrayList<Film> films = daoManager.getfDao().findSubFilm(x, active);
         ArrayList<FilmDTO> filmsDTO = new ArrayList<>();
         for (Film y : films) {
             filmsDTO.add(buildFilmObject(y.getFilmID()));
@@ -361,7 +360,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public ArrayList<FilmDTO> findFilmsLikedByUser(int id, boolean active) throws filmnotfound, genreNotFound, connectionProblem, reginotfound {
-         ArrayList<Film> likesArrayList = daoManager.getlDao().findFilmsLikedByUser(id,active);
+        ArrayList<Film> likesArrayList = daoManager.getlDao().findFilmsLikedByUser(id, active);
         ArrayList<FilmDTO> films = FilmMapper.entityArrayToDTO(likesArrayList);
         for (FilmDTO x : films) {
             x.setGenre(findGenreByFilmID(x.getFilmID()));
@@ -373,12 +372,12 @@ public class ControllerImpl implements Controller {
 
     @Override
     public ArrayList<UserDTO> findUsersWhoLikesFilm(int id, boolean active) throws connectionProblem, usersnotfound, rightsnotfound {
-        return UserMapper.entityArrayToDTO(daoManager.getlDao().findUsersWhoLikesFilm(id,active));
+        return UserMapper.entityArrayToDTO(daoManager.getlDao().findUsersWhoLikesFilm(id, active));
     }
 
     @Override
     public ArrayList<UserDTO> findpersonsLikesFilm(String name, boolean active) throws filmnotfound, connectionProblem, usersnotfound, rightsnotfound {
-                ArrayList<UserDTO> users = UserMapper.entityArrayToDTO(daoManager.getlDao().findUsersWhoLikesFilm(name,active));
+        ArrayList<UserDTO> users = UserMapper.entityArrayToDTO(daoManager.getlDao().findUsersWhoLikesFilm(name, active));
         for (UserDTO x : users) {
             x.setRight(findRightOfUser(x.getId()));
         }
@@ -387,7 +386,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend, int anz, boolean active) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
-             if (absteigend > 1 || absteigend < -1) {
+        if (absteigend > 1 || absteigend < -1) {
             throw new absteigendoneminusoneorzero();
         }
         ArrayList<FilmDTO> films = findAllFilm(active);
@@ -453,9 +452,8 @@ public class ControllerImpl implements Controller {
         }
         return films;
     }
-    
-    
-    public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound{
+
+    public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound {
         return daoManager.getUsDao().delete(userdto.getId());
     }
 

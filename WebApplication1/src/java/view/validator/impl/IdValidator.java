@@ -15,20 +15,20 @@ import view.validator.interfaces.Id;
  * @author joker
  */
 @FacesValidator("IdValidator")
-public class IdValidator implements ConstraintValidator<Id, Object>{
+public class IdValidator implements ConstraintValidator<Id, Object> {
 
     @Override
     public void initialize(Id constraintAnnotation) {
-        
+
     }
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if((Integer)value<=0){
-              context.buildConstraintViolationWithTemplate("die id ist ungültig").addConstraintViolation();
-             return false;
+        if ((Integer) value <= 0) {
+            context.buildConstraintViolationWithTemplate("die id ist ungültig").addConstraintViolation();
+            return false;
         }
         return true;
     }
-    
+
 }

@@ -16,17 +16,17 @@ import persistence.exceptions.rightsnotfound;
  *
  * @author Nikolay und Don
  */
- class rightsDaoImpl extends Dao implements rightsDao{
+class rightsDaoImpl extends Dao implements rightsDao {
 
     @Override
     public Rights findById(int id) throws rightsnotfound {
         String query = "select * from rights where id='" + id + "'";
         return getRights(query);
     }
-    
+
     @Override
-    public Rights findRightOfUser(int id) throws rightsnotfound{
-        String query = "select r.id,r.`name` from person p join rights r on r.id=p.rightsID where p.userID="+id;
+    public Rights findRightOfUser(int id) throws rightsnotfound {
+        String query = "select r.id,r.`name` from person p join rights r on r.id=p.rightsID where p.userID=" + id;
         return getRights(query);
     }
 

@@ -14,7 +14,9 @@ import persistence.exceptions.genreNotFound;
  * @author Nikolay und Don
  */
 public interface GenreController {
+
     public GenreDTO findGenreById(int id) throws genreNotFound, connectionProblem;
+
     public GenreDTO findGenreByName(String name) throws genreNotFound, connectionProblem;
- 
+
 }

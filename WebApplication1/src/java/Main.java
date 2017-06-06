@@ -29,8 +29,7 @@ import persistence.exceptions.usersnotfound;
 public class Main {
 
     public static void main(String[] args) throws rightsnotfound, usernotfound, connectionProblem, filmnotfound, genreNotFound, reginotfound, usersnotfound, absteigendoneminusoneorzero, UserEmpty, UserIdEmpty, RightIdEmpty, UserBNameEmpty {
-       
-        
+
         try {
             controllerManager x = new controllerManager();
             UserDTO j = new UserDTO();

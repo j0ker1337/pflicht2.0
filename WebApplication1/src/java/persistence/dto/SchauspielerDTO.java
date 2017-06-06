@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author joker
  */
 public class SchauspielerDTO {
+
     private int id;
     private String name;
     private String vorname;
@@ -53,8 +54,5 @@ public class SchauspielerDTO {
     public String toString() {
         return "SchauspielerDTO{" + "id=" + id + ", name=" + name + ", vorname=" + vorname + ", filme=" + filme + '}';
     }
-    
-    
-    
-    
+
 }

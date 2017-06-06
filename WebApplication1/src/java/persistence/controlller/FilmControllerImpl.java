@@ -29,8 +29,9 @@ import persistence.exceptions.usersnotfound;
 class FilmControllerImpl implements FilmController {
 
     private Controller controller;
+
     FilmControllerImpl(Controller controller) {
-        this.controller=controller;
+        this.controller = controller;
     }
 
     @Override
@@ -60,18 +61,18 @@ class FilmControllerImpl implements FilmController {
 
     @Override
     public ArrayList<FilmDTO> findAllFilm() throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound {
-       return controller.findAllFilm();
+        return controller.findAllFilm();
     }
 
     @Override
     public GenreDTO findGenreByFilmID(int id) throws genreNotFound, connectionProblem {
-       return controller.findGenreByFilmID(id);
+        return controller.findGenreByFilmID(id);
     }
 
     @Override
     public ArrayList<FilmDTO> findFilmsLikedByUser(int id) throws filmnotfound, genreNotFound, connectionProblem, reginotfound {
         return controller.findFilmsLikedByUser(id);
-                
+
     }
 
     @Override
@@ -96,19 +97,17 @@ class FilmControllerImpl implements FilmController {
 
     @Override
     public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend, int anz) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
-        return controller.getSortedFilmsByLike(absteigend,anz);
+        return controller.getSortedFilmsByLike(absteigend, anz);
     }
 
     @Override
     public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound {
-       return controller.getSortedFilmsByLike(absteigend);
+        return controller.getSortedFilmsByLike(absteigend);
     }
 
     @Override
     public ArrayList<FilmDTO> findAllFilm(boolean active) throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound {
         return controller.findAllFilm(active);
     }
-
-
 
 }

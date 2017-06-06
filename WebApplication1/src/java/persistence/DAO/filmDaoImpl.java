@@ -8,7 +8,7 @@ import persistence.DAO.interfaces.filmDao;
 import persistence.entities.Film;
 import persistence.exceptions.filmnotfound;
 
-class filmDaoImpl extends Dao implements filmDao{
+class filmDaoImpl extends Dao implements filmDao {
 
     public filmDaoImpl() {
     }

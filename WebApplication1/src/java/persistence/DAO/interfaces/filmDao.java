@@ -14,8 +14,7 @@ import persistence.exceptions.filmnotfound;
  * @author joker
  */
 public interface filmDao {
-    
-    
+
     public Film findFilmByName(String name) throws filmnotfound;
 
     public Film findFilmByName(String name, boolean active) throws filmnotfound;
@@ -24,15 +23,13 @@ public interface filmDao {
 
     public ArrayList<Film> findAllFilm() throws filmnotfound;
 
-    public ArrayList<Film> findAllFilm(boolean active) throws filmnotfound ;
+    public ArrayList<Film> findAllFilm(boolean active) throws filmnotfound;
 
     public ArrayList<Film> findSubFilm(String x) throws filmnotfound;
-       
 
     public ArrayList<Film> findSubFilm(String x, boolean active) throws filmnotfound;
+
     public Film getFilm(String query) throws filmnotfound;
-      
 
     public ArrayList<Film> getFilms(String query);
 }
-

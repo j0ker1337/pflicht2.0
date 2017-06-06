@@ -11,10 +11,10 @@
     background: url(../Pics/loginHintergrund.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
-   /* background-attachment: fixed; */
+    /* background-attachment: fixed; */
     overflow: scroll;
     z-index: 0;
-  }
+}
 .Bannerol{
     position:fixed;
     top:0;
@@ -31,7 +31,7 @@ column{
     font-size: 30%;
     color: red;
     width:40%;
-    
+
 }
 .knopp{
     position:fixed;
@@ -55,13 +55,13 @@ column{
     top: 35vh;
     width:100%;
     background-color: red;
-    
+
     z-index: -999;
 }
 
 #regForm{
     position: relative;
-    
+
     max-height: 100%;
     min-height: 100%;
     float:left;
@@ -71,19 +71,19 @@ column{
     border-right:solid;
     border-top: solid;
     border-bottom: solid;
-    
-    
+
+
 }
 
 #registerTrivia {
-   position: relative;
-   float:right;
-   left:30%;
-   max-width: 50%;
-   min-width: 20%;
-   top:0;   
-   border-left:solid;
-   border-left-color: black;
+    position: relative;
+    float:right;
+    left:30%;
+    max-width: 50%;
+    min-width: 20%;
+    top:0;   
+    border-left:solid;
+    border-left-color: black;
 }
 
 .smallp{

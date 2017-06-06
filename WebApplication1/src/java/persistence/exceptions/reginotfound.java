@@ -15,5 +15,5 @@ public class reginotfound extends SQLException {
 
     public reginotfound() {
     }
-    
+
 }

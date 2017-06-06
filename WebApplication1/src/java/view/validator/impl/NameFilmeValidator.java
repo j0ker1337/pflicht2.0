@@ -16,7 +16,7 @@ import view.validator.interfaces.NameFilme;
  */
 @FacesValidator("NameFilmeValidator")
 
-public class NameFilmeValidator implements ConstraintValidator<NameFilme,Object>{
+public class NameFilmeValidator implements ConstraintValidator<NameFilme, Object> {
 
     @Override
     public void initialize(NameFilme constraintAnnotation) {
@@ -27,5 +27,5 @@ public class NameFilmeValidator implements ConstraintValidator<NameFilme,Object>
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

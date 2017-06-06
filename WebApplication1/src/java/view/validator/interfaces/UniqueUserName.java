@@ -21,7 +21,10 @@ import view.validator.impl.UniqueValidator;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface UniqueUserName {
+
     String message() default "Wrong Username";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

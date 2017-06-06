@@ -10,6 +10,7 @@ package persistence.entities;
  * @author joker
  */
 public class Regisseur {
+
     int id;
     String name;
     String vorname;
@@ -37,6 +38,5 @@ public class Regisseur {
     public void setVorname(String vorname) {
         this.vorname = vorname;
     }
-    
-    
+
 }

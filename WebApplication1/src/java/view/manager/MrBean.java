@@ -5,7 +5,6 @@
  */
 package view.manager;
 
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -16,8 +15,10 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class MrBean {
-   private String page;
-   private int id;
+
+    private String page;
+    private int id;
+
     public String getPage() {
         return page;
     }
@@ -25,11 +26,13 @@ public class MrBean {
     public void setPage(String page) {
         this.page = page;
     }
-    public void setPage(String page,int id) {
-        System.err.println(page+"/ "+id);
+
+    public void setPage(String page, int id) {
+        System.err.println(page + "/ " + id);
         this.page = page;
-        this.id=id;
+        this.id = id;
     }
+
     public int getId() {
         return id;
     }
@@ -37,10 +40,5 @@ public class MrBean {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
-    
-    
-   
-   
+
 }

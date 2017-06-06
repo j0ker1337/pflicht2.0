@@ -17,14 +17,14 @@ import persistence.exceptions.filmnotfound;
  * @author joker
  */
 public interface schauspielerfilmDao {
-    
+
     public ArrayList<Film> findFilmsplayedBySchauspieler(int id) throws filmnotfound;
 
-    public ArrayList<Schauspieler> findSchaupielerWhoPlayedInFilm(int id) throws connectionProblem; 
+    public ArrayList<Schauspieler> findSchaupielerWhoPlayedInFilm(int id) throws connectionProblem;
 
-    public Schauspieler delete(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem; 
+    public Schauspieler delete(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem;
 
-    public Schauspieler insert(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem; 
+    public Schauspieler insert(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem;
 
     public Schauspieler updateQuery(String query, int f_id, int s_id) throws filmnotfound, connectionProblem, CombinationNotFound;
 

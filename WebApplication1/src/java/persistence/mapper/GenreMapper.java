@@ -5,22 +5,23 @@
  */
 package persistence.mapper;
 
-import persistence.entities.Genre;
 import persistence.dto.GenreDTO;
+import persistence.entities.Genre;
 
 /**
  *
  * @author Nikolay und Don
  */
 public class GenreMapper {
-        public static GenreDTO entityToDTO(Genre genre){
+
+    public static GenreDTO entityToDTO(Genre genre) {
         GenreDTO genreDTO = new GenreDTO();
         genreDTO.setId(genre.getId());
         genreDTO.setName(genre.getName());
         return genreDTO;
     }
-    
-    public static Genre dtoToentityT(GenreDTO genreDTO){
+
+    public static Genre dtoToentityT(GenreDTO genreDTO) {
         Genre genre = new Genre();
         genre.setId(genreDTO.getId());
         genre.setName(genreDTO.getName());

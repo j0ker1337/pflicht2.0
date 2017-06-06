@@ -11,6 +11,6 @@ import java.sql.SQLException;
  *
  * @author Nikolay und Don
  */
-public class rightsnotfound extends SQLException{
-    
+public class rightsnotfound extends SQLException {
+
 }

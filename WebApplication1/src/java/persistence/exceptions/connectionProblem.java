@@ -11,6 +11,6 @@ import java.sql.SQLException;
  *
  * @author Nikolay und Don
  */
-public class connectionProblem extends SQLException{
-    
+public class connectionProblem extends SQLException {
+
 }

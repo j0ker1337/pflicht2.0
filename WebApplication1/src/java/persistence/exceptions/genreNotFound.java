@@ -11,6 +11,6 @@ import java.sql.SQLException;
  *
  * @author Nikolay und Don
  */
-public class genreNotFound extends SQLException{
-    
+public class genreNotFound extends SQLException {
+
 }

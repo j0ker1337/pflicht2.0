@@ -451,7 +451,7 @@ public interface Controller {
     public void checker1(ArrayList<FilmDTO> oldl, ArrayList<FilmDTO> newl, int userid) throws filmnotfound, connectionProblem, CombinationNotFound;
 
     /**
-     * 
+     *
      * @param udto
      * @return
      * @throws connectionProblem
@@ -461,16 +461,16 @@ public interface Controller {
      * @throws UserBNameEmpty
      * @throws UserEmpty
      * @throws UserFoundException
-     * @throws RightIdEmpty 
+     * @throws RightIdEmpty
      */
     public UserDTO save(UserDTO udto) throws connectionProblem, rightsnotfound, usernotfound, usernotfound, UserBNameEmpty, UserEmpty, UserFoundException, RightIdEmpty;
-    
+
     /**
-     * 
+     *
      * @param userdto
      * @return
      * @throws connectionProblem
-     * @throws usernotfound 
+     * @throws usernotfound
      */
     public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound;
 

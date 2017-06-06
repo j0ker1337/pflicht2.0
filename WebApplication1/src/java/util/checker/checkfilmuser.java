@@ -15,7 +15,7 @@ import persistence.exceptions.filmnotfound;
 public class checkfilmuser {
 
     public static void check(UserDTO old, UserDTO newUser) throws filmnotfound {
-        
+
     }
 
 }

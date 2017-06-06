@@ -7,7 +7,7 @@ package persistence.dto;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -15,10 +15,11 @@ import javax.inject.Named;
  * @author Nikolay und Don
  */
 @Named("User")
-@RequestScoped
-public class UserDTO extends DTO{
-   private int id;
-   private String vorname;
+@SessionScoped
+public class UserDTO extends DTO {
+
+    private int id;
+    private String vorname;
     private String name;
     private Date geburt;
     private String Bname;
@@ -104,9 +105,4 @@ public class UserDTO extends DTO{
         return "UserDTO{" + "id=" + id + ", vorname=" + vorname + ", name=" + name + ", geburt=" + geburt + ", Bname=" + Bname + ", pass=" + pass + ", right=" + right + ", active=" + active + ", likes=" + likes + '}';
     }
 
-    
-   
-    
-    
-    
 }

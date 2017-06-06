@@ -15,14 +15,12 @@ import persistence.exceptions.filmnotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 
+class likefilmDaoImpl extends Dao implements likefilmDao {
 
- class likefilmDaoImpl extends Dao implements likefilmDao{
-    
- 
     public likefilmDaoImpl() {
-     
+
     }
-    
+
     public ArrayList<Film> findFilmsLikedByUser(int id) throws filmnotfound {
         String query = ("select * from filme f join usertofilm x "
                 + "on f.filmID = x.film "
@@ -30,47 +28,47 @@ import persistence.exceptions.usersnotfound;
         filmDao fd = new filmDaoImpl();
         return fd.getFilms(query);
     }
-    
-        public ArrayList<Film> findFilmsLikedByUser(int id,boolean active) throws filmnotfound {
+
+    public ArrayList<Film> findFilmsLikedByUser(int id, boolean active) throws filmnotfound {
         String query = ("select * from filme f join usertofilm x "
                 + "on f.filmID = x.film JOIN person p on x.user=p.UserID"
-                + "where p.UserID = '" + id + "' AND p.active="+active);
+                + "where p.UserID = '" + id + "' AND p.active=" + active);
         filmDao fd = new filmDaoImpl();
         return fd.getFilms(query);
     }
-    
+
     public ArrayList<Film> findFilmsLikedByUser(String name, String vorname) throws connectionProblem, usernotfound, filmnotfound {
         userDaoImpl ud = new userDaoImpl();
         int userID = ud.findUserByName(name, vorname).getUserID();
         return findFilmsLikedByUser(userID);
     }
-    
+
     public ArrayList<User> findUsersWhoLikesFilm(int id) throws connectionProblem, usersnotfound {
         ArrayList<User> al = new ArrayList();
         String query = ("select * from person f join usertofilm x on f.userID = x.user where x.film =" + id);
         userDaoImpl ud = new userDaoImpl();
         return ud.getUsers(query);
     }
-    
-        public ArrayList<User> findUsersWhoLikesFilm(int id,boolean active) throws connectionProblem, usersnotfound {
+
+    public ArrayList<User> findUsersWhoLikesFilm(int id, boolean active) throws connectionProblem, usersnotfound {
         ArrayList<User> al = new ArrayList();
-        String query = ("select * from person f join usertofilm x on f.userID = x.user where x.film =" + id+"and x.active="+active);
+        String query = ("select * from person f join usertofilm x on f.userID = x.user where x.film =" + id + "and x.active=" + active);
         userDaoImpl ud = new userDaoImpl();
         return ud.getUsers(query);
     }
-    
+
     public ArrayList<User> findUsersWhoLikesFilm(String name) throws filmnotfound, connectionProblem, usersnotfound {
         filmDao fd = new filmDaoImpl();
         int filmID = fd.findFilmByName(name).getFilmID();
         return findUsersWhoLikesFilm(filmID);
     }
-    
-        public ArrayList<User> findUsersWhoLikesFilm(String name,boolean active) throws filmnotfound, connectionProblem, usersnotfound {
+
+    public ArrayList<User> findUsersWhoLikesFilm(String name, boolean active) throws filmnotfound, connectionProblem, usersnotfound {
         filmDao fd = new filmDaoImpl();
         int filmID = fd.findFilmByName(name).getFilmID();
-        return findUsersWhoLikesFilm(filmID,active);
+        return findUsersWhoLikesFilm(filmID, active);
     }
-    
+
     public Film findCombination(int userid, int filmid) throws CombinationNotFound {
         Film fi = null;
         filmDao fd = new filmDaoImpl();
@@ -82,18 +80,18 @@ import persistence.exceptions.usersnotfound;
         }
         return fi;
     }
-    
+
     public Film delete(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
         filmDao fd = new filmDaoImpl();
         String query = ("delete from usertofilm where film=? and user=?");
         return updateQuery(query, userid, filmid);
     }
-    
+
     public Film insert(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
         String query = "insert into usertofilm values(? , ?)";
         return updateQuery(query, userid, filmid);
     }
-    
+
     public Film updateQuery(String query, int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
         try {
             getConnection().setAutoCommit(false);

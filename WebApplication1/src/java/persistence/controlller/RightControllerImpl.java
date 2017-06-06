@@ -14,19 +14,16 @@ import persistence.exceptions.rightsnotfound;
  *
  * @author Nikolay und Don
  */
+class RightControllerImpl implements RightController {
 
-
- class RightControllerImpl implements RightController{
-    
     private Controller controller;
 
     public RightControllerImpl(Controller controller) {
         this.controller = controller;
     }
-    
-    
-    @Override 
-             public RightDTO findRightsById(int id) throws rightsnotfound{
-                 return controller.findRightsById(id);
-             }
+
+    @Override
+    public RightDTO findRightsById(int id) throws rightsnotfound {
+        return controller.findRightsById(id);
+    }
 }

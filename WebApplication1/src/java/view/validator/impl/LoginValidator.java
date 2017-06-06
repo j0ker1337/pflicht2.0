@@ -26,7 +26,7 @@ public class LoginValidator implements Validator {
 
         Object value1 = input1.getSubmittedValue();
         Object value2 = input2.getSubmittedValue();
-        
+
         return;
         // ...
     }

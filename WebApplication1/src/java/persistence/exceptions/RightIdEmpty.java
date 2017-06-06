@@ -10,5 +10,5 @@ package persistence.exceptions;
  * @author Nikolay und Don
  */
 public class RightIdEmpty extends Exception {
-    
+
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author joker
  */
 public class RegisseurDTO {
+
     private int id;
     private String name;
     private String vorname;
@@ -54,9 +55,4 @@ public class RegisseurDTO {
         return "RegisseurDTO{" + "id=" + id + ", name=" + name + ", vorname=" + vorname + ", filme=" + filme + '}';
     }
 
-
-    
-    
-    
-    
 }

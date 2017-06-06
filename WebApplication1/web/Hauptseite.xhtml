@@ -11,57 +11,67 @@
     </h:head>
     <h:body>
         <div class="Page">
-
             <div class="Bannerol">
                 <p></p>
             </div>
             <div class="Persontext">
-                <p>Willkommen #{userService.currentUser.bname}
-                    . Schön das sie heute am: aktuelles datum vorbeischauen.</p>
+                <p>Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
+                    . Schön das sie heute am: #{System.currentTimeMillis()} vorbeischauen.</p>
             </div>
 
             <h:form class="knopp">
-                <h:commandButton  value="Click für 1" action="#{hauptseitenBean.choosestate1()}">
+                <h:commandButton  value="Zeige alle Filme" action="#{HauptseitenBean.choosestate1()}">
                     <f:ajax render=":Hauptcontainer" />
                 </h:commandButton>
 
-                <h:commandButton  value="Click für 2" action="#{hauptseitenBean.choosestate2()}">
+                <h:commandButton  value="Click für 2" action="#{HauptseitenBean.choosestate2()}">
                     <f:ajax render=":Hauptcontainer" />
                 </h:commandButton>
 
-                <h:commandButton  value="Click für 3" action="#{hauptseitenBean.choosestate3()}">
+                <h:commandButton  value="Click für 3" action="#{HauptseitenBean.choosestate3()}">
                     <f:ajax  render=":Hauptcontainer" />
                 </h:commandButton>
             </h:form>
 
             <h:panelGroup id="Hauptcontainer"  >
 
-                <h:panelGroup id="nimm1" rendered="#{hauptseitenBean.state1}" >
+                <h:panelGroup id="nimm1" rendered="#{HauptseitenBean.state1}" >
                     <h:form >
-                    <h:dataTable var="film" value="#{controllerManager.filmController.findAllFilm()}">
+                        <h:dataTable var="film" value="#{controllerManager.filmController.findAllFilm()}">
+                            <h:column>
+                                <f:facet name = "header">id</f:facet>
+                                #{film.name}</h:column>
+                            <h:column>
+                                <f:facet name = "header">name</f:facet>
+                                #{film.filmID}</h:column>
+                            <h:column>
+                                <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
+                                <h:commandLink action="#{HauptseitenBean.choosestate4()}"
+                                               value="edit" style="font-size: large">
+                                    <f:ajax  render=":Hauptcontainer" />            
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </h:panelGroup>
+
+                <h:panelGroup id="nimm2" rendered="#{HauptseitenBean.state2}" >
+                    <h:dataTable var="User" value="#{controllerManager.userController.findAllUser()}">
                         <h:column>
                             <f:facet name = "header">id</f:facet>
-                            #{film.name}</h:column>
+                            #{User.bname}</h:column>
                         <h:column>
                             <f:facet name = "header">name</f:facet>
-                            #{film.filmID}</h:column>
-                        <h:column>
-                            <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
-                            <h:commandLink actionListener="#{mrBean.setPage('filmedit.xhtml',id)}" action="edit Film"
-                                           value="edit" style="font-size: large">
-                                <f:ajax  render="ContenLoader" />            
-                            </h:commandLink>
-                        </h:column>
+                            #{User.name}</h:column>
                     </h:dataTable>
-                        </h:form>
                 </h:panelGroup>
 
-                <h:panelGroup id="nimm2" rendered="#{hauptseitenBean.state2}" >
-                    <h:outputText id="s2"  value="state2" />
-                </h:panelGroup>
-
-                <h:panelGroup id="nimm3" rendered="#{hauptseitenBean.state3}" >
+                <h:panelGroup id="nimm3" rendered="#{HauptseitenBean.state3}" >
                     <h:outputText id="s3"  value="state3" />
+                </h:panelGroup>
+
+                <h:panelGroup id="nimm4" rendered="#{HauptseitenBean.state4}" >
+                    <h:outputText id="s4"  value="state4" />
                 </h:panelGroup>
 
             </h:panelGroup> 

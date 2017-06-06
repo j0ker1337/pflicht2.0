@@ -15,13 +15,12 @@ import view.validator.interfaces.StringLenght;
 @javax.faces.bean.ManagedBean
 @ViewScoped
 public class LoginPOJO {
-        
+
     @StringLenght
     private String username;
 
     @StringLenght
     private String password;
-
 
     public LoginPOJO() {
     }
@@ -39,8 +38,7 @@ public class LoginPOJO {
     }
 
     public void setPassword(String password) {
-        this.password=password;
+        this.password = password;
     }
-   
 
 }

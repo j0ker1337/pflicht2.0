@@ -9,6 +9,6 @@ package persistence.exceptions;
  *
  * @author Nikolay und Don
  */
-public class UserBNameEmpty extends Exception{
-    
+public class UserBNameEmpty extends Exception {
+
 }

@@ -10,5 +10,5 @@ package view.validator.interfaces;
  * @author joker
  */
 public class IdUser {
-    
+
 }

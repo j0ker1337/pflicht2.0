@@ -14,13 +14,12 @@ import persistence.DAO.interfaces.schauspielerDao;
 import persistence.DAO.interfaces.schauspielerfilmDao;
 import persistence.DAO.interfaces.userDao;
 
-
 /**
  *
  * @author Nikolay und Don
  */
 public class DaoManager {
-    
+
     private filmDaoImpl fDao;
     private userDaoImpl usDao;
     private likefilmDaoImpl lDao;
@@ -29,15 +28,14 @@ public class DaoManager {
     private regiDaoImpl regieDao;
     private schauspielerDaoImpl schauspielerdao;
     private schauspielerfilmDaoImpl schauspielerfilmDao;
-    
-    
+
     public DaoManager() {
-        this.fDao=new filmDaoImpl();
-        this.gDao=new genreDaoImpl();
-        this.usDao=new userDaoImpl();
+        this.fDao = new filmDaoImpl();
+        this.gDao = new genreDaoImpl();
+        this.usDao = new userDaoImpl();
         this.lDao = new likefilmDaoImpl();
         this.rDao = new rightsDaoImpl();
-        this.schauspielerdao = new schauspielerDaoImpl(); 
+        this.schauspielerdao = new schauspielerDaoImpl();
         this.regieDao = new regiDaoImpl();
         this.schauspielerfilmDao = new schauspielerfilmDaoImpl();
     }
@@ -73,9 +71,5 @@ public class DaoManager {
     public rightsDao getrDao() {
         return rDao;
     }
-     
-    
-    
-    
-    
+
 }

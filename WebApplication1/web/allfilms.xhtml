@@ -17,7 +17,7 @@
                 #{film.filmID}</h:column>
             <h:column>
                 <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
-                      <h:commandLink actionListener="#{mrBean.setPage('filmedit.xhtml',id)}" action="edit Film"
+                <h:commandLink actionListener="#{mrBean.setPage('filmedit.xhtml',id)}" action="edit Film"
                                value="edit" style="font-size: large">
                     <f:ajax  render="ContenLoader" />            
                 </h:commandLink>

@@ -1,9 +1,9 @@
-
 package persistence.entities;
 
 import java.sql.Date;
 
 public class User {
+
     private int userID;
     private String vorname;
     private String name;
@@ -21,7 +21,6 @@ public class User {
         this.active = active;
     }
 
-    
     public int getRightsID() {
         return rightsID;
     }
@@ -83,7 +82,4 @@ public class User {
         return "user{" + "userID=" + userID + ", vorname=" + vorname + ", name=" + name + ", geburt=" + geburt + ", Bname=" + Bname + ", pass=" + pass + ", rightsID=" + rightsID + '}';
     }
 
-  
-    
-    
 }

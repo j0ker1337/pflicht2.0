@@ -9,7 +9,8 @@ package persistence.dto;
  *
  * @author Nikolay und Don
  */
-public class GenreDTO extends DTO{
+public class GenreDTO extends DTO {
+
     private int id;
     private String name;
 
@@ -33,7 +34,5 @@ public class GenreDTO extends DTO{
     public String toString() {
         return "GenreDTO{" + "id=" + id + ", name=" + name + '}';
     }
-    
-    
-    
+
 }
