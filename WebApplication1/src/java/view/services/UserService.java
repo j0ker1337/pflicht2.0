@@ -50,7 +50,22 @@ public class UserService implements Serializable {
 
     public UserService() {
         this.coManager = new controllerManager();
-        this.currentUser = new UserDTO();
+        try {
+            this.currentUser = coManager.getUserController().findUserByID(1);
+        } catch (connectionProblem ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usernotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (filmnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void add(FilmDTO dto) {

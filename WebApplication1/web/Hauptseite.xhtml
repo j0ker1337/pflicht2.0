@@ -46,9 +46,9 @@
                                 #{film.filmID}</h:column>
                             <h:column>
                                 <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
-                                <h:commandLink action="#{HauptseitenBean.choosestate4()}"
+                                <h:commandLink action="#{HauptseitenBean.choosestate3()}"
                                                value="edit" style="font-size: large">
-                                    <f:ajax  render=":Hauptcontainer" />            
+                                    <f:ajax  event="click" render=":Hauptcontainer" />            
                                 </h:commandLink>
                             </h:column>
                         </h:dataTable>
@@ -71,7 +71,7 @@
                 </h:panelGroup>
 
                 <h:panelGroup id="nimm4" rendered="#{HauptseitenBean.state4}" >
-                    <h:outputText id="s4"  value="state4" />
+                    asasasd
                 </h:panelGroup>
 
             </h:panelGroup> 

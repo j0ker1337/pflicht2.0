@@ -7,12 +7,21 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-
-        #{User.bname}
-        #{User.name}
-        #{User.geburt}
-        #{User.pass}
-
+        <h:form>
+  
+                    <h:inputText value="#{USERSE.currentUser.bname}" id="user_name" label="Dein Name"></h:inputText>
+                    <h:outputText>#{USERSE.currentUser.bname}</h:outputText>
+            
+            <h:inputSecret value="#{USERSE.currentUser.pass}" id="user_pass" label="Dein Name"></h:inputSecret>
+            <h:outputText>#{USERSE.currentUser.pass}</h:outputText>
+            
+            
+            <h:inputText value="#{USERSE.currentUser.pass}" id="user_year"></h:inputText>
+            <h:outputText>#{USERSE.currentUser.geburt}</h:outputText>
+        
+            <h:commandButton action="#{USERSE.update()}" value="click"></h:commandButton>
+        </h:form>
+              
     </h:body>
 </html>
 

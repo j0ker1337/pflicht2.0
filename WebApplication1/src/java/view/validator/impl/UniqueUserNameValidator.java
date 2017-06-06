@@ -25,7 +25,7 @@ import view.validator.interfaces.UniqueUserName;
  * @author Nikolay und Don
  */
 @FacesValidator("UniqueValidator")
-public class UniqueValidator implements ConstraintValidator<UniqueUserName, Object> {
+public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserName, Object> {
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
@@ -51,7 +51,7 @@ public class UniqueValidator implements ConstraintValidator<UniqueUserName, Obje
         } catch (genreNotFound ex) {
 
         } catch (reginotfound ex) {
-            Logger.getLogger(UniqueValidator.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UniqueUserNameValidator.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }

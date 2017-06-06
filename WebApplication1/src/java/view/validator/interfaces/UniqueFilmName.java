@@ -20,7 +20,7 @@ import view.validator.impl.UniqueFilmNameValidator;
 @Constraint(validatedBy = UniqueFilmNameValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-public @interface UniqueUserName {
+public @interface UniqueFilmName {
 
     String message() default "Wrong Username";
 

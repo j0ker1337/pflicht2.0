@@ -9,6 +9,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
+import view.validator.interfaces.StringLenght;
+import view.validator.interfaces.UniqueUserName;
 
 /**
  *
@@ -19,10 +22,21 @@ import javax.inject.Named;
 public class UserDTO extends DTO {
 
     private int id;
+    @NotNull
+    @StringLenght
     private String vorname;
+    @NotNull
+    @StringLenght
     private String name;
     private Date geburt;
+    
+    @NotNull
+    @StringLenght
+    @UniqueUserName
     private String Bname;
+    
+    @NotNull
+    @StringLenght
     private String pass;
     private RightDTO right;
     private boolean active;

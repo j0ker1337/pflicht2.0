@@ -22,7 +22,7 @@ import view.validator.impl.StringLenghtValidator;
 @Target({ElementType.FIELD})
 public @interface StringLenght {
 
-    String message() default "Bitte gib eine Zahl länger als 4 ein";
+    String message() default "Bitte gib eine vernünftige anzahl ein ";
 
     Class<?>[] groups() default {};
 
