@@ -27,6 +27,9 @@
                             <h:inputSecret class="inpText" value="#{registerPOJO.password}" label="Passwort"/>
                         </h:column>
                         <h:column>
+                            <p>Optionale Angaben</p> 
+                        </h:column>
+                        <h:column>
                             <p class="smallp">Vorname</p>
                             <h:inputText class="inpText" value="#{registerPOJO.vorname}" label="Vorname"/>
                         </h:column>
@@ -34,16 +37,15 @@
                             <p class="smallp">Nachname</p>
                             <h:inputText class="inpText" value="#{registerPOJO.nachname}" label="Nachname"/>
                         </h:column>
-                        <h:column>
-                            <p>Optionale Angaben</p> 
-                        </h:column>
 
 
                     </h:panelGrid>
+                    <h:column>
+                        <h:commandButton 
+                            value="Speichern" 
+                            action="#{userService.register(registerPOJO)}"/>
+                    </h:column>
                 </h:panelGroup>
-                <h:commandButton 
-                    value="Speichern" 
-                    action="#{userService.register(registerPOJO)}"/>
             </h:form>
             <h:panelGroup layout="block" id="registerTrivia">
                 <p>Wilkommen auf MyMovieDb die Nr.1 Seite für selbstangelegte Film-Datenbanken.

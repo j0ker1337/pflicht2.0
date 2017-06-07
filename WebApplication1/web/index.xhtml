@@ -27,7 +27,7 @@
                     <label for="user-pw">Passwort:</label>
                     <h:inputSecret id="user-pw" value="#{loginPOJO.password}"></h:inputSecret>
                     <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
-                    <h:commandButton value="Einloggen" action="#{USERSE.login(loginPOJO)}" ></h:commandButton>
+                    <h:commandButton  value="Einloggen" action="#{USERSE.login(loginPOJO)}" ></h:commandButton>
                 </h:form>
             </div>
             <p>Falls sie noch kein Konto haben folgen sie diesem <h:link value="Link" outcome="Registrierseite" /></p>
