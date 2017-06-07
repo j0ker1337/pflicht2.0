@@ -5,10 +5,15 @@
  */
 package persistence.dto;
 
+import javax.inject.Named;
+
 /**
  *
  * @author Nikolay und Don
  */
+
+
+@Named("GenreDTO")
 public class GenreDTO extends DTO {
 
     private int id;
