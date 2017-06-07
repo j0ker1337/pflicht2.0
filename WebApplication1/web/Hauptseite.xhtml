@@ -11,7 +11,8 @@
     </h:head>
     <h:body>
         <div class="Page">
-
+            
+            <div id="hauptbanner">
             <div class="Bannerol">
                 <p></p>
             </div>
@@ -26,14 +27,7 @@
                 vorbeischauen.
 
             </div>
-
-                    . Schön das sie heute am:
-                    <h:outputText value="#{USERSE.date}" >
-                        <f:convertDateTime pattern="dd.MM.yyyy" />
-                    </h:outputText>
-                    vorbeischauen.
-
-                </div>
+                
 
                 <h:form class="knopp">
                     <h:commandButton  value="Zeige alle Filme" action="#{HauptseitenBean.choosestate1()}">
@@ -113,7 +107,7 @@
                         </h:selectOneMenu> <br/>
                         
                         
-                        Schauspieler: <h:selectManyCheckbox value=""
+                       <!-- Schauspieler: <h:selectManyCheckbox value=""-->
                         
                         
                         
