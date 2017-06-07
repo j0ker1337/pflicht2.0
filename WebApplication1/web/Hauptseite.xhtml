@@ -11,40 +11,42 @@
     </h:head>
     <h:body>
         <div class="Page">
-            <div class="Bannerol">
-                <p></p>
+            <div id="hauptbanner">
+                <div class="Bannerol" rendered="true">
+                    <p>s</p>
+                </div>
+
+                <div class="Persontext">
+                    Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
+
+                    . Schön das sie heute am:
+                    <h:outputText value="#{USERSE.date}" >
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:outputText>
+                    vorbeischauen.
+
+                </div>
+
+                <h:form class="knopp">
+                    <h:commandButton  value="Zeige alle Filme" action="#{HauptseitenBean.choosestate1()}">
+                        <f:ajax render=":Hauptcontainer" />
+                    </h:commandButton>
+
+                    <h:commandButton  value="Zeige deine Filme" action="#{HauptseitenBean.choosestate2()}">
+                        <f:ajax render=":Hauptcontainer" />
+                    </h:commandButton>
+
+                    <h:commandButton  value="Füge Fiilme hinzu" action="#{HauptseitenBean.choosestate3()}">
+                        <f:ajax  render=":Hauptcontainer" />
+                    </h:commandButton>
+                </h:form>
             </div>
-            
-            <div class="Persontext">
-                Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
-                
-                . Schön das sie heute am:
-                <h:outputText value="#{USERSE.date}" >
-                    <f:convertDateTime pattern="dd.MM.yyyy" />
-                </h:outputText>
-                vorbeischauen.
-                
-            </div>
-
-            <h:form class="knopp">
-                <h:commandButton  value="Zeige alle Filme" action="#{HauptseitenBean.choosestate1()}">
-                    <f:ajax render=":Hauptcontainer" />
-                </h:commandButton>
-
-                <h:commandButton  value="Zeige deine Filme" action="#{HauptseitenBean.choosestate2()}">
-                    <f:ajax render=":Hauptcontainer" />
-                </h:commandButton>
-
-                <h:commandButton  value="Füge Fiilme hinzu" action="#{HauptseitenBean.choosestate3()}">
-                    <f:ajax  render=":Hauptcontainer" />
-                </h:commandButton>
-            </h:form>
-
+            <div id="haltecontainer">
             <h:panelGroup id="Hauptcontainer"  >
 
                 <h:panelGroup id="nimm1" rendered="#{HauptseitenBean.state1}" >
                     <h:form >
-                        <h:dataTable var="film" value="#{controllerManager.filmController.findAllFilm()}">
+                        <h:dataTable var="film" value="#{controllerManager.filmController.findAllFilm()}" border="1"  width="98%">
                             <h:column>
                                 <f:facet name = "header">name</f:facet>
                                 #{film.name}</h:column>
@@ -63,7 +65,7 @@
                 </h:panelGroup>
 
                 <h:panelGroup id="nimm2" rendered="#{HauptseitenBean.state2}" >
-                    <h:dataTable var="User" value="#{controllerManager.userController.findAllUser()}">
+                    <h:dataTable var="User" value="#{controllerManager.userController.findAllUser()}" border="1"  width="98%">
                         <h:column>
                             <f:facet name = "header">id</f:facet>
                             #{User.bname}</h:column>
@@ -77,6 +79,7 @@
                     
                     <!-- ________________________ -->
                     <h:form>
+
                         Filmname: <h:inputText value="#{addMovie.name}"/> <br/>
                         
                         Genre: <h:selectOneMenu value="#{addMovie.genre}">
@@ -109,7 +112,7 @@
               
 
             </h:panelGroup> 
-
+                </div>
         </div>
     </h:body>
 </html>
