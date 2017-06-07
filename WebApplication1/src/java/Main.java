@@ -1,4 +1,6 @@
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistence.controlller.controllerManager;
 import persistence.exceptions.RightIdEmpty;
 import persistence.exceptions.UserBNameEmpty;
@@ -10,6 +12,7 @@ import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
+import persistence.exceptions.schauspielernotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 
@@ -26,6 +29,10 @@ public class Main {
 
     public static void main(String[] args) throws rightsnotfound, usernotfound, connectionProblem, filmnotfound, genreNotFound, reginotfound, usersnotfound, absteigendoneminusoneorzero, UserEmpty, UserIdEmpty, RightIdEmpty, UserBNameEmpty {
             controllerManager x = new controllerManager();
-            System.err.println(x.getGenreController().getAllGenre());
+        try {
+            System.err.println(x.getSchauspielerController().findAllSchauspieler());
+        } catch (schauspielernotfound ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

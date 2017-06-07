@@ -11,7 +11,9 @@ import javax.inject.Named;
 import persistence.controlller.interfaces.Controller;
 import persistence.controlller.interfaces.FilmController;
 import persistence.controlller.interfaces.GenreController;
+import persistence.controlller.interfaces.RegieController;
 import persistence.controlller.interfaces.RightController;
+import persistence.controlller.interfaces.SchauspielerController;
 import persistence.controlller.interfaces.UserController;
 
 /**
@@ -27,6 +29,8 @@ public class controllerManager {
     private UserController userController;
     private GenreController genreController;
     private RightController rightController;
+    private RegieController regieController;
+    private SchauspielerController schauspielerController;
     private Controller controller;
 
     public controllerManager() {
@@ -35,7 +39,8 @@ public class controllerManager {
         this.rightController = new RightControllerImpl(controller);
         this.userController = new UserControllerImpl(controller);
         this.genreController = new GenreControllerImpl(controller);
-
+        this.regieController = new RegieControllerImpl(controller);
+        this.schauspielerController = new SchauspielerControllerImpl(controller);
     }
 
     public FilmController getFilmController() {
@@ -57,5 +62,15 @@ public class controllerManager {
     public Controller getController() {
         return controller;
     }
+
+    public RegieController getRegieController() {
+        return regieController;
+    }
+
+    public SchauspielerController getSchauspielerController() {
+        return schauspielerController;
+    }
+    
+    
 
 }
