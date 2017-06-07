@@ -14,6 +14,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import persistence.controlller.controllerManager;
 import persistence.dto.FilmDTO;
 import persistence.dto.UserDTO;
@@ -61,8 +62,8 @@ public class UserService implements Serializable {
 
     public UserService() {
         this.coManager = new controllerManager();
-        date= new Date(System.currentTimeMillis());
-        currentUser= new UserDTO();
+        date = new Date(System.currentTimeMillis());
+        currentUser = new UserDTO();
         /*try {
             this.currentUser = coManager.getUserController().findUserByID(1);
         } catch (connectionProblem ex) {
@@ -78,7 +79,7 @@ public class UserService implements Serializable {
         } catch (reginotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        
+
     }
 
     public void add(FilmDTO dto) {
@@ -116,7 +117,6 @@ public class UserService implements Serializable {
         this.currentUser = coManager.getUserController().save(currentUser);
     }
 
-   
     public void login(LoginPOJO log) throws rightsnotfound {
         UserDTO dto = new UserDTO();
         try {
@@ -141,8 +141,8 @@ public class UserService implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Incorrect Username or Password",
                             "Please enter correct username or Password"));
-                   redirect("error.xhtml");
-                   return;
+            redirect("error.xhtml");
+            return;
         } catch (filmnotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (genreNotFound ex) {
@@ -153,7 +153,6 @@ public class UserService implements Serializable {
         redirect("error.xhtml");
         return;
     }
-
 
     public void check() throws IOException {
         if (this.currentUser == null) {
@@ -166,7 +165,7 @@ public class UserService implements Serializable {
         }
 
     }
-   
+
     private void redirect(String url) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -175,6 +174,12 @@ public class UserService implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void logout() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        session.invalidate();
     }
 
     private void visit(String name) {
@@ -201,6 +206,4 @@ public class UserService implements Serializable {
         }
     }
 
-    
-    
 }
