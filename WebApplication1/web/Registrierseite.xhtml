@@ -16,7 +16,7 @@
         <div class="Page">
 
             <h:form>
-                <h:panelGroup id="regForm" layout="block">
+                <h:panelGroup id="regForm" >
                     <h:panelGrid cellpadding="5" cellspacing="0" columns="1" border="1" bgcolor="gray" width="220">
                         <h:column >
                             <p class="smallp">Benutzername</p>
@@ -37,17 +37,17 @@
                             <p class="smallp">Nachname</p>
                             <h:inputText class="inpText" value="#{registerPOJO.nachname}" label="Nachname"/>
                         </h:column>
-
+                        <h:column>
+                            <h:commandButton 
+                                value="Registrieren" 
+                                action="#{userService.register(registerPOJO)}"/>
+                        </h:column>
 
                     </h:panelGrid>
-                    <h:column>
-                        <h:commandButton 
-                            value="Speichern" 
-                            action="#{userService.register(registerPOJO)}"/>
-                    </h:column>
+
                 </h:panelGroup>
             </h:form>
-            <h:panelGroup layout="block" id="registerTrivia">
+            <h:panelGroup id="registerTrivia">
                 <p>Wilkommen auf MyMovieDb die Nr.1 Seite für selbstangelegte Film-Datenbanken.
                     Es fehlt nurnoch ein kleiner Schritt bevor sie losolegen können.
                     Füllen sie as Formular auf der linken Seite aus um alle Features von
