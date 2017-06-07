@@ -46,15 +46,15 @@
                     <h:form >
                         <h:dataTable var="film" value="#{controllerManager.filmController.findAllFilm()}">
                             <h:column>
-                                <f:facet name = "header">id</f:facet>
+                                <f:facet name = "header">name</f:facet>
                                 #{film.name}</h:column>
                             <h:column>
-                                <f:facet name = "header">name</f:facet>
+                                <f:facet name = "header">id</f:facet>
                                 #{film.filmID}</h:column>
                             <h:column>
                                 <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
                                 <h:commandLink action="#{HauptseitenBean.choosestate3()}"
-                                               value="edit" style="font-size: large">
+                                               value="add" style="font-size: large">
                                     <f:ajax  event="click" render=":Hauptcontainer" />            
                                 </h:commandLink>
                             </h:column>
