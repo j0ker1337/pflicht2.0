@@ -7,6 +7,7 @@ package view.services;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -40,6 +41,7 @@ public class UserService implements Serializable {
 
     private UserDTO currentUser;
     private controllerManager coManager;
+    private Date datum;
 
     public UserDTO getCurrentUser() {
         return currentUser;
@@ -184,4 +186,14 @@ public class UserService implements Serializable {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+    
+    
 }
