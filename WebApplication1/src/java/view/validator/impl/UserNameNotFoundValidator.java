@@ -34,6 +34,7 @@ public class UserNameNotFoundValidator implements ConstraintValidator<UserNameNo
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+        context.buildConstraintViolationWithTemplate("").addConstraintViolation();
         context.disableDefaultConstraintViolation();
         controllerManager x = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
         try {
