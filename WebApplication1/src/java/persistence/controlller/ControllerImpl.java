@@ -488,5 +488,10 @@ public class ControllerImpl implements Controller {
     public ArrayList<SchauspielerDTO> findAllSchauspieler() throws connectionProblem, schauspielernotfound {
         return SchauspielerMapper.entityArrayToDTO(daoManager.getSchauspielerdao().findAllSchauspieler());
     }
+    
+    @Override
+    public FilmDTO insert(FilmDTO film) throws filmnotfound, genreNotFound, connectionProblem{
+        return FilmMapper.entityToDTO(daoManager.getfDao().insert(FilmMapper.dtoToentityT(film)));
+    }
 
 }
