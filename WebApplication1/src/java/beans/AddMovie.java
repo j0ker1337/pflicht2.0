@@ -156,7 +156,10 @@ public class AddMovie implements Serializable{
     
     
     public AddMovie() {
-        
+        this.schauspieler= new ArrayList<SchauspielerDTO>();
+        SchauspielerDTO s= new SchauspielerDTO();
+        s.setName("Halil");
+        schauspieler.add(s);
     }
     
     public void save(){
