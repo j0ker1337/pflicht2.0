@@ -1,5 +1,6 @@
 package persistence.controlller;
 
+import java.util.ArrayList;
 import persistence.controlller.interfaces.Controller;
 import persistence.controlller.interfaces.GenreController;
 import persistence.dto.GenreDTO;
@@ -27,5 +28,9 @@ class GenreControllerImpl implements GenreController {
     public GenreDTO findGenreById(int id) throws genreNotFound, connectionProblem {
         return controller.findGenreById(id);
     }
+    
+     public ArrayList<GenreDTO> getAllGenre() throws connectionProblem{
+         return controller.getAllGenre();
+     }
 
 }
