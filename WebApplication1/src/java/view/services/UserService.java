@@ -135,6 +135,7 @@ public class UserService implements Serializable {
         } catch (reginotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
+               redirect("Hauptseite.xhtml");
     }
 
 
