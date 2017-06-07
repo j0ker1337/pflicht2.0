@@ -5,13 +5,19 @@
  */
 package persistence.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author joker
  */
-public class SchauspielerDTO {
+
+@ManagedBean
+@SessionScoped
+public class SchauspielerDTO implements Serializable{
 
     private int id;
     private String name;

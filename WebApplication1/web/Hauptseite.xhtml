@@ -35,7 +35,7 @@
                 vorbeischauen.
                 -->
                 <br/>
-                
+
                 <h:form class="knopp">
                     <h:commandButton  value="Zeige alle Filme" action="#{HauptseitenBean.choosestate1()}">
                         <f:ajax render=":Hauptcontainer" />
@@ -61,13 +61,13 @@
                                 <h:column>
                                     <f:facet name = "header">Alle Filme</f:facet>
                                     #{film.name} - #{film.genre.name} - #{film.regisseurDTO.name} - #{film.jahr}<br/>
-                                    
+
                                     Schauspieler: 
                                     <ui:repeat value="#{film.schauspieler}" var="v">
                                         <h:outputText value=", #{v.vorname} #{v.name}"/>
                                     </ui:repeat>
                                 </h:column>
-                                
+
                                 <h:column>
                                     <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
 
@@ -80,7 +80,7 @@
                                          <f:ajax  event="click" render=":Hauptcontainer" />       
                                      </h:commandLink>  -->   
                                 </h:column>
-                                
+
 
                             </h:dataTable>
                         </h:form>
@@ -88,7 +88,7 @@
 
                     <h:panelGroup id="nimm2" rendered="#{HauptseitenBean.state2}" >
                         <h:dataTable var="Filme" value="#{USERSE.currentUser.likes}" border="1"  width="98%">
-                            
+
                             <h:column>
                                 <f:facet name = "header">name</f:facet>
                                 #{Filme.name}</h:column>
@@ -100,33 +100,14 @@
                         <!-- ________________________ -->
                         <h:form>
 
-                            Filmname: <h:inputText value="#{addMovie.name}"/> <br/>
-                            
-                            
-                            Erscheinungsjahr:<h:selectOneMenu value="#{addMovie.jahr}">
-                                <f:selectItems value="#{addMovie.getAllYears()}" var="v" itemValue="#{v}" itemLabel="#{v}"/>
-                            </h:selectOneMenu> <br/>
+                            Filmname: <h:inputText value="#{addMovie.newfilm.name}"/> <br/>
 
-                            Genre: <h:selectOneMenu value="#{addMovie.genre}">
-                                <f:selectItems value="#{addMovie.getAllGenres()}" var="v" itemValue="#{v.id}" itemLabel="#{v.name}"/>
-                            </h:selectOneMenu> <br/>
-
-
-
-                            Regisseur: <h:selectOneMenu value="bla">
-                                <f:selectItems value="#{addMovie.getAllRegi()}" var="v" 
-                                               itemValue="#{v.id}" itemLabel="#{v.vorname} #{v.name}" />
-                            </h:selectOneMenu> <br/>
-
-                            Schauspieler:
-                            <h:selectManyListbox value="#{addMovie.selectedSchauspieler}">
-                                <f:selectItems value="#{addMovie.getAvailableSchauspieler()}" var="v" 
-                                               itemValue="#{v.id}" itemLabel="#{v.vorname} #{v.name}"  /><br/> 
-                            </h:selectManyListbox> <br/><br/>
-
-
-
-                            <h:commandButton value="Submit" action="#{userService.add(filmDTO)}" />
+                            <h:selectManyCheckbox id="schauspieler" value="#{addMovie.newfilm.schauspieler}">  
+                                <f:selectItems value="#{controllerManager.schauspielerController.findAllSchauspieler()}" var="s" 
+                                               itemValue="#{s}" itemLabel="#{s.name}" />
+                                <f:converter converterId="FooConverter" />
+                            </h:selectManyCheckbox>>
+                            <h:commandButton value="Submit" action="#{addMovie.save()}" />
 
 
                         </h:form>
