@@ -8,6 +8,8 @@ package view.services;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import persistence.controlller.controllerManager;
 import persistence.dto.FilmDTO;
 import persistence.dto.UserDTO;
+import persistence.exceptions.CombinationNotFound;
 import persistence.exceptions.RightIdEmpty;
 import persistence.exceptions.UserBNameEmpty;
 import persistence.exceptions.UserEmpty;
@@ -29,6 +32,7 @@ import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
+import persistence.exceptions.usersnotfound;
 import view.POJO.LoginPOJO;
 import view.POJO.RegisterPOJO;
 
@@ -43,6 +47,15 @@ public class UserService implements Serializable {
     private UserDTO currentUser;
     private controllerManager coManager;
     private Date date;
+    private ArrayList<FilmDTO> films;
+
+    public ArrayList<FilmDTO> getFilms() {
+        return films;
+    }
+
+    public void setFilms(ArrayList<FilmDTO> films) {
+        this.films = films;
+    }
 
     public Date getDate() {
         return date;
@@ -61,7 +74,7 @@ public class UserService implements Serializable {
     }
 
     public UserService() {
-        this.coManager = new controllerManager();
+        this.coManager = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
         date = new Date(System.currentTimeMillis());
         currentUser = new UserDTO();
         /*try {
@@ -79,13 +92,6 @@ public class UserService implements Serializable {
         } catch (reginotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-
-    }
-
-    public void add(FilmDTO dto) {
-        System.err.println("\n" + currentUser.getLikes());
-        currentUser.getLikes().add(dto);
-        System.err.println("\n" + currentUser.getLikes());
 
     }
 
@@ -200,6 +206,84 @@ public class UserService implements Serializable {
         } catch (filmnotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (genreNotFound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<FilmDTO> findAllFilms() {
+        ArrayList<FilmDTO> x = new ArrayList<FilmDTO>();
+        try {
+            x = coManager.getFilmController().findAllFilm();
+            for (FilmDTO y : x) {
+                if (currentUser.getLikes().contains(y)) {
+                    y.setIhave(true);
+                } else {
+                    y.setIhave(false);
+                }
+            }
+            films = x;
+            for (FilmDTO y : films) {
+                System.err.println(y);
+            }
+
+        } catch (filmnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (connectionProblem ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return x;
+    }
+
+    public void add(FilmDTO dTO) {
+        currentUser.getLikes().add(dTO);
+        try {
+            coManager.getUserController().likes(currentUser);
+            currentUser = coManager.getUserController().findUserByID(currentUser.getId());
+        } catch (connectionProblem ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usernotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (filmnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CombinationNotFound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usersnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void delete(FilmDTO dTO) {
+        currentUser.getLikes().remove(dTO);
+        try {
+            coManager.getUserController().likes(currentUser);
+            currentUser = coManager.getUserController().findUserByID(currentUser.getId());
+        } catch (connectionProblem ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usernotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (filmnotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CombinationNotFound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usersnotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (reginotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);

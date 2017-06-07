@@ -183,6 +183,7 @@ public class ControllerImpl implements Controller {
     public UserDTO findUserByUserName(String name) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
         UserDTO udto = UserMapper.entityToDto(daoManager.getUsDao().findUserByUserName(name));
         udto.setLikes(findFilmsLikedByUser(udto.getId()));
+        udto.setRight(findRightOfUser(udto.getId()));
         return udto;
     }
 
@@ -455,6 +456,11 @@ public class ControllerImpl implements Controller {
 
     public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound {
         return daoManager.getUsDao().delete(userdto.getId());
+    }
+
+    @Override
+    public ArrayList<GenreDTO> getAllGenre() throws connectionProblem {
+        return GenreMapper.entityArrayToDTO(daoManager.getgDao().findAllGenre());
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package persistence.controlller.interfaces;
 
+import java.util.ArrayList;
 import persistence.dto.GenreDTO;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.genreNotFound;
@@ -18,5 +19,5 @@ public interface GenreController {
     public GenreDTO findGenreById(int id) throws genreNotFound, connectionProblem;
 
     public GenreDTO findGenreByName(String name) throws genreNotFound, connectionProblem;
-
+ public ArrayList<GenreDTO> getAllGenre() throws connectionProblem;
 }

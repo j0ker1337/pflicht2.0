@@ -5,6 +5,7 @@
  */
 package persistence.DAO.interfaces;
 
+import java.util.ArrayList;
 import persistence.entities.Genre;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.genreNotFound;
@@ -22,4 +23,6 @@ public interface genreDao {
     public Genre findGenreByFilmID(int id) throws genreNotFound, connectionProblem;
 
     public Genre getGenres(String query) throws genreNotFound, connectionProblem;
+
+    public ArrayList<Genre> findAllGenre() throws connectionProblem;
 }

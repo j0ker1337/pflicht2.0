@@ -474,4 +474,5 @@ public interface Controller {
      */
     public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound;
 
+    public ArrayList<GenreDTO> getAllGenre() throws connectionProblem;
 }

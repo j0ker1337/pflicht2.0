@@ -6,7 +6,9 @@
 package persistence.DAO;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import persistence.DAO.interfaces.genreDao;
 import persistence.entities.Genre;
 import persistence.exceptions.connectionProblem;
@@ -35,6 +37,11 @@ class genreDaoImpl extends Dao implements genreDao {
         String query = "select g.name,g.`genreID` from filme f join genre g on f.genre=g.genreID where f.filmID=" + id;
         return getGenres(query);
     }
+    
+    public ArrayList<Genre> findAllGenre() throws connectionProblem{
+        String query = "select * from genre";
+        return getGenress(query);
+    }
 
     public Genre getGenres(String query) throws genreNotFound, connectionProblem {
         Genre genre = null;
@@ -54,5 +61,23 @@ class genreDaoImpl extends Dao implements genreDao {
         }
         return genre;
     }
-
+    
+    public ArrayList<Genre> getGenress(String query) throws connectionProblem{
+           ArrayList<Genre> al = null;
+        try {
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+            al = new ArrayList<Genre>();
+            while (rs.next()) {
+                Genre us = new Genre();
+                us.setId(rs.getInt("genreID"));
+                us.setName(rs.getString("name"));
+                al.add(us);
+            }
+        } catch (SQLException e) {
+            System.out.println("fehler");
+            throw new connectionProblem();
+        }
+        return al;
+    }
 }
