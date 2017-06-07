@@ -24,16 +24,54 @@ public class AddMovie implements Serializable{
     private int genre;
     private int jahr;
     private int regi;
-    private ArrayList<SchauspielerDTO> schauspieler;
+    private ArrayList<SchauspielerDTO> selectedSchauspieler;
+    private ArrayList<SchauspielerDTO> availableSchauspieler;
 
-    public ArrayList<SchauspielerDTO> getSchauspieler() {
-        return schauspieler;
-    }
-
-    public void setSchauspieler(ArrayList<SchauspielerDTO> schauspieler) {
-        this.schauspieler = schauspieler;
+    
+    public AddMovie() {
+        //this.availableSchauspieler = controllerManager.getSchauspielerController().getAllSchauspieler();
+        
+        //__________ temp
+        this.availableSchauspieler = new ArrayList<SchauspielerDTO>();
+        SchauspielerDTO s = new SchauspielerDTO();
+        s.setVorname("Gerrit");
+        s.setName("Harmes");
+        availableSchauspieler.add(s);
+        
+        s = new SchauspielerDTO();
+        s.setVorname("Halil");
+        s.setName("Aydin");
+        availableSchauspieler.add(s);
+        
+        s = new SchauspielerDTO();
+        s.setVorname("Nils");
+        s.setName("Nikolay");
+        availableSchauspieler.add(s);
+        //__________
+        selectedSchauspieler = new ArrayList<SchauspielerDTO>();
     }
     
+    
+    public void save(){
+        //controllerManager.filmController.addFilm(this);
+    }
+    
+    
+    public ArrayList<SchauspielerDTO> getSelectedSchauspieler() {
+        return selectedSchauspieler;
+    }
+    
+    public void setSelectedSchauspieler(ArrayList<SchauspielerDTO> schauspieler) {
+        this.selectedSchauspieler = schauspieler;
+    }
+    
+    public ArrayList<SchauspielerDTO> getAvailableSchauspieler() {
+        return availableSchauspieler;
+    }
+    
+    public void setAvailableSchauspieler(ArrayList<SchauspielerDTO> schauspieler) {
+        this.availableSchauspieler = schauspieler;
+    }
     
     
     public ArrayList<Integer> getAllYears(){
@@ -47,26 +85,27 @@ public class AddMovie implements Serializable{
     public ArrayList<RegisseurDTO> getAllRegi(){
         //return controllerManager.getRegisseurController().getAllRegisser();
         
-        
         ArrayList<RegisseurDTO> list= new ArrayList<RegisseurDTO>();
         
         RegisseurDTO temp= new RegisseurDTO();
         temp.setId(0);
+        temp.setVorname("Michael");
         temp.setName("Bay");
         list.add(temp);
         
         temp= new RegisseurDTO();
         temp.setId(1);
+        temp.setVorname("Peter");
         temp.setName("Jackson");
         list.add(temp);
         
         temp= new RegisseurDTO();
         temp.setId(2);
+        temp.setVorname("Gerrit");
         temp.setName("Aydin");
         list.add(temp);
         
         return list;
-        
     }
     
     
@@ -118,10 +157,6 @@ public class AddMovie implements Serializable{
     
     
     
-    
-    
-    
-    
     public String getName() {
         return name;
     }
@@ -154,16 +189,5 @@ public class AddMovie implements Serializable{
         this.regi = regi;
     }
     
-    
-    public AddMovie() {
-        this.schauspieler= new ArrayList<SchauspielerDTO>();
-        SchauspielerDTO s= new SchauspielerDTO();
-        s.setName("Halil");
-        schauspieler.add(s);
-    }
-    
-    public void save(){
-        //TODO
-    }
     
 }
