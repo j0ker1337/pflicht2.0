@@ -33,6 +33,7 @@ import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
+import persistence.exceptions.schauspielernotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 import persistence.mapper.FilmMapper;
@@ -461,6 +462,36 @@ public class ControllerImpl implements Controller {
     @Override
     public ArrayList<GenreDTO> getAllGenre() throws connectionProblem {
         return GenreMapper.entityArrayToDTO(daoManager.getgDao().findAllGenre());
+    }
+    
+    
+    public ArrayList<RegisseurDTO> getAllRegisseur() throws reginotfound, connectionProblem{
+        return RegiMapper.entityArrayToDTO(daoManager.getRegieDao().findAllRegisseur());
+    }
+
+    @Override
+    public SchauspielerDTO findSchauspielerById(int id) throws connectionProblem, schauspielernotfound {
+       return SchauspielerMapper.entityToDTO(daoManager.getSchauspielerdao().findSchauspielerById(id));
+    }
+
+    @Override
+    public SchauspielerDTO delte(int id) throws connectionProblem {
+        return SchauspielerMapper.entityToDTO(daoManager.getSchauspielerdao().delte(id));
+    }
+
+    @Override
+    public SchauspielerDTO insert(SchauspielerDTO schauspieler) throws connectionProblem, schauspielernotfound {
+        return SchauspielerMapper.entityToDTO(daoManager.getSchauspielerdao().insert(SchauspielerMapper.dtoToentityT(schauspieler)));
+    }
+
+    @Override
+    public ArrayList<SchauspielerDTO> findAllSchauspieler() throws connectionProblem, schauspielernotfound {
+        return SchauspielerMapper.entityArrayToDTO(daoManager.getSchauspielerdao().findAllSchauspieler());
+    }
+    
+    @Override
+    public FilmDTO insert(FilmDTO film) throws filmnotfound, genreNotFound, connectionProblem{
+        return FilmMapper.entityToDTO(daoManager.getfDao().insert(FilmMapper.dtoToentityT(film)));
     }
 
 }

@@ -32,6 +32,12 @@ class schauspielerDaoImpl implements schauspielerDao {
     }
 
     @Override
+    public ArrayList<Schauspieler> findAllSchauspieler() throws connectionProblem, schauspielernotfound {
+        String query = "select * from schauspieler";
+        return getSchauspieler(query);
+    }
+
+    @Override
     public Schauspieler delte(int id) throws connectionProblem {
         String query = "delete from schauspieler where id=" + id;
         try {

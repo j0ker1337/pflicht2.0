@@ -24,6 +24,7 @@ import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
+import persistence.exceptions.schauspielernotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 
@@ -475,4 +476,16 @@ public interface Controller {
     public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound;
 
     public ArrayList<GenreDTO> getAllGenre() throws connectionProblem;
+
+    public ArrayList<RegisseurDTO> getAllRegisseur() throws reginotfound, connectionProblem;
+
+    public SchauspielerDTO findSchauspielerById(int id) throws connectionProblem, schauspielernotfound;
+
+    public SchauspielerDTO delte(int id) throws connectionProblem;
+
+    public SchauspielerDTO insert(SchauspielerDTO schauspieler) throws connectionProblem, schauspielernotfound;
+
+    public ArrayList<SchauspielerDTO> findAllSchauspieler() throws connectionProblem, schauspielernotfound;
+    
+      public FilmDTO insert(FilmDTO film) throws filmnotfound, genreNotFound, connectionProblem;
 }

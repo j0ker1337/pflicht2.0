@@ -26,6 +26,6 @@ public class Main {
 
     public static void main(String[] args) throws rightsnotfound, usernotfound, connectionProblem, filmnotfound, genreNotFound, reginotfound, usersnotfound, absteigendoneminusoneorzero, UserEmpty, UserIdEmpty, RightIdEmpty, UserBNameEmpty {
             controllerManager x = new controllerManager();
-            System.err.println(x.getGenreController().getAllGenre());
+   
     }
 }
