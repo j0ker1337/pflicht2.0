@@ -17,18 +17,33 @@
 
             <h:graphicImage value ="resources/Pics/MyMovieDb_Logo_final.png"/>
 
-            <h:panelGrid columns="2" ></h:panelGrid>
-            <div class="LoginForm">
+            
+            <div class="LoginForm" align="center">
                 <h:form>
-                    <label for="user-name">Benutzername:</label>
-                    <h:inputText id="user-name" value="#{loginPOJO.username}"></h:inputText>
-                    <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
-                    <br></br>
-                    <label for="user-pw">Passwort:</label>
-                    <h:inputSecret id="user-pw" value="#{loginPOJO.password}"></h:inputSecret>
-                    <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
-                    <h:commandButton  value="Einloggen" action="#{USERSE.login(loginPOJO)}" ></h:commandButton>
+                    <h:panelGrid columns="2" border="1">
+                        <f:facet name = "header">
+                            <p>Anmelde-Formular</p>
+                        </f:facet>
+                        
+                   
+                    <h:outputLabel value="Benutzername:"/>
+                    <h:inputText id="user-name" value="#{loginPOJO.username}"/>
+                   
+            
+                    <h:outputLabel value="Passwort:"/>
+                    <h:inputSecret id="user-pw" value="#{loginPOJO.password}"/>
+                    
+                    
+                    <f:facet name="footer">
+                        <h:panelGroup style="display:block; text-align:center; ">
+                            <h:commandButton  value="Einloggen" action="#{USERSE.login(loginPOJO)}" />
+                        </h:panelGroup>
+                    </f:facet>
+                    </h:panelGrid>
+                    
                 </h:form>
+                 <h:messages layout="table"   showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
+                 <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
             </div>
             <p>Falls sie noch kein Konto haben folgen sie diesem <h:link value="Link" outcome="Registrierseite" /></p>
 
