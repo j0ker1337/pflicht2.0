@@ -14,9 +14,16 @@
             <div class="Bannerol">
                 <p></p>
             </div>
+            
             <div class="Persontext">
-                <p>Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
-                    . Schön das sie heute am: #{System.currentTimeMillis()} vorbeischauen.</p>
+                Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
+                
+                . Schön das sie heute am:
+                <h:outputText value="#{USERSE.date}" >
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                </h:outputText>
+                vorbeischauen.
+                
             </div>
 
             <h:form class="knopp">
@@ -24,11 +31,11 @@
                     <f:ajax render=":Hauptcontainer" />
                 </h:commandButton>
 
-                <h:commandButton  value="Click für 2" action="#{HauptseitenBean.choosestate2()}">
+                <h:commandButton  value="Zeige deine Filme" action="#{HauptseitenBean.choosestate2()}">
                     <f:ajax render=":Hauptcontainer" />
                 </h:commandButton>
 
-                <h:commandButton  value="Click für 3" action="#{HauptseitenBean.choosestate3()}">
+                <h:commandButton  value="Füge Fiilme hinzu" action="#{HauptseitenBean.choosestate3()}">
                     <f:ajax  render=":Hauptcontainer" />
                 </h:commandButton>
             </h:form>
