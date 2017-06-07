@@ -8,6 +8,11 @@ package view.services;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -41,7 +46,15 @@ public class UserService implements Serializable {
 
     private UserDTO currentUser;
     private controllerManager coManager;
-    private Date datum;
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public UserDTO getCurrentUser() {
         return currentUser;
@@ -53,7 +66,9 @@ public class UserService implements Serializable {
 
     public UserService() {
         this.coManager = new controllerManager();
-        try {
+        date= new Date(System.currentTimeMillis());
+        currentUser= new UserDTO();
+        /*try {
             this.currentUser = coManager.getUserController().findUserByID(1);
         } catch (connectionProblem ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,7 +82,7 @@ public class UserService implements Serializable {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (reginotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
     }
 
@@ -187,13 +202,6 @@ public class UserService implements Serializable {
         }
     }
 
-    public Date getDatum() {
-        return datum;
-    }
-
-    public void setDatum(Date datum) {
-        this.datum = datum;
-    }
     
     
 }

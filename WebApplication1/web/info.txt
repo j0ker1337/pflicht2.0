@@ -78,7 +78,7 @@ alter table schauspieler MODIFY nachname varchar(100) NOT NULL;
 alter table regie MODIFY vorname varchar(100) NOT NULL;
 alter table regie MODIFY nachname varchar(100) NOT NULL;
 alter table filme MODIFY active boolean DEFAULT 0;
-alter table persons MODIFY active boolean DEFAULT 0;
+alter table person MODIFY active boolean DEFAULT 0;
 
 alter table filme MODIFY filmID integer AUTO_INCREMENT;
 alter table filme MODIFY name varchar(100) NOT NULL;
