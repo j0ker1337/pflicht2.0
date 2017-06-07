@@ -13,36 +13,43 @@ class filmDaoImpl extends Dao implements filmDao {
     public filmDaoImpl() {
     }
 
+    @Override
     public Film findFilmByName(String name) throws filmnotfound {
         String query = ("select * from filme where name like \'" + name + "\'");
         return getFilm(query);
     }
 
+    @Override
     public Film findFilmByName(String name, boolean active) throws filmnotfound {
         String query = ("select * from filme where name like \'" + name + "\' and active=" + active);
         return getFilm(query);
     }
 
+    @Override
     public Film findFilmByID(int id) throws filmnotfound {
         String query = ("select * from filme where filmID = " + id);
         return getFilm(query);
     }
 
+    @Override
     public ArrayList<Film> findAllFilm() throws filmnotfound {
         String query = ("select * from filme");
         return getFilms(query);
     }
 
+    @Override
     public ArrayList<Film> findAllFilm(boolean active) throws filmnotfound {
         String query = ("select * from filme where active=" + active);
         return getFilms(query);
     }
 
+    @Override
     public ArrayList<Film> findSubFilm(String x) throws filmnotfound {
         String query = ("select * from filme where name like \'" + x + "%\'");
         return getFilms(query);
     }
 
+    @Override
     public ArrayList<Film> findSubFilm(String x, boolean active) throws filmnotfound {
         String query = ("select * from filme where name like \'" + x + "%\' and active=" + active);
         return getFilms(query);
@@ -85,6 +92,7 @@ class filmDaoImpl extends Dao implements filmDao {
         return findFilmByID(fi.getFilmID());
     }
      */
+    @Override
     public Film getFilm(String query) throws filmnotfound {
         Film fi = null;
         try {
@@ -110,6 +118,7 @@ class filmDaoImpl extends Dao implements filmDao {
         return fi;
     }
 
+    @Override
     public ArrayList<Film> getFilms(String query) {
         ArrayList<Film> al = null;
         try {

@@ -61,10 +61,12 @@ public class ControllerImpl implements Controller {
         return buildFilmObject(dTO.getFilmID());
     }
 
+    @Override
     public GenreDTO findGenreOfFilm(int id) throws genreNotFound, connectionProblem {
         return GenreMapper.entityToDTO(daoManager.getgDao().findGenreByFilmID(id));
     }
 
+    @Override
     public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
 
         return RegiMapper.entityToDTO(daoManager.getRegieDao().findRegisseurwhoCreatedFilm(id));
@@ -215,6 +217,7 @@ public class ControllerImpl implements Controller {
         return null;
     }
 
+    @Override
     public UserDTO likes(UserDTO userdto) throws connectionProblem, usernotfound, rightsnotfound, filmnotfound, genreNotFound, CombinationNotFound, usersnotfound, reginotfound {
         UserDTO old = findUserByID(userdto.getId());
         Film x = null;
@@ -223,6 +226,10 @@ public class ControllerImpl implements Controller {
         return findUserByID(userdto.getId());
     }
 
+    //indem ich die rekursiven aufrufe von checker1 
+    //rausgenommen habe hab ich den stack overflow beim dreimal drücken von add auf der Hauptseite behoben. Nils
+    
+    @Override
     public void checker1(ArrayList<FilmDTO> oldl, ArrayList<FilmDTO> newl, int userid) throws filmnotfound, connectionProblem, CombinationNotFound {
         if (newl.size() == oldl.size() && equals(oldl, newl)) {
 
@@ -236,7 +243,7 @@ public class ControllerImpl implements Controller {
                     oldl.remove(x);
                 }
             }
-            checker1(oldl, newl, userid);
+            //checker1(oldl, newl, userid);
         } else if (oldl.size() <= newl.size()) {
             Iterator itr = newl.iterator();
             while (itr.hasNext()) {
@@ -247,7 +254,7 @@ public class ControllerImpl implements Controller {
                 }
 
             }
-            checker1(oldl, newl, userid);
+            //checker1(oldl, newl, userid); 
         }
 
     }

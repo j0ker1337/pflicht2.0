@@ -24,18 +24,21 @@ import persistence.exceptions.reginotfound;
  */
 class regiDaoImpl implements regiDao {
 
+    @Override
     public Regisseur findRegisseurById(int id) throws connectionProblem, reginotfound {
         String query = "select * from regi where id=" + id;
         return findByQuery(query);
     }
 
     //"select * from schauspieler_to_film sf join schauspieler f on sf.s_id=f.id where sf.f_id=1 and sf.s_id=" + id;
+    @Override
     public Regisseur findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
         String query = "select * from regie r join filme f on f.regie=r.id where f.filmID=" + id;
         System.err.println(query);
         return findByQuery(query);
     }
 
+    @Override
     public Regisseur insert(Regisseur regisseur) throws connectionProblem, reginotfound {
         String query = ("insert into regie (vorname ,nachname) values(?,?)");
         int id = 0;
@@ -61,6 +64,7 @@ class regiDaoImpl implements regiDao {
         return findRegisseurById(id);
     }
 
+    @Override
     public Regisseur findByQuery(String query) throws connectionProblem, reginotfound {
         Regisseur r = null;
         try {

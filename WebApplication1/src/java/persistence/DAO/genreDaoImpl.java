@@ -23,26 +23,31 @@ class genreDaoImpl extends Dao implements genreDao {
     public genreDaoImpl() {
     }
 
+    @Override
     public Genre findById(int id) throws genreNotFound, connectionProblem {
         String query = "select * from genre where genreID='" + id + "'";
         return getGenres(query);
     }
 
+    @Override
     public Genre findByName(String name) throws genreNotFound, connectionProblem {
         String query = "select * from genre where name like '" + name + "'";
         return getGenres(query);
     }
 
+    @Override
     public Genre findGenreByFilmID(int id) throws genreNotFound, connectionProblem {
         String query = "select g.name,g.`genreID` from filme f join genre g on f.genre=g.genreID where f.filmID=" + id;
         return getGenres(query);
     }
     
+    @Override
     public ArrayList<Genre> findAllGenre() throws connectionProblem{
         String query = "select * from genre";
         return getGenress(query);
     }
 
+    @Override
     public Genre getGenres(String query) throws genreNotFound, connectionProblem {
         Genre genre = null;
         try {

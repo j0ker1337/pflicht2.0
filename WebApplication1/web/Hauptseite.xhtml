@@ -53,16 +53,22 @@
 
                             <h:column>
                                 <f:facet name = "header">name</f:facet>
-                                #{film.name}</h:column>
+                                #{film.name}
+                            </h:column>
                             <h:column>
                                 <f:facet name = "header">id</f:facet>
-                                #{film.filmID}</h:column>
+                                #{film.filmID}
+                            </h:column>
                             <h:column>
-                                <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
+                                <!--<c:set var = "id" scope = "session" value = "#{film.filmID}"/>-->
 
 
-                                <h:commandButton value="delete" action="#{USERSE.delete(film)}" rendered="#{(film.ihave)}" />
-                                <h:commandButton value="add" action="#{USERSE.add(film)}" rendered="#{!(film.ihave)}" />
+                                <h:commandButton value="delete" action="#{USERSE.delete(film)}" rendered="#{(film.ihave)}" >
+                                    <f:ajax  event="click" render=":Hauptcontainer" />
+                                </h:commandButton>
+                                <h:commandButton value="add" action="#{USERSE.add(film)}" rendered="#{!(film.ihave)}" >
+                                    <f:ajax  event="click" render=":Hauptcontainer" />
+                                </h:commandButton>
 
                                 <!-- <h:commandLink action=""
                                                 value="edit" style="font-size: large">

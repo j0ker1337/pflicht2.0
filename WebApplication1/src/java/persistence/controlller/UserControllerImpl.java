@@ -76,10 +76,12 @@ public class UserControllerImpl implements UserController {
         return controller.save(udto);
     }
 
+    @Override
     public ArrayList<UserDTO> findAllUser(boolean active) throws connectionProblem, usersnotfound, rightsnotfound, filmnotfound, genreNotFound, reginotfound {
         return controller.findAllUser(active);
     }
 
+    @Override
     public boolean delete(UserDTO userdto) throws connectionProblem, usernotfound {
         return controller.delete(userdto);
     }

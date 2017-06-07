@@ -25,6 +25,7 @@ import persistence.exceptions.filmnotfound;
  */
 class schauspielerfilmDaoImpl implements schauspielerfilmDao {
 
+    @Override
     public ArrayList<Film> findFilmsplayedBySchauspieler(int id) throws filmnotfound {
         String query = ("select * from filme f join schauspieler_to_film x "
                 + "on f.filmID = x.f_id "
@@ -33,22 +34,26 @@ class schauspielerfilmDaoImpl implements schauspielerfilmDao {
         return fd.getFilms(query);
     }
 
+    @Override
     public ArrayList<Schauspieler> findSchaupielerWhoPlayedInFilm(int id) throws connectionProblem {
         String query = ("select * from schauspieler f join schauspieler_to_film x on f.id = x.s_id where x.f_id =" + id);
         schauspielerDaoImpl s = new schauspielerDaoImpl();
         return s.getSchauspieler(query);
     }
 
+    @Override
     public Schauspieler delete(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
         String query = ("delete from usertofilm where f_id=? and s_id=?");
         return updateQuery(query, userid, filmid);
     }
 
+    @Override
     public Schauspieler insert(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
         String query = "insert into usertofilm values(? , ?)";
         return updateQuery(query, userid, filmid);
     }
 
+    @Override
     public Schauspieler updateQuery(String query, int f_id, int s_id) throws filmnotfound, connectionProblem, CombinationNotFound {
         try {
             getConnection().setAutoCommit(false);
@@ -69,6 +74,7 @@ class schauspielerfilmDaoImpl implements schauspielerfilmDao {
         return findCombination(s_id, f_id);
     }
 
+    @Override
     public Schauspieler findCombination(int s_id, int f_id) throws CombinationNotFound {
         Schauspieler fi = null;
         schauspielerDaoImpl fd = new schauspielerDaoImpl();

@@ -29,6 +29,7 @@ class GenreControllerImpl implements GenreController {
         return controller.findGenreById(id);
     }
     
+    @Override
      public ArrayList<GenreDTO> getAllGenre() throws connectionProblem{
          return controller.getAllGenre();
      }
