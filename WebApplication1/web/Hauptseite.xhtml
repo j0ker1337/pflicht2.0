@@ -77,9 +77,7 @@
 
                     <h:panelGroup id="nimm2" rendered="#{HauptseitenBean.state2}" >
                         <h:dataTable var="Filme" value="#{USERSE.currentUser.likes}" border="1"  width="98%">
-                            <h:column>
-                                <f:facet name = "header">id</f:facet>
-                                #{Filme.filmID}</h:column>
+                            
                             <h:column>
                                 <f:facet name = "header">name</f:facet>
                                 #{Filme.name}</h:column>
@@ -92,6 +90,11 @@
                         <h:form>
 
                             Filmname: <h:inputText value="#{addMovie.name}"/> <br/>
+                            
+                            
+                            Erscheinungsjahr:<h:selectOneMenu value="#{addMovie.jahr}">
+                                <f:selectItems value="#{addMovie.getAllYears()}" var="v" itemValue="#{v}" itemLabel="#{v}"/>
+                            </h:selectOneMenu> <br/>
 
                             Genre: <h:selectOneMenu value="#{addMovie.genre}">
                                 <f:selectItems value="#{addMovie.getAllGenres()}" var="v" itemValue="#{v.id}" itemLabel="#{v.name}"/>
@@ -105,7 +108,9 @@
                             </h:selectOneMenu> <br/>
 
 
-                            Schauspieler: <h:selectManyCheckbox value=""></h:selectManyCheckbox>
+                            Schauspieler: <h:selectManyCheckbox value="#{addMovie.schauspieler}">
+                                <f:selectItems value="#{addMovie.getSchauspieler()}" var="v" itemValue="#{v.getId}" itemLabel="#{v.getName}"  />
+                            </h:selectManyCheckbox>
 
 
 

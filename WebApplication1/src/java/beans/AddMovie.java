@@ -25,7 +25,24 @@ public class AddMovie implements Serializable{
     private int jahr;
     private int regi;
     private ArrayList<SchauspielerDTO> schauspieler;
+
+    public ArrayList<SchauspielerDTO> getSchauspieler() {
+        return schauspieler;
+    }
+
+    public void setSchauspieler(ArrayList<SchauspielerDTO> schauspieler) {
+        this.schauspieler = schauspieler;
+    }
     
+    
+    
+    public ArrayList<Integer> getAllYears(){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for(int i= 2017; i >= 1942; i--){
+            list.add(new Integer(i));
+        }
+        return list;
+    }
     
     public ArrayList<RegisseurDTO> getAllRegi(){
         //return controllerManager.getRegisseurController().getAllRegisser();
