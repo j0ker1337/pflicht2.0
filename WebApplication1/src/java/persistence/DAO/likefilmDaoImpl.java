@@ -82,7 +82,6 @@ class likefilmDaoImpl extends Dao implements likefilmDao {
     }
 
     public Film delete(int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
-        filmDao fd = new filmDaoImpl();
         String query = ("delete from usertofilm where film=? and user=?");
         return updateQuery(query, userid, filmid);
     }
@@ -91,6 +90,8 @@ class likefilmDaoImpl extends Dao implements likefilmDao {
         String query = "insert into usertofilm values(? , ?)";
         return updateQuery(query, userid, filmid);
     }
+    
+
 
     public Film updateQuery(String query, int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
         try {

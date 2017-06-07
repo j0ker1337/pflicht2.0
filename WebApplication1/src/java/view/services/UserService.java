@@ -8,11 +8,6 @@ package view.services;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Date;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -134,6 +129,8 @@ public class UserService implements Serializable {
                                 "Please enter correct username or Password"));
             } else {
                 this.currentUser = dto;
+                redirect("Hauptseite.xhtml");
+                return;
             }
 
         } catch (connectionProblem ex) {
@@ -145,6 +142,7 @@ public class UserService implements Serializable {
                             "Incorrect Username or Password",
                             "Please enter correct username or Password"));
                    redirect("error.xhtml");
+                   return;
         } catch (filmnotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (genreNotFound ex) {
@@ -152,7 +150,8 @@ public class UserService implements Serializable {
         } catch (reginotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
-               redirect("Hauptseite.xhtml");
+        redirect("error.xhtml");
+        return;
     }
 
 
