@@ -58,9 +58,6 @@
                                     <f:facet name = "header">name</f:facet>
                                     #{film.name}</h:column>
                                 <h:column>
-                                    <f:facet name = "header">id</f:facet>
-                                    #{film.filmID}</h:column>
-                                <h:column>
                                     <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
 
 
@@ -72,9 +69,7 @@
                                          <f:ajax  event="click" render=":Hauptcontainer" />       
                                      </h:commandLink>  -->   
                                 </h:column>
-                                <h:column>
-                                    <f:facet name = "header">ihave</f:facet>
-                                    #{film.ihave}</h:column>
+                                
 
                             </h:dataTable>
                         </h:form>
