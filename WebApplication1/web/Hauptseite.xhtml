@@ -14,16 +14,16 @@
             <div class="Bannerol">
                 <p></p>
             </div>
-            
+
             <div class="Persontext">
                 Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
-                
+
                 . Schön das sie heute am:
                 <h:outputText value="#{USERSE.date}" >
                     <f:convertDateTime pattern="dd.MM.yyyy" />
                 </h:outputText>
                 vorbeischauen.
-                
+
             </div>
 
             <h:form class="knopp">
@@ -44,7 +44,7 @@
 
                 <h:panelGroup id="nimm1" rendered="#{HauptseitenBean.state1}" >
                     <h:form >
-                        <h:dataTable var="film" value="#{controllerManager.filmController.findAllFilm()}">
+                        <h:dataTable var="film" value="#{USERSE.findAllFilms()}">
                             <h:column>
                                 <f:facet name = "header">id</f:facet>
                                 #{film.name}</h:column>
@@ -53,11 +53,19 @@
                                 #{film.filmID}</h:column>
                             <h:column>
                                 <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
-                                <h:commandLink action="#{HauptseitenBean.choosestate3()}"
-                                               value="edit" style="font-size: large">
-                                    <f:ajax  event="click" render=":Hauptcontainer" />            
-                                </h:commandLink>
+
+                                <h:commandButton value="delete" action="#{USERSE.delete(film)}" rendered="#{(film.ihave)}" />
+                                <h:commandButton value="add" action="#{USERSE.add(film)}" rendered="#{!(film.ihave)}" />
+
+                                <!-- <h:commandLink action=""
+                                                value="edit" style="font-size: large">
+                                     <f:ajax  event="click" render=":Hauptcontainer" />       
+                                 </h:commandLink>  -->   
                             </h:column>
+                            <h:column>
+                                <f:facet name = "header">ihave</f:facet>
+                                #{film.ihave}</h:column>
+             
                         </h:dataTable>
                     </h:form>
                 </h:panelGroup>

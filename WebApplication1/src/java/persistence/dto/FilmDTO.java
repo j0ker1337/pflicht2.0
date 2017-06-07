@@ -27,6 +27,7 @@ public class FilmDTO extends DTO {
     private boolean active;
     private ArrayList<SchauspielerDTO> schauspieler;
     private RegisseurDTO regisseurDTO;
+    private boolean ihave;
 
     public boolean isActive() {
         return active;
@@ -94,7 +95,7 @@ public class FilmDTO extends DTO {
 
     @Override
     public String toString() {
-        return "FilmDTO{" + "filmID=" + filmID + ", name=" + name + ", jahr=" + jahr + ", genre=" + genre + ", users=" + users + ", schauspieler=" + schauspieler + ", regisseurDTO=" + regisseurDTO + '}';
+        return "FilmDTO{" + "filmID=" + filmID + ", name=" + name + ", jahr=" + jahr + ", genre=" + genre + ", users=" + users + ", active=" + active + ", schauspieler=" + schauspieler + ", regisseurDTO=" + regisseurDTO + ", ihave=" + ihave + '}';
     }
 
     @Override
@@ -121,11 +122,17 @@ public class FilmDTO extends DTO {
         final FilmDTO other = (FilmDTO) obj;
         if (this.filmID != other.filmID) {
             return false;
+
         }
-        if (this.jahr != other.jahr) {
-            return false;
-        }
-        return Objects.equals(this.name, other.name);
+        return true;
+    }
+
+    public boolean getIhave() {
+        return ihave;
+    }
+
+    public void setIhave(boolean ihave) {
+        this.ihave = ihave;
     }
 
 }
