@@ -5,25 +5,24 @@
  */
 package view.POJO;
 
-import javax.faces.bean.ViewScoped;
-import view.validator.interfaces.StringLenght;
 
-/**
- *
- * @author Nikolay und Don
- */
-@javax.faces.bean.ManagedBean
-@ViewScoped
-public class LoginPOJO {
+
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import view.validator.interfaces.StringLenght;
+import view.validator.interfaces.UserNameNotFound;
+
+@ManagedBean
+@SessionScoped
+public class LoginPOJO implements Serializable{
 
     @StringLenght
+    @UserNameNotFound
     private String username;
 
     @StringLenght
     private String password;
-
-    public LoginPOJO() {
-    }
 
     public String getUsername() {
         return username;
@@ -40,5 +39,6 @@ public class LoginPOJO {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 }

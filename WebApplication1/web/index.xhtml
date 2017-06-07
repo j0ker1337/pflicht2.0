@@ -21,12 +21,13 @@
             <div class="LoginForm">
                 <h:form>
                     <label for="user-name">Benutzername:</label>
-                    <h:inputText id="user-name" value="#{USERSE.currentUser.bname}"  />
-
+                    <h:inputText value="#{loginPOJO.username}"></h:inputText>
+                    <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
+                    <br></br>
                     <label for="user-pw">Passwort:</label>
-                    <h:inputSecret id="user-pw" value="#{USERSE.currentUser.pass}"  />
-
-                    <h:commandButton value="Einloggen" action="Hauptseite" ></h:commandButton>
+                    <h:inputSecret id="user-pw" value="#{loginPOJO.password}"></h:inputSecret>
+                    <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
+                    <h:commandButton value="Einloggen" action="#{USERSE.login(loginPOJO)}" ></h:commandButton>
                 </h:form>
             </div>
             <p>Falls sie noch kein Konto haben folgen sie diesem <h:link value="Link" outcome="Registrierseite" /></p>

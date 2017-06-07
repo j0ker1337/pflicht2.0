@@ -11,20 +11,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import view.validator.impl.UniqueFilmNameValidator;
+import view.validator.impl.UserNameNotFoundValidator;
 
 /**
  *
  * @author joker
  */
-@Constraint(validatedBy = UniqueFilmNameValidator.class)
+@Constraint(validatedBy = UserNameNotFoundValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-public @interface UniqueFilmName {
-
-    String message() default "Wrong Filmname";
-
+public @interface UserNameNotFound {
+    String message() default "Wrong Username";
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
 }

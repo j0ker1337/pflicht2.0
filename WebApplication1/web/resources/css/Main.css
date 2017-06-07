@@ -89,4 +89,32 @@ column{
 .smallp{
     font-size: 85%;
 }
+.FACES-MESSAGES {
+    width: 100%;
+    border-collapse: seperated;
+    border: 0px solid #DDDDDD;
+    margin: 2px 0px 2px 0px;
 
+}
+
+.FACES-MESSAGES td{
+    height: 18px;
+    font-weight: normal;    
+    font-size: 12px;    
+    padding: 2px 2px 2px 22px;
+}
+.FACES-MESSAGES .MESSAGES-INFO{
+    color: #0000DD;
+    background: transparent url('images/message_info.png') 2px 0px no-repeat;
+
+}
+
+.FACES-MESSAGES .MESSAGES-ERROR{
+    color: #BB0000;
+    background: transparent url('images/message_error.png') 2px 0px no-repeat;
+
+}
+.FACES-MESSAGES .MESSAGES-WARN{
+    color: #000;
+    background: transparent url('images/message_warn.png') 2px 0px no-repeat;
+}

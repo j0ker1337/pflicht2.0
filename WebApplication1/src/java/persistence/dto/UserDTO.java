@@ -29,12 +29,12 @@ public class UserDTO extends DTO {
     @StringLenght
     private String name;
     private Date geburt;
-    
+
+    @UniqueUserName
     @NotNull
     @StringLenght
-    @UniqueUserName
-    private String Bname;
-    
+    private String bname;
+
     @NotNull
     @StringLenght
     private String pass;
@@ -75,11 +75,11 @@ public class UserDTO extends DTO {
     }
 
     public String getBname() {
-        return Bname;
+        return bname;
     }
 
-    public void setBname(String Bname) {
-        this.Bname = Bname;
+    public void setBname(String bname) {
+        this.bname = bname;
     }
 
     public String getPass() {
@@ -116,7 +116,7 @@ public class UserDTO extends DTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" + "id=" + id + ", vorname=" + vorname + ", name=" + name + ", geburt=" + geburt + ", Bname=" + Bname + ", pass=" + pass + ", right=" + right + ", active=" + active + ", likes=" + likes + '}';
+        return "UserDTO{" + "id=" + id + ", vorname=" + vorname + ", name=" + name + ", geburt=" + geburt + ", bname=" + bname + ", pass=" + pass + ", right=" + right + ", active=" + active + ", likes=" + likes + '}';
     }
 
 }

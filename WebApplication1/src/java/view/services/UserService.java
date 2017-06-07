@@ -27,6 +27,7 @@ import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
+import view.POJO.LoginPOJO;
 import view.POJO.RegisterPOJO;
 
 /**
@@ -103,20 +104,17 @@ public class UserService implements Serializable {
         this.currentUser = coManager.getUserController().save(currentUser);
     }
 
-    /*
-    public void login(LoginDTO log) throws rightsnotfound {
+   
+    public void login(LoginPOJO log) throws rightsnotfound {
         UserDTO dto = new UserDTO();
         try {
-            dto = userController.findUserByUserName(log.getUsername());
+            dto = coManager.getUserController().findUserByUserName(log.getUsername());
             if (!(dto.getPass().equals(log.getPassword()))) {
                 FacesContext.getCurrentInstance().addMessage(
                         null,
-                        new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                "Incorrect Username and Password",
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                "Incorrect Username or Password",
                                 "Please enter correct username or Password"));
-
-                redirect("login.xhtml");
-
             } else {
                 this.currentUser = dto;
             }
@@ -126,27 +124,19 @@ public class UserService implements Serializable {
         } catch (usernotfound ex) {
             FacesContext.getCurrentInstance().addMessage(
                     null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Incorrect Username and Password",
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Incorrect Username or Password",
                             "Please enter correct username or Password"));
-
-            redirect("login.xhtml");
-
+                   redirect("error.xhtml");
         } catch (filmnotfound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (genreNotFound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        redirect("xxx.xhtml");
     }
 
-    public UserController getUserController() {
-        return userController;
-    }
-
-    public void setUserController(UserController userController) {
-        this.userController = userController;
-    }
 
     public void check() throws IOException {
         if (this.currentUser == null) {
@@ -156,11 +146,10 @@ public class UserService implements Serializable {
                             "Bitte log dich ein",
                             "Please enter correct username or Password"));
 
-            redirect("faces/login.xhtml");
         }
-        redirect("faces/login.xhtml");
+
     }
-     */
+   
     private void redirect(String url) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

@@ -18,14 +18,14 @@ import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.usernotfound;
-import view.validator.interfaces.UniqueUserName;
+import view.validator.interfaces.UniqueFilmName;
 
 /**
  *
  * @author Nikolay und Don
  */
-@FacesValidator("UniqueValidator")
-public class UniqueFilmNameValidator implements ConstraintValidator<UniqueUserName, Object> {
+@FacesValidator("UniqueFilmNameValidator")
+public class UniqueFilmNameValidator implements ConstraintValidator<UniqueFilmName, Object> {
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
@@ -57,7 +57,7 @@ public class UniqueFilmNameValidator implements ConstraintValidator<UniqueUserNa
     }
 
     @Override
-    public void initialize(UniqueUserName constraintAnnotation) {
+    public void initialize(UniqueFilmName constraintAnnotation) {
 
     }
 
