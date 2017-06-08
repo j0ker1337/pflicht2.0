@@ -106,11 +106,11 @@
 
                     <h:panelGroup id="nimm4" rendered="#{HauptseitenBean.state4}" >
                         <h:form>
-                            <h:inputText id="input" value="#{FILMSE.search}">
-                            <f:ajax event="keyup" execute="input" render="output"/>
+                            <h:inputText id="input" value="#{USERSE.search}">
+                                <f:ajax event="keyup" execute="input" render="output"/>
                             </h:inputText>
-    
-                            <h:dataTable id="output" var="film" value="#{FILMSE.find()}">
+
+                            <h:dataTable id="output" var="film" value="#{USERSE.findByString()}">
                                 <h:column>
                                     <f:facet name = "header">id</f:facet>
                                     #{film.name}</h:column>
@@ -119,6 +119,11 @@
                                     #{film.filmID}</h:column>
                                 <h:column>
                                     <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <h:commandButton value="delete" action="#{USERSE.delete(film)}" rendered="#{(film.ihave)}" />
+                                    <h:commandButton value="add" action="#{USERSE.add(film)}" rendered="#{!(film.ihave)}" />
                                 </h:column>
                             </h:dataTable> 
                         </h:form>

@@ -47,8 +47,20 @@ public class UserService implements Serializable {
     private UserDTO currentUser;
     private controllerManager coManager;
     private Date date;
+    private String search;
     private ArrayList<FilmDTO> films;
 
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    
+    
+    
     public ArrayList<FilmDTO> getFilms() {
         return films;
     }
@@ -277,6 +289,38 @@ public class UserService implements Serializable {
         } catch (CombinationNotFound ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+        public ArrayList<FilmDTO> findByString() {
+        this.coManager = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
+        try {
+            ArrayList<FilmDTO> x= coManager.getFilmController().findSubFilm(this.search);
+            for (FilmDTO y : x) {
+                if (currentUser.getLikes().contains(y)) {
+                    y.setIhave(true);
+                } else {
+                    y.setIhave(false);
+                }
+            }
+            films = x;
+            for (FilmDTO y : films) {
+                System.err.println(y);
+            }
+            
+        } catch (filmnotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (connectionProblem ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usersnotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return films;
     }
 
 }
