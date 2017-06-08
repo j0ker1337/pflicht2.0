@@ -18,10 +18,16 @@ import persistence.dto.FilmDTO;
 import persistence.dto.GenreDTO;
 import persistence.dto.RegisseurDTO;
 import persistence.dto.SchauspielerDTO;
+import persistence.exceptions.CombinationNotFound;
 import persistence.exceptions.connectionProblem;
+import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
+import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.schauspielernotfound;
+import persistence.exceptions.usernotfound;
+import persistence.exceptions.usersnotfound;
+import view.services.UserService;
 
 @Named(value = "addMovie")
 @RequestScoped
@@ -119,7 +125,12 @@ public class AddMovie implements Serializable {
             newfilm.setSchauspieler(schauspielerDTOs);
             newfilm.setGenre(x.getGenreController().findGenreById(genreid));
             newfilm.setRegisseurDTO(x.getRegieController().findBYId(regi));
-
+  
+             UserService us = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{USERSE}", UserService.class);
+            newfilm = x.getFilmController().insert(newfilm);
+            us.getCurrentUser().getLikes().add(newfilm);
+            System.err.println(newfilm.getFilmID());
+            x.getUserController().likes(us.getCurrentUser());
             System.err.println(newfilm);
         } catch (connectionProblem ex) {
             Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,8 +139,19 @@ public class AddMovie implements Serializable {
         } catch (genreNotFound ex) {
             Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
             Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (filmnotfound ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usernotfound ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CombinationNotFound ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usersnotfound ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        
     }
 
     public ArrayList<SchauspielerDTO> getSelectedSchauspieler() {

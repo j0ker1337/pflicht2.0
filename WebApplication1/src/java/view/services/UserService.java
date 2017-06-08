@@ -134,6 +134,7 @@ public class UserService implements Serializable {
         currentUser.setVorname(reg.getVorname());
         currentUser.setRight(coManager.getRightController().findRightsById(1));
         this.currentUser = coManager.getUserController().save(currentUser);
+        redirect("Hauptseite.xhtml");
     }
 
     public void login(LoginPOJO log) throws rightsnotfound {
@@ -195,10 +196,12 @@ public class UserService implements Serializable {
         }
     }
 
-    private void logout() {
+    public void logout() {
+        System.err.println("FICK DICHSW");
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
         session.invalidate();
+        redirect("index.xhtml");
     }
 
     private void visit(String name) {
