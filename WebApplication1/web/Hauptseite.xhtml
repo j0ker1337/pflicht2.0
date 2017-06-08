@@ -4,31 +4,30 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:s="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title> MyMovieDB </title>
         <link rel="stylesheet" type="text/css" href="resources/css/Main.css"></link>
     </h:head>
     <h:body>
         <div class="Page">
-            
+
             <div id="hauptbanner">
-            <div class="Bannerol">
-                <p></p>
-            </div>
+                <div class="Bannerol">
+                    <p></p>
+                </div>
 
-            <div class="Persontext">
-                Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
+                <div class="Persontext">
+                    Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
 
-                . Schön das sie heute am:
-                <h:outputText value="#{USERSE.date}" >
-                    <f:convertDateTime pattern="dd.MM.yyyy" />
-                </h:outputText>
-                vorbeischauen.
+                    . Schön das sie heute am 
+                    <h:outputText value="#{USERSE.date}" >
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:outputText>
+                    vorbeischauen.
 
-            </div>
-                
-
+              </div>
                 <h:form class="knopp">
                     <h:commandButton  value="Zeige alle Filme" action="#{HauptseitenBean.choosestate1()}">
                         <f:ajax render=":Hauptcontainer" />
@@ -38,100 +37,86 @@
                         <f:ajax render=":Hauptcontainer" />
                     </h:commandButton>
 
-                    <h:commandButton  value="Füge Fiilme hinzu" action="#{HauptseitenBean.choosestate3()}">
+                    <h:commandButton  value="Füge Filme hinzu" action="#{HauptseitenBean.choosestate3()}">
                         <f:ajax  render=":Hauptcontainer" />
                     </h:commandButton>
                 </h:form>
             </div>
             <div id="haltecontainer">
-            <h:panelGroup id="Hauptcontainer"  >
+                <h:panelGroup id="Hauptcontainer"  >
 
-                <h:panelGroup id="nimm1" rendered="#{HauptseitenBean.state1}" >
-                    <h:form >
+                    <h:panelGroup id="nimm1" rendered="#{HauptseitenBean.state1}" >
+                        <h:form >
 
-                        <h:dataTable var="film" value="#{controllerManager.filmController.findAllFilm()}" border="1"  width="98%">
+                            <h:dataTable var="film" value="#{USERSE.findAllFilms()}" border="1"  width="98%">
+
+
+                                <h:column>
+                                    <f:facet name = "header">Alle Filme</f:facet>
+                                    #{film.name} - #{film.genre.name} - #{film.regisseurDTO.name} - #{film.jahr}<br/>
+
+                                    Schauspieler: 
+                                    <ui:repeat value="#{film.schauspieler}" var="v">
+                                        <h:outputText value=", #{v.vorname} #{v.name}"/>
+                                    </ui:repeat>
+                                </h:column>
+
+
+                                <h:column>
+                                    <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
+
+
+                                    <h:commandButton value="delete" action="#{USERSE.delete(film)}" rendered="#{(film.ihave)}" />
+                                    <h:commandButton value="add" action="#{USERSE.add(film)}" rendered="#{!(film.ihave)}" />
+
+                                    <!-- <h:commandLink action=""
+                                                    value="edit" style="font-size: large">
+                                         <f:ajax  event="click" render=":Hauptcontainer" />       
+                                     </h:commandLink>  -->   
+                                </h:column>
+
+
+                            </h:dataTable>
+                        </h:form>
+                    </h:panelGroup>
+
+                    <h:panelGroup id="nimm2" rendered="#{HauptseitenBean.state2}" >
+                        <h:dataTable var="Filme" value="#{USERSE.currentUser.likes}" border="1"  width="98%">
 
                             <h:column>
                                 <f:facet name = "header">name</f:facet>
-                                #{film.name}
-                            </h:column>
-                            <h:column>
-                                <f:facet name = "header">id</f:facet>
-                                #{film.filmID}
-                            </h:column>
-                            <h:column>
-                                <!--<c:set var = "id" scope = "session" value = "#{film.filmID}"/>-->
-
-
-                                <h:commandButton value="delete" action="#{USERSE.delete(film)}" rendered="#{(film.ihave)}" >
-                                    <f:ajax  event="click" render=":Hauptcontainer" />
-                                </h:commandButton>
-                                <h:commandButton value="add" action="#{USERSE.add(film)}" rendered="#{!(film.ihave)}" >
-                                    <f:ajax  event="click" render=":Hauptcontainer" />
-                                </h:commandButton>
-
-                                <!-- <h:commandLink action=""
-                                                value="edit" style="font-size: large">
-                                     <f:ajax  event="click" render=":Hauptcontainer" />       
-                                 </h:commandLink>  -->   
-                            </h:column>
-                            <h:column>
-                                <f:facet name = "header">ihave</f:facet>
-                                #{film.ihave}</h:column>
-             
+                                #{Filme.name}</h:column>
                         </h:dataTable>
-                    </h:form>
-                </h:panelGroup>
 
-                <h:panelGroup id="nimm2" rendered="#{HauptseitenBean.state2}" >
-                    <h:dataTable var="User" value="#{controllerManager.userController.findAllUser()}" border="1"  width="98%">
-                        <h:column>
-                            <f:facet name = "header">id</f:facet>
-                            #{User.bname}</h:column>
-                        <h:column>
-                            <f:facet name = "header">name</f:facet>
-                            #{User.name}</h:column>
-                    </h:dataTable>
-                </h:panelGroup>
+                    </h:panelGroup>
 
-                <h:panelGroup id="nimm3" rendered="#{HauptseitenBean.state3}" >
-                    
-                    <!-- ________________________ -->
-                    <h:form>
+                    <h:panelGroup id="nimm3" rendered="#{HauptseitenBean.state3}" >
 
-                        Filmname: <h:inputText value="#{addMovie.name}"/> <br/>
-                        
-                        Genre: <h:selectOneMenu value="#{addMovie.genre}">
-                            <f:selectItems value="#{addMovie.getAllGenres()}" var="v" itemValue="#{v.id}" itemLabel="#{v.name}"/>
-                        </h:selectOneMenu> <br/>
-                        
-                        
-                        
-                        Regisseur: <h:selectOneMenu value="bla">
-                             <f:selectItems value="#{addMovie.getAllRegi()}" var="v" 
-                               itemValue="#{v.id}" itemLabel="#{v.name}" />
-                        </h:selectOneMenu> <br/>
-                        
-                        
-                       <!-- Schauspieler: <h:selectManyCheckbox value=""-->
-                        
-                        
-                        
-                        <h:commandButton value="Submit" action="#{userService.add(filmDTO)}" />
-                        
-                       
-                    </h:form>
-                    
-                    <!-- _________________________ -->
-                </h:panelGroup>
+                        <!-- ________________________ -->
+                        <h:form>
 
-                <h:panelGroup id="nimm4" rendered="#{HauptseitenBean.state4}" >
-                    asasasd
-                </h:panelGroup>
-              
+                            Filmname: <h:inputText value="#{addMovie.newfilm.name}"/> <br/>
 
-            </h:panelGroup> 
-                </div>
+                            <h:selectManyCheckbox id="schauspieler" value="#{addMovie.newfilm.schauspieler}">  
+                                <f:selectItems value="#{controllerManager.schauspielerController.findAllSchauspieler()}" var="s" 
+                                               itemValue="#{s}" itemLabel="#{s.name}" />
+                                <f:converter converterId="FooConverter" />
+                            </h:selectManyCheckbox>>
+                            <h:commandButton value="Submit" action="#{addMovie.save()}" />
+
+
+                        </h:form>
+
+                        <!-- _________________________ -->
+                    </h:panelGroup>
+
+                    <h:panelGroup id="nimm4" rendered="#{HauptseitenBean.state4}" >
+                        asasasd
+                    </h:panelGroup>
+
+
+                </h:panelGroup> 
+            </div>
         </div>
     </h:body>
 </html>

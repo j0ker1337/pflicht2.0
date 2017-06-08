@@ -5,6 +5,7 @@
  */
 package persistence.DAO.interfaces;
 
+import java.util.ArrayList;
 import persistence.entities.Regisseur;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.reginotfound;
@@ -23,4 +24,8 @@ public interface regiDao {
     public Regisseur insert(Regisseur regisseur) throws connectionProblem, reginotfound;
 
     public Regisseur findByQuery(String query) throws connectionProblem, reginotfound;
+
+    public ArrayList<Regisseur> findByQuerys(String query) throws connectionProblem, reginotfound;
+
+    public ArrayList findAllRegisseur() throws connectionProblem, reginotfound;
 }

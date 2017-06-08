@@ -109,5 +109,9 @@ class FilmControllerImpl implements FilmController {
     public ArrayList<FilmDTO> findAllFilm(boolean active) throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound {
         return controller.findAllFilm(active);
     }
+    @Override
+     public FilmDTO insert(FilmDTO film) throws filmnotfound, genreNotFound, connectionProblem{
+         return controller.insert(film);
+     }
 
 }

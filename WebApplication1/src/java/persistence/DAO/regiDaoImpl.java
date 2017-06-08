@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static persistence.DAO.Dao.getConnection;
@@ -30,6 +31,12 @@ class regiDaoImpl implements regiDao {
         return findByQuery(query);
     }
 
+    @Override
+    public ArrayList findAllRegisseur() throws connectionProblem, reginotfound {
+        String query = "select * from regie";
+        return findByQuerys(query);
+    }
+    @Override
     //"select * from schauspieler_to_film sf join schauspieler f on sf.s_id=f.id where sf.f_id=1 and sf.s_id=" + id;
     @Override
     public Regisseur findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
@@ -84,5 +91,25 @@ class regiDaoImpl implements regiDao {
             throw new reginotfound();
         }
         return r;
+    }
+    @Override
+    public ArrayList<Regisseur> findByQuerys(String query) throws connectionProblem, reginotfound {
+        ArrayList<Regisseur> al = null;
+        try {
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+            al = new ArrayList<Regisseur>();
+            while (rs.next()) {
+                Regisseur us = new Regisseur();
+                us.setId(rs.getInt("id"));
+                us.setVorname(rs.getString("vorname"));
+                us.setName(rs.getString("nachname"));
+                al.add(us);
+            }
+        } catch (SQLException e) {
+            System.out.println("fehler");
+            throw new connectionProblem();
+        }
+        return al;
     }
 }

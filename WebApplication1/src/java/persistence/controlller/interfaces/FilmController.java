@@ -55,4 +55,5 @@ public interface FilmController {
     public ArrayList<FilmDTO> getSortedFilmsByLike(int absteigend) throws filmnotfound, genreNotFound, connectionProblem, absteigendoneminusoneorzero, rightsnotfound, reginotfound;
 
     public ArrayList<FilmDTO> findAllFilm(boolean active) throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound;
+ public FilmDTO insert(FilmDTO film) throws filmnotfound, genreNotFound, connectionProblem;
 }

@@ -5,7 +5,9 @@
  */
 package persistence.dto;
 
-import javax.inject.Named;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
@@ -13,8 +15,9 @@ import javax.inject.Named;
  */
 
 
-@Named("GenreDTO")
-public class GenreDTO extends DTO {
+@ManagedBean
+@SessionScoped
+public class GenreDTO extends DTO implements Serializable{
 
     private int id;
     private String name;

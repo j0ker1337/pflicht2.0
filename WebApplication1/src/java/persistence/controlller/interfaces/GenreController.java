@@ -19,5 +19,6 @@ public interface GenreController {
     public GenreDTO findGenreById(int id) throws genreNotFound, connectionProblem;
 
     public GenreDTO findGenreByName(String name) throws genreNotFound, connectionProblem;
- public ArrayList<GenreDTO> getAllGenre() throws connectionProblem;
+
+    public ArrayList<GenreDTO> getAllGenre() throws connectionProblem;
 }

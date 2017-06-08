@@ -1,9 +1,12 @@
 package persistence.DAO;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistence.DAO.interfaces.filmDao;
 import persistence.entities.Film;
 import persistence.exceptions.filmnotfound;
@@ -60,38 +63,34 @@ class filmDaoImpl extends Dao implements filmDao {
         return getFilms(query);
     }
     
-
-    /*  public Film updateFilm(Film fi) throws filmnotfound {
-        Savepoint safe = null;
+    public Film insert(Film film) throws filmnotfound{
+        String query = ("insert into filme (name ,genre,jahr,regie,active) values(?,?,?,?,?)");
+        int id = 0;
         try {
-            safe = getConnection().setSavepoint("safe");
+            getConnection().setAutoCommit(false);
+            PreparedStatement pre = getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            pre.setString(1, film.getName());
+            pre.setInt(2, film.getGenre());
+            pre.setInt(3, film.getJahr());
+            pre.setInt(4, film.getRegi());
+            pre.setBoolean(5, film.isActive());
+            pre.executeUpdate();
+            getConnection().commit();
+            ResultSet rs = pre.getGeneratedKeys();
+            rs.next();
+            id = rs.getInt(1);
         } catch (SQLException ex) {
-            Logger.getLogger(filmDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-
-            String query = ("update filme set name = ?,genre = ?"
-                    + " ,jahr = ?,regisseur = ?"
-                    + " where filmID = ?");
-            PreparedStatement st = getConnection().prepareStatement(query);
-            st.setString(1, fi.getName());
-            st.setInt(2, fi.getGenre());
-            st.setInt(3, fi.getJahr());
-            st.setString(4, fi.getRegi());
-            st.setInt(5, fi.getFilmID());
-            st.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("fehler");
             try {
-                conn.rollback(safe);
-            } catch (SQLException ex) {
-                Logger.getLogger(filmDao.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("ROLLBACK!");
+                getConnection().rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(userDaoImpl.class.getName()).log(Level.SEVERE, null, ex1);
             }
-            e.printStackTrace();
+            ex.printStackTrace();
+            System.out.print("sadasd");
         }
-        return findFilmByID(fi.getFilmID());
+        return findFilmByName(film.getName());
     }
-     */
     @Override
     public Film getFilm(String query) throws filmnotfound {
         Film fi = null;
@@ -142,5 +141,4 @@ class filmDaoImpl extends Dao implements filmDao {
         }
         return al;
     }
-
 }

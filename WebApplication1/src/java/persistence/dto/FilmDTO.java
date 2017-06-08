@@ -5,18 +5,21 @@
  */
 package persistence.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import view.validator.interfaces.IdFilme;
 
 /**
  *
  * @author Nikolay und Don
  */
-@Named("Film")
+@ManagedBean
+@SessionScoped
 
-public class FilmDTO extends DTO {
+public class FilmDTO extends DTO implements Serializable{
 
     @IdFilme
     private int filmID;
@@ -58,7 +61,9 @@ public class FilmDTO extends DTO {
     }
 
     public void setName(String name) {
-        this.name = name;
+        
+        this.name = name; 
+        
     }
 
     public GenreDTO getGenre() {
