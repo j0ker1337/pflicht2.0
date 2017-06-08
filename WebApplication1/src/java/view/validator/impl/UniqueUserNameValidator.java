@@ -27,10 +27,13 @@ import view.validator.interfaces.UniqueUserName;
  */
 @FacesValidator("UniqueUserNameValidator")
 public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserName, Object> {
+
     private controllerManager coManager;
-    public UniqueUserNameValidator(){
+
+    public UniqueUserNameValidator() {
         this.coManager = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
     }
+
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();

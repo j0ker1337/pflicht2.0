@@ -70,7 +70,5 @@ public class controllerManager {
     public SchauspielerController getSchauspielerController() {
         return schauspielerController;
     }
-    
-    
 
 }

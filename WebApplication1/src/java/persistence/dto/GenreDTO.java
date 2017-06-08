@@ -13,11 +13,9 @@ import javax.faces.bean.SessionScoped;
  *
  * @author Nikolay und Don
  */
-
-
 @ManagedBean
 @SessionScoped
-public class GenreDTO extends DTO implements Serializable{
+public class GenreDTO extends DTO implements Serializable {
 
     private int id;
     private String name;

@@ -14,10 +14,9 @@ import javax.faces.bean.SessionScoped;
  *
  * @author joker
  */
-
 @ManagedBean
 @SessionScoped
-public class SchauspielerDTO implements Serializable{
+public class SchauspielerDTO implements Serializable {
 
     private int id;
     private String name;

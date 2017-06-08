@@ -37,8 +37,8 @@ class genreDaoImpl extends Dao implements genreDao {
         String query = "select g.name,g.`genreID` from filme f join genre g on f.genre=g.genreID where f.filmID=" + id;
         return getGenres(query);
     }
-    
-    public ArrayList<Genre> findAllGenre() throws connectionProblem{
+
+    public ArrayList<Genre> findAllGenre() throws connectionProblem {
         String query = "select * from genre";
         return getGenress(query);
     }
@@ -61,9 +61,9 @@ class genreDaoImpl extends Dao implements genreDao {
         }
         return genre;
     }
-    
-    public ArrayList<Genre> getGenress(String query) throws connectionProblem{
-           ArrayList<Genre> al = null;
+
+    public ArrayList<Genre> getGenress(String query) throws connectionProblem {
+        ArrayList<Genre> al = null;
         try {
             Statement st = getConnection().createStatement();
             ResultSet rs = st.executeQuery(query);

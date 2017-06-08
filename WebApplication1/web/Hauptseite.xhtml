@@ -27,13 +27,6 @@
                     vorbeischauen.
 
                 </div>
-                <!--
-                . Schön das sie heute am:
-                <h:outputText value="#{USERSE.date}" >
-                    <f:convertDateTime pattern="dd.MM.yyyy" />
-                </h:outputText>
-                vorbeischauen.
-                -->
                 <br/>
 
                 <h:form class="knopp">
@@ -46,6 +39,10 @@
                     </h:commandButton>
 
                     <h:commandButton  value="Füge Filme hinzu" action="#{HauptseitenBean.choosestate3()}">
+                        <f:ajax  render=":Hauptcontainer" />
+                    </h:commandButton>
+
+                    <h:commandButton  id="kk" value="Suche Filme" action="#{HauptseitenBean.choosestate4()}">
                         <f:ajax  render=":Hauptcontainer" />
                     </h:commandButton>
                 </h:form>
@@ -100,14 +97,6 @@
                         <!-- ________________________ -->
                         <h:form>
 
-                            Filmname: <h:inputText value="#{addMovie.newfilm.name}"/> <br/>
-
-                            <h:selectManyCheckbox id="schauspieler" value="#{addMovie.newfilm.schauspieler}">  
-                                <f:selectItems value="#{controllerManager.schauspielerController.findAllSchauspieler()}" var="s" 
-                                               itemValue="#{s}" itemLabel="#{s.name}" />
-                                <f:converter converterId="FooConverter" />
-                            </h:selectManyCheckbox>>
-                            <h:commandButton value="Submit" action="#{addMovie.save()}" />
 
 
                         </h:form>
@@ -116,7 +105,23 @@
                     </h:panelGroup>
 
                     <h:panelGroup id="nimm4" rendered="#{HauptseitenBean.state4}" >
-                        asasasd
+                        <h:form>
+                            <h:inputText id="input" value="#{FILMSE.search}">
+                            <f:ajax event="keyup" execute="input" render="output"/>
+                            </h:inputText>
+    
+                            <h:dataTable id="output" var="film" value="#{FILMSE.find()}">
+                                <h:column>
+                                    <f:facet name = "header">id</f:facet>
+                                    #{film.name}</h:column>
+                                <h:column>
+                                    <f:facet name = "header">name</f:facet>
+                                    #{film.filmID}</h:column>
+                                <h:column>
+                                    <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
+                                </h:column>
+                            </h:dataTable> 
+                        </h:form>
                     </h:panelGroup>
 
 

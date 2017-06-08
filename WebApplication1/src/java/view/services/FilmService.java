@@ -7,6 +7,7 @@ package view.services;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -31,6 +32,24 @@ public class FilmService implements Serializable {
 
     private controllerManager coManager;
     private FilmDTO current;
+    private String search;
+    private ArrayList<FilmDTO> erg;
+
+    public ArrayList<FilmDTO> getErg() {
+        return erg;
+    }
+
+    public void setErg(ArrayList<FilmDTO> erg) {
+        this.erg = erg;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
 
     public FilmService() {
         this.coManager = new controllerManager();
@@ -70,6 +89,26 @@ public class FilmService implements Serializable {
 
     public void setCurrent(FilmDTO current) {
         this.current = current;
+    }
+
+    public ArrayList<FilmDTO> find() {
+        this.coManager = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
+        try {
+            erg = coManager.getFilmController().findSubFilm(this.search);
+        } catch (filmnotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (connectionProblem ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (usersnotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return erg;
     }
 
 }

@@ -24,6 +24,7 @@ import persistence.exceptions.reginotfound;
  * @author joker
  */
 class regiDaoImpl implements regiDao {
+
     @Override
     public Regisseur findRegisseurById(int id) throws connectionProblem, reginotfound {
         String query = "select * from regi where id=" + id;
@@ -35,6 +36,7 @@ class regiDaoImpl implements regiDao {
         String query = "select * from regie";
         return findByQuerys(query);
     }
+
     @Override
     //"select * from schauspieler_to_film sf join schauspieler f on sf.s_id=f.id where sf.f_id=1 and sf.s_id=" + id;
     public Regisseur findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
@@ -42,6 +44,7 @@ class regiDaoImpl implements regiDao {
         System.err.println(query);
         return findByQuery(query);
     }
+
     @Override
     public Regisseur insert(Regisseur regisseur) throws connectionProblem, reginotfound {
         String query = ("insert into regie (vorname ,nachname) values(?,?)");
@@ -67,6 +70,7 @@ class regiDaoImpl implements regiDao {
         }
         return findRegisseurById(id);
     }
+
     @Override
     public Regisseur findByQuery(String query) throws connectionProblem, reginotfound {
         Regisseur r = null;
@@ -88,6 +92,7 @@ class regiDaoImpl implements regiDao {
         }
         return r;
     }
+
     @Override
     public ArrayList<Regisseur> findByQuerys(String query) throws connectionProblem, reginotfound {
         ArrayList<Regisseur> al = null;

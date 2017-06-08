@@ -28,9 +28,9 @@ class GenreControllerImpl implements GenreController {
     public GenreDTO findGenreById(int id) throws genreNotFound, connectionProblem {
         return controller.findGenreById(id);
     }
-    
-     public ArrayList<GenreDTO> getAllGenre() throws connectionProblem{
-         return controller.getAllGenre();
-     }
+
+    public ArrayList<GenreDTO> getAllGenre() throws connectionProblem {
+        return controller.getAllGenre();
+    }
 
 }

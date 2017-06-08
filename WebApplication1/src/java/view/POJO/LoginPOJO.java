@@ -5,8 +5,6 @@
  */
 package view.POJO;
 
-
-
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +13,7 @@ import view.validator.interfaces.UserNameNotFound;
 
 @ManagedBean
 @SessionScoped
-public class LoginPOJO implements Serializable{
+public class LoginPOJO implements Serializable {
 
     @StringLenght
     @UserNameNotFound
@@ -39,6 +37,5 @@ public class LoginPOJO implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 }

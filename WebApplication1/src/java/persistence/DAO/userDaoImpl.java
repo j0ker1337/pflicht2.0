@@ -139,7 +139,6 @@ class userDaoImpl extends Dao implements userDao {
         return getUsers(query);
     }
 
-
     @Override
     public ArrayList<User> findAllUser(boolean active) throws connectionProblem, usersnotfound {
         String query = ("select * from person where active=" + active);

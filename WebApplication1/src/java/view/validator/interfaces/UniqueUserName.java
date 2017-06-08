@@ -13,8 +13,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import view.validator.impl.UniqueUserNameValidator;
 
-
-
 /**
  *
  * @author joker
@@ -23,7 +21,10 @@ import view.validator.impl.UniqueUserNameValidator;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface UniqueUserName {
+
     String message() default "Wrong Username";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

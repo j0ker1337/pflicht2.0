@@ -16,7 +16,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class RegisseurDTO implements Serializable{
+public class RegisseurDTO implements Serializable {
 
     private int id;
     private String name;

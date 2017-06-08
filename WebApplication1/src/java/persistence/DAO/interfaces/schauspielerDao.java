@@ -25,6 +25,6 @@ public interface schauspielerDao {
     public Schauspieler findByQuery(String query) throws connectionProblem, schauspielernotfound;
 
     public ArrayList<Schauspieler> getSchauspieler(String query) throws connectionProblem;
-    
+
     public ArrayList<Schauspieler> findAllSchauspieler() throws connectionProblem, schauspielernotfound;
 }

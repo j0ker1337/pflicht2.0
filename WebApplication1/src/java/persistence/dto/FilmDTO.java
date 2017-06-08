@@ -19,7 +19,7 @@ import view.validator.interfaces.IdFilme;
 @ManagedBean
 @SessionScoped
 
-public class FilmDTO extends DTO implements Serializable{
+public class FilmDTO extends DTO implements Serializable {
 
     @IdFilme
     private int filmID;
@@ -61,9 +61,9 @@ public class FilmDTO extends DTO implements Serializable{
     }
 
     public void setName(String name) {
-        
-        this.name = name; 
-        
+
+        this.name = name;
+
     }
 
     public GenreDTO getGenre() {

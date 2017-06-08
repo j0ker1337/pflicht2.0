@@ -36,7 +36,7 @@
     background-size: 75% 100%;
     background-position: center;
     z-index: 4;
-   
+
 }
 .Persontext{
     position: relative;
@@ -67,9 +67,9 @@ column{
     position:fixed;
     top: 30%;
     left:0;
-    
+
     width: 100%;
-    
+
 }
 
 #Hauptcontainer{
@@ -82,7 +82,9 @@ column{
     text-align: center;
 }
 
-
+#nimm4 column{
+    text-align: center;
+} 
 #regForm{
     position: relative;
 

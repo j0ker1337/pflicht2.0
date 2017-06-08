@@ -5,9 +5,6 @@
  */
 package view.POJO;
 
-
-
-
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,18 +12,18 @@ import javax.validation.constraints.NotNull;
 import view.validator.interfaces.StringLenght;
 import view.validator.interfaces.UniqueUserName;
 
-/** 
+/**
  *
  * @author Nikolay und Don
  */
 @ManagedBean
 @SessionScoped
-public class RegisterPOJO implements Serializable{
+public class RegisterPOJO implements Serializable {
 
     @NotNull
     @UniqueUserName
     private String benutzername;
-    
+
     @NotNull
     @StringLenght
     private String password;

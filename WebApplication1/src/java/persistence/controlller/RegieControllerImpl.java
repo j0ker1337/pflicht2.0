@@ -16,9 +16,10 @@ import persistence.exceptions.reginotfound;
  *
  * @author joker
  */
-public class RegieControllerImpl implements RegieController{
+public class RegieControllerImpl implements RegieController {
 
     private Controller controller;
+
     RegieControllerImpl(Controller controller) {
         this.controller = controller;
     }
@@ -32,5 +33,5 @@ public class RegieControllerImpl implements RegieController{
     public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
         return controller.findRegisseurwhoCreatedFilm(id);
     }
-    
+
 }

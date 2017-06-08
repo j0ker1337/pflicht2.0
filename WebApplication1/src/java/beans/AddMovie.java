@@ -7,6 +7,8 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -23,6 +25,7 @@ import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
 import persistence.exceptions.rightsnotfound;
+import persistence.exceptions.schauspielernotfound;
 import persistence.exceptions.usernotfound;
 import persistence.exceptions.usersnotfound;
 import view.services.UserService;
@@ -32,6 +35,7 @@ import view.services.UserService;
 public class AddMovie implements Serializable {
 
     private FilmDTO newfilm;
+    private HashMap<Integer, SchauspielerDTO> schauspieler;
     private ArrayList<SchauspielerDTO> selectedSchauspieler;
     private ArrayList<SchauspielerDTO> availableSchauspieler;
 
@@ -58,14 +62,14 @@ public class AddMovie implements Serializable {
         selectedSchauspieler = new ArrayList<SchauspielerDTO>();
     }
 
-    public void save() {
+    public void save(FilmDTO fdto) {
         controllerManager x = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
         UserService xxx = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{USERSE}", UserService.class);
         try {
-            x.getFilmController().findFilmByName(newfilm.getName());
+            x.getFilmController().findFilmByName(fdto.getName());
         } catch (filmnotfound ex) {
             try {
-                newfilm = x.getFilmController().insert(newfilm);
+                FilmDTO newfilm = x.getFilmController().insert(fdto);
                 xxx.getCurrentUser().getLikes().add(newfilm);
                 x.getUserController().likes(xxx.getCurrentUser());
             } catch (filmnotfound ex1) {
@@ -193,6 +197,31 @@ public class AddMovie implements Serializable {
 
     public void setNewfilm(FilmDTO newfilm) {
         this.newfilm = new FilmDTO();
+    }
+
+    public HashMap<Integer, SchauspielerDTO> getsch() {
+        HashMap b = new HashMap<Integer, SchauspielerDTO>();
+        try {
+            controllerManager x = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
+            for (SchauspielerDTO y : x.getSchauspielerController().findAllSchauspieler()) {
+                b.put(y.getId(), y);
+            }
+            this.schauspieler = b;
+        } catch (connectionProblem ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (schauspielernotfound ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return schauspieler;
+    }
+
+    public String getSelected() {
+        String result = "";
+        for (Entry<Integer, SchauspielerDTO> entry : schauspieler.entrySet()) {
+            result = result + ", " + entry.getKey();
+
+        }
+        return result.toString();
     }
 
 }

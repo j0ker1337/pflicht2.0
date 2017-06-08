@@ -24,15 +24,12 @@ import persistence.exceptions.schauspielernotfound;
 public class FooConverter implements Converter {
 
     // Init ---------------------------------------------------------------------------------------
-    
-
-
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        SchauspielerDTO y=new SchauspielerDTO();
+        SchauspielerDTO y = new SchauspielerDTO();
         controllerManager x = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
         try {
-            y= x.getSchauspielerController().findSchauspielerById(Integer.parseInt(value));
+            y = x.getSchauspielerController().findSchauspielerById(Integer.parseInt(value));
         } catch (connectionProblem ex) {
             Logger.getLogger(FooConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (schauspielernotfound ex) {
@@ -43,9 +40,7 @@ public class FooConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-         SchauspielerDTO student = (SchauspielerDTO) value;
-        int id = student.getId();
-        return String.valueOf(id);
+        return String.valueOf((int) value);
     }
 
 }

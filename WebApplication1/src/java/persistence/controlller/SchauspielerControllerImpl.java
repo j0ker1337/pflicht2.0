@@ -16,7 +16,7 @@ import persistence.exceptions.schauspielernotfound;
  *
  * @author joker
  */
-public class SchauspielerControllerImpl implements SchauspielerController{
+public class SchauspielerControllerImpl implements SchauspielerController {
 
     private Controller controller;
 
@@ -28,15 +28,15 @@ public class SchauspielerControllerImpl implements SchauspielerController{
         return controller.findSchauspielerById(id);
     }
 
-    public SchauspielerDTO delte(int id) throws connectionProblem{
+    public SchauspielerDTO delte(int id) throws connectionProblem {
         return controller.delte(id);
     }
 
-    public SchauspielerDTO insert(SchauspielerDTO schauspieler) throws connectionProblem, schauspielernotfound{
+    public SchauspielerDTO insert(SchauspielerDTO schauspieler) throws connectionProblem, schauspielernotfound {
         return controller.insert(schauspieler);
     }
 
-    public ArrayList<SchauspielerDTO> findAllSchauspieler() throws connectionProblem, schauspielernotfound{
+    public ArrayList<SchauspielerDTO> findAllSchauspieler() throws connectionProblem, schauspielernotfound {
         return controller.findAllSchauspieler();
     }
 }

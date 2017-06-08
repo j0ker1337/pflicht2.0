@@ -19,7 +19,7 @@ public class StringLenghtValidator implements ConstraintValidator<StringLenght, 
 
     @Override
     public void initialize(StringLenght constraintAnnotation) {
-         
+
     }
 
     @Override

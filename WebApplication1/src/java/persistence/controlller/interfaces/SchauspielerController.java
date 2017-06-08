@@ -15,11 +15,12 @@ import persistence.exceptions.schauspielernotfound;
  * @author joker
  */
 public interface SchauspielerController {
-     public SchauspielerDTO findSchauspielerById(int id) throws connectionProblem, schauspielernotfound;
+
+    public SchauspielerDTO findSchauspielerById(int id) throws connectionProblem, schauspielernotfound;
 
     public SchauspielerDTO delte(int id) throws connectionProblem;
 
     public SchauspielerDTO insert(SchauspielerDTO schauspieler) throws connectionProblem, schauspielernotfound;
-    
+
     public ArrayList<SchauspielerDTO> findAllSchauspieler() throws connectionProblem, schauspielernotfound;
 }

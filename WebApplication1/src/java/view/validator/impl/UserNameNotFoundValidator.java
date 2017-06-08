@@ -42,8 +42,8 @@ public class UserNameNotFoundValidator implements ConstraintValidator<UserNameNo
         } catch (connectionProblem ex) {
             Logger.getLogger(UserNameNotFoundValidator.class.getName()).log(Level.SEVERE, null, ex);
         } catch (usernotfound ex) {
-            StringBuffer buf = new StringBuffer( "Username oder Passwort leider falsch" );
-             context.buildConstraintViolationWithTemplate(buf.toString()).addConstraintViolation();
+            StringBuffer buf = new StringBuffer("Username oder Passwort leider falsch");
+            context.buildConstraintViolationWithTemplate(buf.toString()).addConstraintViolation();
             return false;
         } catch (rightsnotfound ex) {
             Logger.getLogger(UserNameNotFoundValidator.class.getName()).log(Level.SEVERE, null, ex);

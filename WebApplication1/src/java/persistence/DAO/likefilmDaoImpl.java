@@ -90,8 +90,6 @@ class likefilmDaoImpl extends Dao implements likefilmDao {
         String query = "insert into usertofilm values(? , ?)";
         return updateQuery(query, userid, filmid);
     }
-    
-
 
     public Film updateQuery(String query, int userid, int filmid) throws filmnotfound, CombinationNotFound, connectionProblem {
         try {

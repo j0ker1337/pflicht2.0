@@ -48,7 +48,7 @@ public class HauptseitenBean implements Serializable {
     }
 
     public void setState4(boolean st) {
-        this.state0 = st;
+        this.state4 = st;
     }
 
     public boolean getState0() {

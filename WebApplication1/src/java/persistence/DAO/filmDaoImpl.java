@@ -50,13 +50,13 @@ class filmDaoImpl extends Dao implements filmDao {
         String query = ("select * from filme where name like \'" + x + "%\' and active=" + active);
         return getFilms(query);
     }
-    
-    public ArrayList<Film> findFilmByYear(int year){
-        String query=("select * from filme where jahr="+year);
+
+    public ArrayList<Film> findFilmByYear(int year) {
+        String query = ("select * from filme where jahr=" + year);
         return getFilms(query);
     }
-    
-    public Film insert(Film film) throws filmnotfound{
+
+    public Film insert(Film film) throws filmnotfound {
         String query = ("insert into filme (name ,genre,jahr,regie,active) values(?,?,?,?,?)");
         int id = 0;
         try {
@@ -84,7 +84,7 @@ class filmDaoImpl extends Dao implements filmDao {
         }
         return findFilmByName(film.getName());
     }
-   
+
     @Override
     public Film getFilm(String query) throws filmnotfound {
         Film fi = null;

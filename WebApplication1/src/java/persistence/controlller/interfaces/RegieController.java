@@ -15,7 +15,8 @@ import persistence.exceptions.reginotfound;
  * @author joker
  */
 public interface RegieController {
-     public ArrayList<RegisseurDTO> getAllRegisseur() throws reginotfound, connectionProblem;
-     
-         public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound;
+
+    public ArrayList<RegisseurDTO> getAllRegisseur() throws reginotfound, connectionProblem;
+
+    public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound;
 }
