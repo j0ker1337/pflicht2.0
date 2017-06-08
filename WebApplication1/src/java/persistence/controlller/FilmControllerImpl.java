@@ -115,4 +115,8 @@ class FilmControllerImpl implements FilmController {
         return controller.insert(film);
     }
 
+    @Override
+    public ArrayList<FilmDTO> findAllFilmsOfYear(int year) throws filmnotfound, genreNotFound, connectionProblem {
+           return controller.findAllFilmsOfYear(year);
+    }
 }

@@ -34,4 +34,6 @@ public interface filmDao {
     public ArrayList<Film> getFilms(String query);
 
     public Film insert(Film film) throws filmnotfound;
+     public ArrayList<Film> findAllFilmsOfYear(int  year) throws filmnotfound;
+    
 }

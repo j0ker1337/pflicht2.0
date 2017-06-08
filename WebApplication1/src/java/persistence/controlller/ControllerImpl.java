@@ -496,4 +496,7 @@ public class ControllerImpl implements Controller {
     public RegisseurDTO findBYId(int id) throws connectionProblem, reginotfound {
            return RegiMapper.entityToDTO(daoManager.getRegieDao().findBYId(id));
     }
+     public ArrayList<FilmDTO> findAllFilmsOfYear(int  year) throws filmnotfound,genreNotFound,connectionProblem{
+            return FilmMapper.entityArrayToDTO(daoManager.getfDao().findAllFilmsOfYear(year));  
+     }
 }

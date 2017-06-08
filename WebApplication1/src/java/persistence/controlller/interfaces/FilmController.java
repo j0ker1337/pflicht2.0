@@ -57,4 +57,6 @@ public interface FilmController {
     public ArrayList<FilmDTO> findAllFilm(boolean active) throws filmnotfound, genreNotFound, connectionProblem, rightsnotfound, reginotfound;
 
     public FilmDTO insert(FilmDTO film) throws filmnotfound, genreNotFound, connectionProblem;
+
+    public ArrayList<FilmDTO> findAllFilmsOfYear(int year) throws filmnotfound, genreNotFound, connectionProblem;
 }

@@ -46,6 +46,10 @@ class filmDaoImpl extends Dao implements filmDao {
         return getFilms(query);
     }
 
+       public ArrayList<Film> findAllFilmsOfYear(int  year) throws filmnotfound {
+        String query = ("select * from filme where jahr= \'" + year + "%\'");
+        return getFilms(query);
+    }
     public ArrayList<Film> findSubFilm(String x, boolean active) throws filmnotfound {
         String query = ("select * from filme where name like \'" + x + "%\' and active=" + active);
         return getFilms(query);
