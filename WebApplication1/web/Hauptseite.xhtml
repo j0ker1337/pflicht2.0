@@ -12,12 +12,12 @@
     </h:head>
     <h:body>
         <div class="Page">
-            <div id="hauptbanner">
+            <h:panelGroup id="hauptbanner">
                 <div class="Bannerol">
                     <p></p>
                 </div>
 
-                <div class="Persontext">
+                <h:panelGroup class="Persontext">
                     Willkommen <h:outputText value ="#{USERSE.currentUser.bname}"></h:outputText>
 
                     . Schön das sie heute am 
@@ -26,7 +26,7 @@
                     </h:outputText>
                     vorbeischauen.
 
-                </div>
+                </h:panelGroup>
                 <br/>
                 <h:panelGroup class="knopp">
                 <h:form>
@@ -60,7 +60,7 @@
                 </h:form>
                     </h:panelGroup>
                 
-            </div>
+            </h:panelGroup>
             
                 <h:panelGroup id="Hauptcontainer"  >
 
@@ -151,13 +151,13 @@
                     <h:panelGroup  rendered="#{HauptseitenBean.state4}" >
                         <h:panelGroup id="nimm4">
                             <h:form>
-                                <h:inputText id="input" value="#{USERSE.search}" style="float: left;">
+                                <h:inputText id="input" value="#{USERSE.search}" >
                                     <f:ajax event="keyup" execute="input" render="output"/>
                                 </h:inputText>
 
-                                <h:dataTable id="output" var="film" value="#{USERSE.findByString()}" style="float:right;">
+                                <h:dataTable id="output" var="film" value="#{USERSE.findByString()}" >
                                     <h:column>
-                                        <f:facet name = "header">name</f:facet>
+                                        <f:facet name = "header">Deine Filme</f:facet>
                                         #{film.name}</h:column>
                                     <h:column>
                                         <f:facet name = "header">regisseur</f:facet>

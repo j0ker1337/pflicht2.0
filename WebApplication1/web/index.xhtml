@@ -20,18 +20,27 @@
             <h:panelGrid columns="2" ></h:panelGrid>
             <div class="LoginForm">
                 <h:form>
-                    <label for="user-name">Benutzername:</label>
+                    <h:panelGrid columns="2" border="1">
+                    
+                    <f:facet name = "header">Einlogg-Form</f:facet>
+                    
+                    <!--<label for="user-name">Benutzername:</label>-->
+                    <h:outputLabel for="user-name" value="Benutzername:" />
                     <h:inputText id="user-name" value="#{loginPOJO.username}"></h:inputText>
-                    <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
-                    <br></br>
-                    <label for="user-pw">Passwort:</label>
-                    <h:inputSecret id="user-pw" value="#{loginPOJO.password}"></h:inputSecret>
-                    <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
+                    
+                    <!--<label for="user-pw">Passwort:</label>-->
+                    <h:outputLabel for="user-pw" value="Passwort:" />
+                    <h:inputSecret  id="user-pw" value="#{loginPOJO.password}"></h:inputSecret>
+                    
                     <h:commandButton  value="Einloggen" action="#{USERSE.login(loginPOJO)}" ></h:commandButton>
+                </h:panelGrid>
                 </h:form>
+                
             </div>
             <p>Falls sie noch kein Konto haben folgen sie diesem <h:link value="Link" outcome="Registrierseite" /></p>
-
+            
+            <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
+            <h:messages layout="table"  showDetail="true" styleClass="FACES-MESSAGES" infoClass="MESSAGES-INFO" errorClass="MESSAGES-ERROR" warnClass="MESSAGES-WARN"/>
         </div>
 
     </h:body>
