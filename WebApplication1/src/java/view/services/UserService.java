@@ -26,6 +26,7 @@ import persistence.exceptions.UserBNameEmpty;
 import persistence.exceptions.UserEmpty;
 import persistence.exceptions.UserFoundException;
 import persistence.exceptions.UserIdEmpty;
+import persistence.exceptions.absteigendoneminusoneorzero;
 import persistence.exceptions.connectionProblem;
 import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
@@ -323,4 +324,35 @@ public class UserService implements Serializable {
         return films;
     }
 
+        public ArrayList<FilmDTO> findMostLiked() {
+        this.coManager = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
+        try {
+            ArrayList<FilmDTO> x= coManager.getFilmController().getSortedFilmsByLike(1);
+            for (FilmDTO y : x) {
+                if (currentUser.getLikes().contains(y)) {
+                    y.setIhave(true);
+                } else {
+                    y.setIhave(false);
+                }
+            }
+            films = x;
+            for (FilmDTO y : films) {
+                System.err.println(y);
+            }
+            
+        } catch (filmnotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (connectionProblem ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (rightsnotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (reginotfound ex) {
+            Logger.getLogger(FilmService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (absteigendoneminusoneorzero ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return films;
+    }
 }

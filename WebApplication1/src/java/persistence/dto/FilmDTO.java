@@ -32,6 +32,10 @@ public class FilmDTO extends DTO implements Serializable {
     private RegisseurDTO regisseurDTO;
     private boolean ihave;
 
+    public FilmDTO() {
+    }
+
+    
     public boolean isActive() {
         return active;
     }

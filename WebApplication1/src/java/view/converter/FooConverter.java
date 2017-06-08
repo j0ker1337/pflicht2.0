@@ -40,7 +40,16 @@ public class FooConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return String.valueOf((int) value);
+        SchauspielerDTO y=null;
+        controllerManager x = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
+        try {
+            y=x.getSchauspielerController().findSchauspielerById((int) value);
+        } catch (connectionProblem ex) {
+            Logger.getLogger(FooConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (schauspielernotfound ex) {
+            Logger.getLogger(FooConverter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ""+y.getId();
     }
 
 }

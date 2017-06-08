@@ -24,6 +24,6 @@ class RightControllerImpl implements RightController {
 
     @Override
     public RightDTO findRightsById(int id) throws rightsnotfound {
-        return controller.findRightsById(id);
+        return this.controller.findRightsById(id);
     }
 }

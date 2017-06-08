@@ -15,4 +15,5 @@ import persistence.exceptions.rightsnotfound;
 public interface RightController {
 
     public RightDTO findRightsById(int id) throws rightsnotfound;
+    
 }

@@ -488,4 +488,6 @@ public interface Controller {
     public ArrayList<SchauspielerDTO> findAllSchauspieler() throws connectionProblem, schauspielernotfound;
 
     public FilmDTO insert(FilmDTO film) throws filmnotfound, genreNotFound, connectionProblem;
+
+    public RegisseurDTO findBYId(int id) throws connectionProblem, reginotfound;
 }

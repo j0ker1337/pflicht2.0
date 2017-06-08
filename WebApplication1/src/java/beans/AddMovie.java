@@ -8,10 +8,9 @@ package beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import persistence.controlller.controllerManager;
@@ -19,27 +18,59 @@ import persistence.dto.FilmDTO;
 import persistence.dto.GenreDTO;
 import persistence.dto.RegisseurDTO;
 import persistence.dto.SchauspielerDTO;
-import persistence.exceptions.CombinationNotFound;
 import persistence.exceptions.connectionProblem;
-import persistence.exceptions.filmnotfound;
 import persistence.exceptions.genreNotFound;
 import persistence.exceptions.reginotfound;
-import persistence.exceptions.rightsnotfound;
 import persistence.exceptions.schauspielernotfound;
-import persistence.exceptions.usernotfound;
-import persistence.exceptions.usersnotfound;
-import view.services.UserService;
 
 @Named(value = "addMovie")
-@SessionScoped
+@RequestScoped
 public class AddMovie implements Serializable {
 
     private FilmDTO newfilm;
+    private String name;
+    private int regi;
+    private ArrayList<String> schauspielerids;
+    private int genreid;
     private HashMap<Integer, SchauspielerDTO> schauspieler;
     private ArrayList<SchauspielerDTO> selectedSchauspieler;
     private ArrayList<SchauspielerDTO> availableSchauspieler;
 
+    public int getRegi() {
+        return regi;
+    }
+
+    public void setRegi(int regi) {
+        this.regi = regi;
+    }
+
+    public ArrayList<String> getSchauspielerids() {
+        return schauspielerids;
+    }
+
+    public int getGenreid() {
+        return genreid;
+    }
+
+    public void setGenreid(int genreid) {
+        this.genreid = genreid;
+    }
+
+    public void setSchauspielerids(ArrayList<String> schauspielerids) {
+        this.schauspielerids = schauspielerids;
+    }
+
+    public HashMap<Integer, SchauspielerDTO> getSchauspieler() {
+        return schauspieler;
+    }
+
+    public void setSchauspieler(HashMap<Integer, SchauspielerDTO> schauspieler) {
+        this.schauspieler = schauspieler;
+    }
+
     public AddMovie() {
+        schauspielerids = new ArrayList<String>();
+        newfilm = new FilmDTO();
         //this.availableSchauspieler = controllerManager.getSchauspielerController().getAllSchauspieler();
 
         //__________ temp
@@ -62,42 +93,40 @@ public class AddMovie implements Serializable {
         selectedSchauspieler = new ArrayList<SchauspielerDTO>();
     }
 
-    public void save(FilmDTO fdto) {
-        controllerManager x = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
-        UserService xxx = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{USERSE}", UserService.class);
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void save() {
         try {
-            x.getFilmController().findFilmByName(fdto.getName());
-        } catch (filmnotfound ex) {
-            try {
-                FilmDTO newfilm = x.getFilmController().insert(fdto);
-                xxx.getCurrentUser().getLikes().add(newfilm);
-                x.getUserController().likes(xxx.getCurrentUser());
-            } catch (filmnotfound ex1) {
-                Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
-            } catch (genreNotFound ex1) {
-                Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
-            } catch (connectionProblem ex1) {
-                Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
-            } catch (rightsnotfound ex1) {
-                Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
-            } catch (usernotfound ex1) {
-                Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
-            } catch (CombinationNotFound ex1) {
-                Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
-            } catch (usersnotfound ex1) {
-                Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
-            } catch (reginotfound ex1) {
-                Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
+            controllerManager x = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
+            System.err.println(newfilm.getJahr());
+            System.err.println(newfilm.getName());
+            System.err.println(regi);
+            ArrayList<SchauspielerDTO> schauspielerDTOs = new ArrayList<>();
+            System.err.println(schauspielerids);
+            for (String z : schauspielerids) {
+                try {
+                    schauspielerDTOs.add(x.getSchauspielerController().findSchauspielerById(Integer.parseInt(z)));
+                } catch (schauspielernotfound ex) {
+                    Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        } catch (genreNotFound ex) {
-            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+            newfilm.setSchauspieler(schauspielerDTOs);
+            newfilm.setGenre(x.getGenreController().findGenreById(genreid));
+            newfilm.setRegisseurDTO(x.getRegieController().findBYId(regi));
+
+            System.err.println(newfilm);
         } catch (connectionProblem ex) {
             Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (usersnotfound ex) {
-            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (rightsnotfound ex) {
-            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
         } catch (reginotfound ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (genreNotFound ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
             Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -196,7 +225,8 @@ public class AddMovie implements Serializable {
     }
 
     public void setNewfilm(FilmDTO newfilm) {
-        this.newfilm = new FilmDTO();
+        this.newfilm = newfilm;
+
     }
 
     public HashMap<Integer, SchauspielerDTO> getsch() {
@@ -213,15 +243,6 @@ public class AddMovie implements Serializable {
             Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
         }
         return schauspieler;
-    }
-
-    public String getSelected() {
-        String result = "";
-        for (Entry<Integer, SchauspielerDTO> entry : schauspieler.entrySet()) {
-            result = result + ", " + entry.getKey();
-
-        }
-        return result.toString();
     }
 
 }

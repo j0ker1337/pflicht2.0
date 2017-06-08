@@ -45,6 +45,11 @@ class regiDaoImpl implements regiDao {
         return findByQuery(query);
     }
 
+    public Regisseur findBYId(int id) throws connectionProblem, reginotfound{
+        String query = "select * from regie where id="+id;
+        return findByQuery(query);
+    }
+    
     @Override
     public Regisseur insert(Regisseur regisseur) throws connectionProblem, reginotfound {
         String query = ("insert into regie (vorname ,nachname) values(?,?)");

@@ -33,5 +33,9 @@ public class RegieControllerImpl implements RegieController {
     public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound {
         return controller.findRegisseurwhoCreatedFilm(id);
     }
+    
+       public RegisseurDTO findBYId(int id) throws connectionProblem, reginotfound{
+           return controller.findBYId(id);
+       }
 
 }

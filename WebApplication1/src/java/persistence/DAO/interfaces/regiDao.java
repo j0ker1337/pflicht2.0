@@ -28,4 +28,6 @@ public interface regiDao {
     public ArrayList<Regisseur> findByQuerys(String query) throws connectionProblem, reginotfound;
 
     public ArrayList findAllRegisseur() throws connectionProblem, reginotfound;
+
+    public Regisseur findBYId(int id) throws connectionProblem, reginotfound;
 }

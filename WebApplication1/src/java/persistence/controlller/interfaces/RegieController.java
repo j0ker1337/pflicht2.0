@@ -19,4 +19,6 @@ public interface RegieController {
     public ArrayList<RegisseurDTO> getAllRegisseur() throws reginotfound, connectionProblem;
 
     public RegisseurDTO findRegisseurwhoCreatedFilm(int id) throws connectionProblem, reginotfound;
+
+    public RegisseurDTO findBYId(int id) throws connectionProblem, reginotfound;
 }

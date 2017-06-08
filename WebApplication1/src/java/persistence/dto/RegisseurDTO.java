@@ -18,6 +18,11 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class RegisseurDTO implements Serializable {
 
+    public RegisseurDTO() {
+    }
+
+    
+    
     private int id;
     private String name;
     private String vorname;

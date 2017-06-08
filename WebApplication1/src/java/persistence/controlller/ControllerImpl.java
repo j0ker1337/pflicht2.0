@@ -493,4 +493,7 @@ public class ControllerImpl implements Controller {
         return FilmMapper.entityToDTO(daoManager.getfDao().insert(FilmMapper.dtoToentityT(film)));
     }
 
+    public RegisseurDTO findBYId(int id) throws connectionProblem, reginotfound {
+           return RegiMapper.entityToDTO(daoManager.getRegieDao().findBYId(id));
+    }
 }
