@@ -28,8 +28,8 @@
 
                 </div>
                 <br/>
-
-                <h:form class="knopp">
+                <h:panelGroup class="knopp">
+                <h:form>
                     <h:commandButton  value="Zeige alle Filme" action="#{HauptseitenBean.choosestate1()}">
                         <f:ajax render=":Hauptcontainer" />
                     </h:commandButton>
@@ -61,14 +61,16 @@
                         <f:ajax  render=":Hauptcontainer" />
                     </h:commandButton>
                 </h:form>
+                    </h:panelGroup>
+                
             </div>
-            <div id="haltecontainer">
+            
                 <h:panelGroup id="Hauptcontainer"  >
 
                     <h:panelGroup id="nimm1" rendered="#{HauptseitenBean.state1}" >
                         <h:form >
 
-                            <h:dataTable var="film" value="#{USERSE.findAllFilms()}" border="1"  width="98%">
+                            <h:dataTable var="film" value="#{USERSE.findAllFilms()}" border="1"  width="98%" >
 
                                 <h:column>
                                     <f:facet name = "header">Alle Filme</f:facet>
@@ -117,61 +119,63 @@
 
                                 </f:selectItems>
                             </h:selectOneMenu>
-                            
-                            
+
+
                             <h:selectOneMenu value="#{addMovie.regi}">
                                 <f:selectItems value="#{controllerManager.regieController.getAllRegisseur()}" var="d" itemValue="#{d.id}" itemLabel="#{d.name}">
 
                                 </f:selectItems>
                             </h:selectOneMenu>
-                            
-                            
-                               
+
+
+
                             <h:selectManyListbox value="#{addMovie.schauspielerids}">
                                 <f:selectItems value="#{controllerManager.schauspielerController.findAllSchauspieler()}" var="e" itemValue="#{e.id}" itemLabel="#{e.name}">
 
                                 </f:selectItems>
                             </h:selectManyListbox>
-                            
-                            
+
+
                             <h:selectOneMenu value="#{addMovie.genreid}">
                                 <f:selectItems value="#{controllerManager.genreController.getAllGenre()}" var="f" itemValue="#{f.id }" itemLabel="#{f.name}">
 
                                 </f:selectItems>
                             </h:selectOneMenu>
                             <h:commandButton value ="speichern" action="#{addMovie.save()}"></h:commandButton>
-                            
-                            
-                            
-                            
+
+
+
+
                         </h:form>
 
                         <!-- _________________________ -->
                     </h:panelGroup>
 
-                    <h:panelGroup id="nimm4" rendered="#{HauptseitenBean.state4}" >
-                        <h:form>
-                            <h:inputText id="input" value="#{USERSE.search}">
-                                <f:ajax event="keyup" execute="input" render="output"/>
-                            </h:inputText>
+                    <h:panelGroup  rendered="#{HauptseitenBean.state4}" >
+                        <h:panelGroup id="nimm4">
+                            <h:form>
+                                <h:inputText id="input" value="#{USERSE.search}" style="float: left;">
+                                    <f:ajax event="keyup" execute="input" render="output"/>
+                                </h:inputText>
 
-                            <h:dataTable id="output" var="film" value="#{USERSE.findByString()}">
-                                <h:column>
-                                    <f:facet name = "header">name</f:facet>
-                                    #{film.name}</h:column>
-                                <h:column>
-                                    <f:facet name = "header">regisseur</f:facet>
-                                    #{film.regisseurDTO.name}</h:column>
-                                <h:column>
-                                    <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
-                                </h:column>
+                                <h:dataTable id="output" var="film" value="#{USERSE.findByString()}" style="float:right;">
+                                    <h:column>
+                                        <f:facet name = "header">name</f:facet>
+                                        #{film.name}</h:column>
+                                    <h:column>
+                                        <f:facet name = "header">regisseur</f:facet>
+                                        #{film.regisseurDTO.name}</h:column>
+                                    <h:column>
+                                        <c:set var = "id" scope = "session" value = "#{film.filmID}"/>
+                                    </h:column>
 
-                                <h:column>
-                                    <h:commandButton value="delete" action="#{USERSE.delete(film)}" rendered="#{(film.ihave)}" />
-                                    <h:commandButton value="add" action="#{USERSE.add(film)}" rendered="#{!(film.ihave)}" />
-                                </h:column>
-                            </h:dataTable> 
-                        </h:form>
+                                    <h:column>
+                                        <h:commandButton value="delete" action="#{USERSE.delete(film)}" rendered="#{(film.ihave)}" />
+                                        <h:commandButton value="add" action="#{USERSE.add(film)}" rendered="#{!(film.ihave)}" />
+                                    </h:column>
+                                </h:dataTable> 
+                            </h:form>
+                        </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup id="nimm5" rendered="#{HauptseitenBean.state6}" >
                         <h:form>
@@ -206,7 +210,7 @@
                         <h:commandButton value="logout" action="#{USERSE.logout()}" />
                     </h:panelGroup>
                 </h:panelGroup> 
-            </div>
+            
         </div>
     </h:body>
 </html>
