@@ -86,30 +86,22 @@ column{
     text-align: center;
 } 
 #regForm{
-    position: relative;
-
+    position: fixed;
+    top:10%;
+    left:50px;
     max-height: 100%;
     min-height: 100%;
-    float:left;
-    border-color: red;
-    border-width: 1000px;
-    border-left:solid;
-    border-right:solid;
-    border-top: solid;
-    border-bottom: solid;
-
-
+    background-color: red;
+    z-index: 2;
 }
 
 #registerTrivia {
-    position: relative;
-    float:right;
-    left:30%;
+    position: fixed;
+    top:15%;
     max-width: 50%;
-    min-width: 20%;
-    top:0;   
-    border-left:solid;
-    border-left-color: black;
+    min-width: 200px;
+    left:300px;
+    z-index:   2;
 }
 
 .smallp{
