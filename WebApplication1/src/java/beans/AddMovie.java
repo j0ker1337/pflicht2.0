@@ -14,6 +14,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import persistence.controlller.controllerManager;
+import persistence.controlller.interfaces.FilmController;
 import persistence.dto.FilmDTO;
 import persistence.dto.GenreDTO;
 import persistence.dto.RegisseurDTO;
@@ -38,9 +39,18 @@ public class AddMovie implements Serializable {
     private int regi;
     private ArrayList<String> schauspielerids;
     private int genreid;
+    private String searchyear;
     private HashMap<Integer, SchauspielerDTO> schauspieler;
     private ArrayList<SchauspielerDTO> selectedSchauspieler;
     private ArrayList<SchauspielerDTO> availableSchauspieler;
+
+    public String getSearchyear() {
+        return searchyear;
+    }
+
+    public void setSearchyear(String searchyear) {
+        this.searchyear = searchyear;
+    }
 
     public int getRegi() {
         return regi;
@@ -77,6 +87,7 @@ public class AddMovie implements Serializable {
     public AddMovie() {
         schauspielerids = new ArrayList<String>();
         newfilm = new FilmDTO();
+        searchyear = "0";
         //this.availableSchauspieler = controllerManager.getSchauspielerController().getAllSchauspieler();
 
         //__________ temp
@@ -125,8 +136,8 @@ public class AddMovie implements Serializable {
             newfilm.setSchauspieler(schauspielerDTOs);
             newfilm.setGenre(x.getGenreController().findGenreById(genreid));
             newfilm.setRegisseurDTO(x.getRegieController().findBYId(regi));
-  
-             UserService us = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{USERSE}", UserService.class);
+
+            UserService us = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{USERSE}", UserService.class);
             newfilm = x.getFilmController().insert(newfilm);
             us.getCurrentUser().getLikes().add(newfilm);
             System.err.println(newfilm.getFilmID());
@@ -150,8 +161,7 @@ public class AddMovie implements Serializable {
         } catch (usersnotfound ex) {
             Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
 
     public ArrayList<SchauspielerDTO> getSelectedSchauspieler() {
@@ -267,4 +277,24 @@ public class AddMovie implements Serializable {
         return schauspieler;
     }
 
+    public ArrayList<FilmDTO> findFilmOfYear() {
+        controllerManager x = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{controllerManager}", controllerManager.class);
+        ArrayList<FilmDTO> bla = new ArrayList<FilmDTO>();
+        int u = 0;
+        try {
+            u = Integer.parseInt(searchyear);
+        } catch (NumberFormatException ex) {
+
+        }
+        try {
+            bla = x.getFilmController().findAllFilmsOfYear(u);
+        } catch (filmnotfound ex1) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (genreNotFound ex1) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (connectionProblem ex1) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+        return bla;
+    }
 }

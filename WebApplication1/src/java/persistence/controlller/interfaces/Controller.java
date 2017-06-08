@@ -12,6 +12,7 @@ import persistence.dto.RegisseurDTO;
 import persistence.dto.RightDTO;
 import persistence.dto.SchauspielerDTO;
 import persistence.dto.UserDTO;
+import persistence.entities.Film;
 import persistence.exceptions.CombinationNotFound;
 import persistence.exceptions.RightIdEmpty;
 import persistence.exceptions.UserBNameEmpty;
@@ -490,4 +491,6 @@ public interface Controller {
     public FilmDTO insert(FilmDTO film) throws filmnotfound, genreNotFound, connectionProblem;
 
     public RegisseurDTO findBYId(int id) throws connectionProblem, reginotfound;
+    
+     public ArrayList<FilmDTO> findAllFilmsOfYear(int  year) throws filmnotfound,genreNotFound,connectionProblem;
 }
